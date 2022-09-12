@@ -1,0 +1,77 @@
+@import "variables";
+
+.container {
+  width: 100%;
+  height: 100vh;
+  background-image: url(/imgs/background.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.title {
+  color: $green;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  margin: 1rem 0;
+
+  .logo {
+    width: 15%;
+    img {
+      width: 100%;
+    }
+  }
+
+  .signup {
+    .signup_blur {
+      margin-right: 1rem;
+      color: $grey-blur;
+      font-size: 0.8rem;
+      font-weight: $fw-light;
+    }
+
+    a {
+      font-weight: $fw-bold;
+      color: $green;
+    }
+    .signup_btn {
+      transition: $transition;
+
+      &:hover{
+        color: $green-light;
+      }
+    }
+  }
+}
+
+.content {
+  width: 100%;
+  margin-top: 3rem auto;
+  text-align: center;
+
+  h2 {
+    margin: 2rem 0;
+  }
+
+  .wrapper {
+    width: 25%;
+    margin: 0 auto;
+
+    .submit {
+      width: 60%;
+      background: $green;
+      color: $white;
+      font-size: $fs-lg;
+    }
+
+    .submit:hover {
+      background-color: $green-dark;
+      cursor: pointer;
+    }
+  }
+}
