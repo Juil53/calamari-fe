@@ -12,7 +12,7 @@ const Sidebar = () => {
       <Link href="#">Calendar</Link>
       <Link href="#">Requests</Link>
       <Link href="#">Approval</Link>
-      <Link href="#">Entitlement</Link>
+      <Link href="#">Entitlements</Link>
 
     </nav>
    );
