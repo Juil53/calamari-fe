@@ -50,7 +50,7 @@
 }
 
 .content {
-  width: 100%;
+  width: 100vw;
   margin-top: 3rem auto;
   text-align: center;
 
@@ -59,7 +59,7 @@
   }
 
   .wrapper {
-    width: 25%;
+    max-width: 300px;
     margin: 0 auto;
 
     .submit {

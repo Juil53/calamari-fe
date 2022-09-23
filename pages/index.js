@@ -9,6 +9,7 @@ export default function Login() {
         <meta name="keywords" content="" />
       </Head>
       <div className={styles.container}>
+        {/* Header */}
         <nav className={styles.head}>
           <div className={styles.logo}>
             <img src="/imgs/logo.svg" alt="logo" />
@@ -20,6 +21,8 @@ export default function Login() {
             <a href="#" className={styles.signup_btn}>Sign up</a>
           </div>
         </nav>
+
+        {/* Form */}
         <section className={styles.content}>
           <h2>Login</h2>
           <div className={styles.wrapper}>
@@ -36,7 +39,16 @@ export default function Login() {
             </form>
           </div>
         </section>
+        
       </div>
     </>
   );
+}
+
+Login.getLayout = function PageLayout(page){
+  return (
+    <>
+    {page}
+    </>
+  )
 }
