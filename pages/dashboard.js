@@ -1,9 +1,9 @@
-import Sidebar from "../components/Sidebar";
+import styles from '../styles/Dashboard.module.scss'
 
 const Dashboard = () => {
   return ( 
     <div>
-      
+      <h1 className={styles.title}>Hi world</h1>
     </div>
    );
 }

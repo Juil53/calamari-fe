@@ -12,18 +12,34 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef } from "react";
 
-const Sidebar = () => {
+const Sidebar = (props) => {
   const sidebar = useRef();
-
-  const openSidebar = () =>  sidebar.current.classList.toggle("active");
+  const openSidebar = () => sidebar.current.classList.toggle(styles.active);
 
   return (
     <nav>
       <div className={`${styles.sidebar}`} ref={sidebar}>
         {/* Logo */}
-        <div className={styles.logo}>
-          <Image src="/imgs/logo.svg" alt="" width={128} height={77} />
-          <FontAwesomeIcon icon={faBars} id={styles.hamburger} onClick={openSidebar}/>
+        <div className={styles.logoWrapper}>
+          <div className={styles.logo}>
+            <Image
+              src="/imgs/logo.svg"
+              alt=""
+              width={128}
+              height={77}
+              className={styles.brandLogo}
+            />
+          </div>
+          <div className={styles.hamWrapper}>
+            <FontAwesomeIcon
+              icon={faBars}
+              id={styles.hamburger}
+              onClick={() => {
+                openSidebar(), 
+                props.changeStatus(!props.show);
+              }}
+            />
+          </div>
         </div>
 
         {/* NavBtn */}
