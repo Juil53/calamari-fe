@@ -6,9 +6,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import styles from "../styles/MyRequest.module.scss";
+import styles from "../styles/Request.module.scss";
 
-export default function MyRequest() {
+export default function Request() {
   return (
     <div className={styles.my__request}>
       <div className={styles.filter}>

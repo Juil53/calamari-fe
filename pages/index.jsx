@@ -8,6 +8,7 @@ export default function Login() {
         <title>Login</title>
         <meta name="keywords" content="" />
       </Head>
+
       <div className={styles.container}>
         {/* Header */}
         <nav className={styles.head}>
@@ -18,7 +19,9 @@ export default function Login() {
             <a href="#" className={styles.signup_blur}>
               Don't have an account yet?
             </a>
-            <a href="#" className={styles.signup_btn}>Sign up</a>
+            <a href="#" className={styles.signup_btn}>
+              Sign up
+            </a>
           </div>
         </nav>
 
@@ -39,16 +42,11 @@ export default function Login() {
             </form>
           </div>
         </section>
-        
       </div>
     </>
   );
 }
 
-Login.getLayout = function PageLayout(page){
-  return (
-    <>
-    {page}
-    </>
-  )
-}
+Login.getLayout = function PageLayout(page) {
+  return <>{page}</>;
+};

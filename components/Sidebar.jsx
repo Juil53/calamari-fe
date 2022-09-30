@@ -38,8 +38,7 @@ const Sidebar = (props) => {
               icon={faBars}
               id={styles.hamburger}
               onClick={() => {
-                openSidebar(), 
-                props.changeStatus(!props.show);
+                openSidebar(), props.changeStatus(!props.show);
               }}
             />
           </div>
@@ -55,7 +54,7 @@ const Sidebar = (props) => {
               </a>
             </Link>
           </li>
-          <li>
+          <li className={route.pathname == "/calendar" ? `${styles.navActive}` : ""}>
             <Link href="/calendar">
               <a>
                 <FontAwesomeIcon icon={faCalendar} />
@@ -63,7 +62,7 @@ const Sidebar = (props) => {
               </a>
             </Link>
           </li>
-          <li>
+          <li className={route.pathname == "/request" ? `${styles.navActive}` : ""}>
             <Link href="/request">
               <a>
                 <FontAwesomeIcon icon={faFileLines} />
@@ -71,7 +70,7 @@ const Sidebar = (props) => {
               </a>
             </Link>
           </li>
-          <li>
+          <li className={route.pathname == "/approval" ? `${styles.navActive}` : ""}>
             <Link href="/approval">
               <a>
                 <FontAwesomeIcon icon={faCircleCheck} />
@@ -79,7 +78,7 @@ const Sidebar = (props) => {
               </a>
             </Link>
           </li>
-          <li>
+          <li className={route.pathname == "/entitlement" ? `${styles.navActive}` : ""}>
             <Link href="/entitlement">
               <a>
                 <FontAwesomeIcon icon={faChartSimple} />

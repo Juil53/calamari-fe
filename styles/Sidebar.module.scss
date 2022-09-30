@@ -106,14 +106,15 @@
 .navActive {
   background-color: $green-hover;
   color: $green-dark;
-  
+
   a {
     span {
-      color:$green-dark;
+      color: $green-dark;
       font-weight: $fw-bold;
     }
+
     svg {
-      color: $green-dark;
+      color: $green-dark !important;
     }
   }
 }
