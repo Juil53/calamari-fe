@@ -1,12 +1,14 @@
 import Sidebar from "./Sidebar";
-import styles from "../styles/Layout.module.scss"
+import styles from "../styles/Layout.module.scss";
+import { useState } from "react";
 
 const Layout = ({ children }) => {
+  const [show, setShow] = useState(false);
+
   return (
     <div className="layout">
-      <Sidebar />
-      <div className={styles.content}>
-        <h1>Content here</h1>
+      <Sidebar changeStatus={(show) => setShow(show)} show={show}/>
+      <div className={show === true ? styles.activeContent : styles.content}>
         {children}
       </div>
     </div>
