@@ -1,4 +1,4 @@
-import styles from '../styles/Dashboard.module.scss'
+import styles from '../styles/Dashboard.module.scss';
 
 const Dashboard = () => {
   return ( 

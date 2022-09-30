@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import styles from "../styles/Sidebar.module.scss";
 import {
   faBars,
@@ -15,6 +16,8 @@ import { useRef } from "react";
 const Sidebar = (props) => {
   const sidebar = useRef();
   const openSidebar = () => sidebar.current.classList.toggle(styles.active);
+
+  const route = useRouter();
 
   return (
     <nav>
@@ -44,8 +47,8 @@ const Sidebar = (props) => {
 
         {/* NavBtn */}
         <ul className={styles.nav_lists}>
-          <li>
-            <Link href="#">
+          <li className={route.pathname == "/apply" ? `${styles.navActive}` : ""}>
+            <Link href="/apply">
               <a>
                 <FontAwesomeIcon icon={faPenToSquare} />
                 <span>Apply</span>
@@ -53,7 +56,7 @@ const Sidebar = (props) => {
             </Link>
           </li>
           <li>
-            <Link href="#">
+            <Link href="/calendar">
               <a>
                 <FontAwesomeIcon icon={faCalendar} />
                 <span>Calendar</span>
@@ -61,7 +64,7 @@ const Sidebar = (props) => {
             </Link>
           </li>
           <li>
-            <Link href="#">
+            <Link href="/request">
               <a>
                 <FontAwesomeIcon icon={faFileLines} />
                 <span>Request</span>
@@ -69,7 +72,7 @@ const Sidebar = (props) => {
             </Link>
           </li>
           <li>
-            <Link href="#">
+            <Link href="/approval">
               <a>
                 <FontAwesomeIcon icon={faCircleCheck} />
                 <span>Approval</span>
@@ -77,7 +80,7 @@ const Sidebar = (props) => {
             </Link>
           </li>
           <li>
-            <Link href="#">
+            <Link href="/entitlement">
               <a>
                 <FontAwesomeIcon icon={faChartSimple} />
                 <span>Entitlement</span>
