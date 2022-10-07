@@ -10,7 +10,7 @@ const CalendarTo = ({dataCalendarTo}) => {
   const refOne = useRef(null);
 
   useEffect(() => {
-    setCalendar(format(new Date(), "MM/dd/yyyy"));
+    setCalendar(format(new Date(), "yyyy-MM-dd"));
     document.addEventListener("keydown", hideOnEsc, true);
     document.addEventListener("click", hideOnClickOutsite, true);
 
@@ -33,8 +33,8 @@ const CalendarTo = ({dataCalendarTo}) => {
   };
 
   const handleSelect = (date) => {
-    setCalendar(format(date, "MM/dd/yyyy"));
-    dataCalendarTo(format(date, "MM/dd/yyyy"))
+    setCalendar(format(date, "yyyy-MM-dd"));
+    dataCalendarTo(format(date, "yyyy-MM-dd"))
   };
 
   return (

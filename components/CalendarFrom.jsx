@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import moment from "moment"
 import { Calendar } from "react-date-range";
 import format from "date-fns/format";
 import "react-date-range/dist/styles.css"; // main css file
@@ -10,7 +11,7 @@ const CalendarFrom = ({dataCalendarFrom}) => {
   const refOne = useRef(null);
 
   useEffect(() => {
-    setCalendar(format(new Date(), "MM/dd/yyyy"));
+    setCalendar(format(new Date(), "yyyy-MM-dd"));
     document.addEventListener("keydown", hideOnEsc, true);
     document.addEventListener("click", hideOnClickOutsite, true);
 
@@ -33,8 +34,8 @@ const CalendarFrom = ({dataCalendarFrom}) => {
   };
 
   const handleSelect = (date) => {
-    setCalendar(format(date, "MM/dd/yyyy"));
-    dataCalendarFrom(format(date, "MM/dd/yyyy"));
+    setCalendar(format(date, "yyyy-MM-dd"));
+    dataCalendarFrom(format(date, "yyyy-MM-dd"));
   };
 
   return (
