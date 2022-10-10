@@ -1,19 +1,15 @@
 import axios from "axios";
 import dynamic from "next/dynamic";
-import { createRef, useEffect, useRef, useState } from "react";
+import { createRef } from "react";
 import CalendarForm from "../components/CalendarForm";
+import * as Constant from "../config/constants";
 import style from "../styles/Apply.module.scss";
 const Calendar = dynamic(() => import("../components/Calendar"), {
   ssr: false,
 });
 
 const Apply = ({ events }) => {
-  const [eventData, setEventData] = useState({});
   const calendarRef = createRef();
-
-  const onEventAdded = (formData) => {
-    setEventData(formData);
-  };
 
   return (
     <>
@@ -23,7 +19,7 @@ const Apply = ({ events }) => {
           <Calendar ref={calendarRef} events={events} />
         </div>
         <div className={style.rightSide}>
-          <CalendarForm onEventAdded={onEventAdded} />
+          <CalendarForm />
         </div>
       </div>
     </>
@@ -31,7 +27,7 @@ const Apply = ({ events }) => {
 };
 
 export const getStaticProps = async () => {
-  const res = await axios.get("https://633d07937e19b17829061bcf.mockapi.io/calendar/events");
+  const res = await axios.get(Constant.API);
   const events = res.data;
 
   return {

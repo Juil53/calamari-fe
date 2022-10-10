@@ -1,4 +1,5 @@
 import { useState } from "react";
+import * as Constant from "../config/constants";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -12,6 +13,7 @@ const Calendar = ({ ref, events }) => {
     title: null,
     start: null,
     end: null,
+    status:Constant.PENDING,
     reason: {
       comment: null
     }
@@ -20,9 +22,11 @@ const Calendar = ({ ref, events }) => {
   const handleEvent = (info) => {
     setShow(true);
     setEvent({
+      id:info.event.id,
       title:info.event.title,
       start:info.event.start,
       end:info.event.end,
+      status:Constant.PENDING,
       reason:info.event.extendedProps
     })
   };

@@ -4,8 +4,10 @@ import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import CalendarFrom from "./CalendarFrom";
 import CalendarTo from "./CalendarTo";
+import styles from "../styles/CalendarForm.module.scss";
+import * as Constant from "../config/constants";
 
-const CalendarForm = ({ onEventAdded }) => {
+const CalendarForm = () => {
   const [data, setData] = useState({});
 
   const dataCalendarFrom = (start) => {
@@ -26,21 +28,20 @@ const CalendarForm = ({ onEventAdded }) => {
     const { name, value } = event.target;
     setData({
       ...data,
+      status: Constant.PENDING,
       [name]: value,
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    onEventAdded(data);
-    axios
-      .post("https://633d07937e19b17829061bcf.mockapi.io/calendar/events", data)
-      .then((res) => {
-        console.log("post success", res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    //Data add vao DB
+    try {
+      await axios.post("https://633d07937e19b17829061bcf.mockapi.io/calendar/events", data);
+      alert("Post Success");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -49,16 +50,34 @@ const CalendarForm = ({ onEventAdded }) => {
         <CalendarFrom dataCalendarFrom={dataCalendarFrom} />
         <CalendarTo dataCalendarTo={dataCalendarTo} />
         <label htmlFor="absence_type">Absence Type</label>
-        <select className="form-select" aria-label="Default select example" name="title" id="absence_type" onChange={handleChange}>
+        <select className="form-select my-3" name="title" id="absence_type" onChange={handleChange}>
           <option value="">Open this select menu</option>
           <option value="Sick">Sick</option>
           <option value="Work from home">Work from home</option>
         </select>
 
+        <div className={styles.color}>
+          <div className={styles.colorText}>
+            <label htmlFor="">Color</label>
+            <input type="color" id={styles.textColor} name="color" onChange={handleChange} />
+          </div>
+          <div className={styles.colorBg}>
+            <label htmlFor="">Background</label>
+            <input
+              type="color"
+              id={styles.bgColor}
+              name="backgroundColor"
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
         <label htmlFor="comment">Comment</label>
         <input type="text" name="comment" id="comment" onChange={handleChange} />
 
-        <button className="btn btn-success" type="submit">Submit</button>
+        <button className="btn btn-success" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );

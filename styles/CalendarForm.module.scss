@@ -1,0 +1,30 @@
+.color {
+    display: flex;
+    margin-bottom: 3rem;
+}
+
+.colorText {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    #textColor {
+        padding: 0;
+        height: 100%;
+        &:focus {
+            padding: 0;
+            border-radius: 50%;
+        }
+    }
+}
+
+.colorBg {
+    width: 30px;
+    height: 30px;
+    #bgColor {
+        padding: 0;
+        height: 100%;
+        &:focus {
+            padding: 0;
+        }
+    }
+}
