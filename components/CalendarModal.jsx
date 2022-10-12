@@ -1,14 +1,29 @@
-import React from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import moment from "moment";
-import axios from "axios";
 import * as Constant from "../config/constants";
-import { useRouter } from "next/router";
 import { handleStatus } from "../utils/utils";
+import CalendarFrom from "./CalendarFrom";
+import CalendarTo from "./CalendarTo";
+import moment from "moment"
+
 
 const CalendarModal = ({ show, setShow, event }) => {
+  console.log(event);
   const handleClose = () => setShow(false);
+  const [data,setData] = useState({
+    id: event.id,
+    start:event.start,
+    end:event.end,
+    reason:{
+      status:event.reason.status,
+      comment:event.reason.comment
+    },
+    title:event.title,
+    status:event.status
+  });
   const route = useRouter();
 
   const handleDelete = async (id) => {
@@ -22,8 +37,28 @@ const CalendarModal = ({ show, setShow, event }) => {
     }
   };
 
-  const handleChange = () => {
+  const dataCalendarFrom = (start) => {
+    setData({
+      ...data,
+      start,
+    });
+  };
 
+  const dataCalendarTo = (end) => {
+    setData({
+      ...data,
+      end,
+    });
+  };
+
+  const handleChange = (e) => {
+    const {name,value} = e.target;
+    e.preventDefault();
+    setData({
+      ...data,
+      [name]:value
+    })
+    console.log(data);
   }
 
   return (
@@ -32,11 +67,9 @@ const CalendarModal = ({ show, setShow, event }) => {
         <Modal.Title>Absence Type: {event.title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h6>From</h6>
-        <input type="text" value={moment(event.start).format("dddd, DD MMM YYYY")} onChange={()=>handleChange()}/>
-        <h6>To</h6>
-        <input type="text" value={moment(event.end).format("dddd, DD MMM YYYY")} onChange={()=>handleChange()}/>
-        <h6>Note: {event.reason.comment}</h6>
+        <CalendarFrom dataCalendarFrom={dataCalendarFrom} oldData={moment(event.start).format("yyyy-MM-DD")}/>
+        <CalendarTo dataCalendarTo={dataCalendarTo} oldData={moment(event.end).format("yyyy-MM-DD")}/>
+        <input type="text" value={data.reason.comment} onChange={handleChange} name="comment"></input>
         <h6>Status: {handleStatus(Number(event.status))}</h6>
         <h6>Name: AAAA</h6>
       </Modal.Body>

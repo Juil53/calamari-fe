@@ -4,7 +4,7 @@ import format from "date-fns/format";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 
-const CalendarTo = ({dataCalendarTo}) => {
+const CalendarTo = ({dataCalendarTo,oldData}) => {
   const [calendar, setCalendar] = useState("");
   const [open, setOpen] = useState(false);
   const refOne = useRef(null);
@@ -40,7 +40,7 @@ const CalendarTo = ({dataCalendarTo}) => {
   return (
     <>
       <label htmlFor="">To</label>
-      <input value={calendar} readOnly onClick={() => setOpen(!open)} />
+      <input value={oldData ? oldData : calendar} readOnly onClick={() => setOpen(!open)} />
       <div ref={refOne}>{open && <Calendar date={new Date()} onChange={handleSelect} />}</div>
     </>
   );

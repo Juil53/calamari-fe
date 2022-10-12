@@ -50,7 +50,7 @@ const CalendarForm = () => {
         <CalendarFrom dataCalendarFrom={dataCalendarFrom} />
         <CalendarTo dataCalendarTo={dataCalendarTo} />
         <label htmlFor="absence_type">Absence Type</label>
-        <select className="form-select my-3" name="title" id="absence_type" onChange={handleChange}>
+        <select name="title" id="absence_type" onChange={handleChange}>
           <option value="">Open this select menu</option>
           <option value="Sick">Sick</option>
           <option value="Work from home">Work from home</option>

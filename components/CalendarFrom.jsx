@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import moment from "moment"
 import { Calendar } from "react-date-range";
 import format from "date-fns/format";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 
-const CalendarFrom = ({dataCalendarFrom}) => {
+const CalendarFrom = ({dataCalendarFrom,oldData}) => {
   const [calendar, setCalendar] = useState("");
   const [open, setOpen] = useState(false);
   const refOne = useRef(null);
@@ -34,14 +33,16 @@ const CalendarFrom = ({dataCalendarFrom}) => {
   };
 
   const handleSelect = (date) => {
+    //set Data
     setCalendar(format(date, "yyyy-MM-dd"));
+    //truyen Data ra parent component
     dataCalendarFrom(format(date, "yyyy-MM-dd"));
   };
 
   return (
     <>
       <label htmlFor="">From</label>
-      <input value={calendar} readOnly onClick={() => setOpen(!open)} />
+      <input value={oldData ? oldData : calendar} readOnly onClick={() => setOpen(!open)} />
       <div ref={refOne}>{open && <Calendar date={new Date()} onChange={handleSelect} />}</div>
     </>
   );

@@ -10,9 +10,9 @@
     #textColor {
         padding: 0;
         height: 100%;
+        cursor: pointer;
         &:focus {
             padding: 0;
-            border-radius: 50%;
         }
     }
 }
@@ -23,6 +23,7 @@
     #bgColor {
         padding: 0;
         height: 100%;
+        cursor: pointer;
         &:focus {
             padding: 0;
         }
