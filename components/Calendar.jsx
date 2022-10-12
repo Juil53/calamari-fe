@@ -6,16 +6,18 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import momentPlugin from '@fullcalendar/moment'
 import CalendarModal from "./CalendarModal";
+import moment from "moment";
 
 const Calendar = ({ ref, events }) => {
   const [show, setShow] = useState(false);
   const [event,setEvent] = useState({
+    id:null,
     title: null,
     start: null,
     end: null,
-    status:Constant.PENDING,
-    reason: {
-      comment: null
+    data:{
+      status:Constant.PENDING,
+      comment:null
     }
   })
 
@@ -24,10 +26,9 @@ const Calendar = ({ ref, events }) => {
     setEvent({
       id:info.event.id,
       title:info.event.title,
-      start:info.event.start,
-      end:info.event.end,
-      status:Constant.PENDING,
-      reason:info.event.extendedProps
+      start:moment(info.event.start).format("yyyy-MM-DD"),
+      end:moment(info.event.end).format("yyyy-MM-DD"),
+      data:info.event.extendedProps
     })
   };
 
