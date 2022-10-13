@@ -1,0 +1,43 @@
+@import "variables";
+
+.tabs {
+    display: flex;
+
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    .tabList {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+
+        .tabHead {
+            width: 100%;
+            text-align: center;
+            font-weight: $fw-bold;
+            font-size: $fs-sm;
+            border: none;
+            cursor: pointer;
+            transition: $transition;
+
+            &:hover {
+                color: $green;
+            }
+
+            &.active {
+                color: $green;
+
+                &::after {
+                    content: "";
+                    display: block;
+                    width: 1.5rem;
+                    padding-top: 5px;
+                    margin: auto;
+                    border-bottom: 3px solid $green;
+                }
+            }
+        }
+    }
+}

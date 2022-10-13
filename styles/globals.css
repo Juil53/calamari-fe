@@ -47,3 +47,11 @@ input:focus {
   outline: #27a082;
   box-shadow: 0px 3px 13px 0 rgb(238 242 246 / 35%);
 }
+
+button {
+  padding: 8px 10px;
+  border: none;
+  color: #fff;
+  background-color: #27a082;
+  font-weight: 600;
+}
