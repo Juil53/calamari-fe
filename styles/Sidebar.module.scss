@@ -2,7 +2,7 @@
 
 .sidebar {
   position: relative;
-  width: 130px;
+  width: 300px;
   height: 100vh;
   background-color: $grey-light;
   position: fixed;
@@ -15,6 +15,7 @@
 
   .logoWrapper {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     height: 30px;
     width: 100%;
@@ -23,16 +24,12 @@
     padding: 20px 0;
     border-bottom: 1px solid $grey-blur;
 
-    .logo {
-      display: none;
-    }
-
     #hamburger {
       color: $green;
       border-radius: $borderRadius;
       padding: 2px;
       position: absolute;
-      left: 50%;
+      right: 5%;
       top: 20px;
       height: 20px;
       text-align: center;
@@ -46,7 +43,6 @@
     position: relative;
     height: 50px;
     width: 100%;
-    line-height: 50px;
   }
 
   ul li a {
@@ -58,7 +54,7 @@
     padding: 10px 0;
 
     span {
-      display: none;
+      display: block;
     }
 
     svg {
@@ -81,22 +77,19 @@
   }
 
   &.active {
-    width: 300px;
+    width: 130px;
     justify-content: space-between;
     .logo {
-      display: block;
+      display: none;
     }
     .hamWrapper {
       position: absolute;
-      left: 90%;
+      left:calc(100% - 20px);
       top: 0;
     }
 
-    ul li a {
-      padding: 0;
-    }
     ul li a span {
-      display: block;
+      display: none;
     }
   }
 }
