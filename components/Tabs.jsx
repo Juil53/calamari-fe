@@ -1,23 +1,19 @@
 import React from "react";
 import styles from "../styles/Tabs.module.scss";
 
-const Tabs = ({index,setIndex}) => {
-  
+const Tabs = ({ index, setIndex, tabs }) => {
   return (
     <div className={styles.tabs}>
       <div className={styles.tabList}>
-        <div
-          className={`${styles.tabHead} ${index == 0 ? styles.active : null}`}
-          onClick={() => setIndex(0)}
-        >
-          FOR APPROVAL
-        </div>
-        <div
-          className={`${styles.tabHead} ${index == 1 ? styles.active : null}`}
-          onClick={() => setIndex(1)}
-        >
-          HISTORY
-        </div>
+        {tabs.map((tab, i) => (
+          <div
+            key={i}
+            className={`${styles.tabHead} ${i == index ? styles.active : null}`}
+            onClick={() => setIndex(i)}
+          >
+            {tab}
+          </div>
+        ))}
       </div>
     </div>
   );

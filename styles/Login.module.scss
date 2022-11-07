@@ -10,7 +10,7 @@
 }
 
 .title {
-  color: $green;
+  color: $primary-color;
 }
 
 .head {
@@ -37,13 +37,13 @@
 
     a {
       font-weight: $fw-bold;
-      color: $green;
+      color: $primary-color;
     }
     .signup_btn {
       transition: $transition;
 
       &:hover{
-        color: $green-light;
+        color: $primary-color-hover;
       }
     }
   }
@@ -64,13 +64,13 @@
 
     .submit {
       width: 60%;
-      background: $green;
+      background: $primary-color;
       color: $white;
       font-size: $fs-lg;
     }
 
     .submit:hover {
-      background-color: $green-dark;
+      background-color: $primary-color-hover;
       cursor: pointer;
     }
   }

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap");
 
 * {
   margin: 0;
@@ -34,24 +34,116 @@ label {
 input {
   width: 100%;
   height: 3rem;
-  padding: 0.2rem 1rem;
-  margin: 1rem 0;
+  padding: 0.2rem 0.5rem;
+  margin: 0.5rem 0;
   border: 1px solid #aaa;
   box-shadow: 0px 3px 13px 0 rgb(238 242 246 / 35%);
-  transition: all 120ms ease;
+  transition: all 300ms ease;
+  cursor: pointer;
 }
 
 input:focus {
   padding: 0.9rem 1rem;
-  border: 1px solid #27a082;
-  outline: #27a082;
-  box-shadow: 0px 3px 13px 0 rgb(238 242 246 / 35%);
+  border: 2px solid #bd1133;
+  outline: #bd1133;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+textarea {
+  width: 100%;
+  padding: 0.2rem 0.5rem;
+}
+
+textarea:focus {
+  padding: 0.2rem 0.5rem;
+  border: 1px solid #bd1133;
+  outline: #bd1133;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 button {
   padding: 8px 10px;
   border: none;
   color: #fff;
-  background-color: #27a082;
+  background-color: #bd1133;
   font-weight: 600;
+}
+
+select {
+  width: 100%;
+  height: 2rem;
+  padding: 0.2rem 0.5rem;
+  margin: 1rem 0;
+  border: 1px solid #aaa;
+  box-shadow: 0px 3px 13px 0 rgb(238 242 246 / 35%);
+  transition: all 120ms ease;
+  cursor: pointer;
+}
+
+select:focus {
+  padding: 0.9rem 1rem;
+  border: 1px solid #bd1133;
+  outline: #bd1133;
+  box-shadow: 0px 3px 13px 0 rgb(238 242 246 / 35%);
+}
+
+/* FUll CALENDAR CSS OVERRIDE */
+.fc .fc-button-primary {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #717981;
+  transition: all 200ms ease;
+  padding: 5px;
+}
+.fc .fc-button-primary:hover {
+  background-color: #bd1133;
+  border: 1px solid #8d0f28;
+}
+.fc .fc-button-primary.fc-button-active {
+  background-color: #bd1133 !important;
+  border-radius: none;
+  border: none;
+}
+.fc .fc-button-primary.fc-button-active:focus {
+  box-shadow: none;
+  border: none;
+}
+.fc .fc-button-primary:disabled {
+  background-color: #bd1133;
+  border: none;
+}
+
+/* MOBILE */
+@media screen and (max-width: 415px) {
+  .fc .fc-toolbar-title {
+    font-size: 1rem;
+  }
+  .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+  }
+  .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr .fc-toolbar-chunk:nth-child(2) {
+    text-align: center;
+    margin: 5px 0;
+  }
+  .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr .fc-toolbar-chunk:nth-child(3) {
+    display: flex;
+    justify-content: center;
+    font-size: smaller;
+  }
+}
+/* TABLET */
+@media screen and (min-width: 416px) and (max-width: 992px) {
+  .fc .fc-toolbar-title {
+    font-size: 1.2rem;
+  }
+}
+
+/* LAPTOP */
+@media screen and (max-width: 1280px) {
+  .fc .fc-toolbar-title {
+    font-size: 1.2rem;
+  }
 }

@@ -5,10 +5,13 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import CalendarFrom from "./CalendarFrom";
 import CalendarTo from "./CalendarTo";
 import styles from "../styles/CalendarForm.module.scss";
-import * as Constant from "../config/constants";
+import * as Constant from "../constant/constants";
 
-const CalendarForm = () => {
+const CalendarForm = ({ absences }) => {
   const [data, setData] = useState({});
+
+  // filter Unique duration Type
+  const setAbs = [...new Set(absences.map((absence) => absence.duration_type))];
 
   const dataCalendarFrom = (start) => {
     setData({
@@ -37,29 +40,40 @@ const CalendarForm = () => {
     event.preventDefault();
     //Data add vao DB
     try {
-      await axios.post("https://633d07937e19b17829061bcf.mockapi.io/calendar/events", data);
-      alert("Post Success");
+      await axios.post(Constant.API, data);
+      // alert("Post Success");
     } catch (error) {
-      console.log(error);
+      alert("Error", error);
     }
   };
 
   return (
-    <div className="calendar__form">
+    <div className={styles.calendarForm}>
       <form onSubmit={handleSubmit}>
         <CalendarFrom dataCalendarFrom={dataCalendarFrom} />
         <CalendarTo dataCalendarTo={dataCalendarTo} />
         <label htmlFor="absence_type">Absence Type</label>
         <select name="title" id="absence_type" onChange={handleChange}>
-          <option value="">Open this select menu</option>
-          <option value="Sick">Sick</option>
-          <option value="Work from home">Work from home</option>
+          <option value="">Select absence type</option>
+          {absences.map((absence) => (
+            <React.Fragment key={absence.id}>
+              <option value={absence.name}>{absence.name}</option>
+            </React.Fragment>
+          ))}
         </select>
-
+        <label htmlFor="durationType">Duration type</label>
+        <select name="duration_type" id="durationType" onChange={handleChange}>
+          <option value="">Select duration Type</option>
+          {setAbs.map((abs, index) => (
+            <React.Fragment key={index}>
+              <option value={abs}>{abs}</option>
+            </React.Fragment>
+          ))}
+        </select>
         <div className={styles.color}>
           <div className={styles.colorText}>
             <label htmlFor="">Color</label>
-            <input type="color" id={styles.textColor} name="color" onChange={handleChange} />
+            <input type="color" id={styles.textColor} name="color" onChange={handleChange} defaultValue="#ffffff"/>
           </div>
           <div className={styles.colorBg}>
             <label htmlFor="">Background</label>
@@ -67,14 +81,13 @@ const CalendarForm = () => {
               type="color"
               id={styles.bgColor}
               name="backgroundColor"
+              defaultValue="#fd6868"
               onChange={handleChange}
             />
           </div>
         </div>
-
         <label htmlFor="comment">Comment</label>
         <input type="text" name="comment" id="comment" onChange={handleChange} />
-
         <button className="btn btn-success" type="submit">
           Submit
         </button>

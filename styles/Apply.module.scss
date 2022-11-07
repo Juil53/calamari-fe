@@ -12,9 +12,28 @@
   grid-template-columns: 2.5fr 1fr;
   gap: 20px;
   margin-top: 20px;
+  @include desktop {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+  @include tablet {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
 
   .leftSide {
     height: 600px;
+    width: 100%;
+    @include desktop {
+      height: 100%
+    }
+    @include mobile {
+      height: 300px
+    }
   }
 
   .rightSide {

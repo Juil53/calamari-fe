@@ -1,11 +1,14 @@
-import styles from "../styles/Approval.module.scss";
-import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
+import { useState } from "react";
 import Tabs from "../components/Tabs";
+import * as Constant from "../constant/constants";
+import styles from "../styles/Approval.module.scss";
 
-const Approval = () => {
+const Approval = ({ events }) => {
   const [index, setIndex] = useState(0);
+  const tabs = ["FOR APPROVAL", "HISTORY"];
 
   return (
     <>
@@ -20,7 +23,7 @@ const Approval = () => {
           <h4 className={styles.title}>Approval</h4>
         </div>
         <div className={styles.rightSide}>
-          <Tabs index={index} setIndex={setIndex} />
+          <Tabs index={index} setIndex={setIndex} tabs={tabs} />
         </div>
       </div>
 
@@ -46,39 +49,39 @@ const Approval = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className={styles.reporter}>
-                  <div className={styles.imgWrapper}>
-                    <img className={styles.avatar} src="/imgs/avatar.jpg" alt="avatar" />
-                  </div>
-                  Nguyen Van A
-                </td>
-                <td>Annual Leave</td>
-                <td>2022-10-12 - 2022-10-15</td>
-                <td>1 day</td>
-                <td>in 3 days</td>
-              </tr>
-              <tr>
-              <td className={styles.reporter}>
-                  <div className={styles.imgWrapper}>
-                    <img className={styles.avatar} src="/imgs/avatar2.png" alt="avatar" />
-                  </div>
-                  Nguyen Van B
-                </td>
-                <td>Annual Leave</td>
-                <td>2022-10-12 - 2022-10-15</td>
-                <td>1 day</td>
-                <td>in 0 days</td>
-              </tr>
+              {events.map((event) => (
+                <tr key={event.id}>
+                  <td className={styles.reporter}>
+                    <div className={styles.imgWrapper}>
+                      {/* <img className={styles.avatar} src="/imgs/avatar.jpg" alt="avatar" /> */}
+                    </div>
+                    Nguyen Van A
+                  </td>
+                  <td>{event.title}</td>
+                  <td>{event.start} - {event.end}</td>
+                  <td>1 day</td>
+                  <td>in 3 days</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
         <div className={styles.tabContent} hidden={index !== 1}>
-          Tab2 Content
+          
         </div>
       </div>
     </>
   );
+};
+
+export const getStaticProps = async () => {
+  const res = await axios.get(Constant.API);
+  const events = res.data;
+
+  return {
+    props: { events },
+    revalidate: 1,
+  };
 };
 
 export default Approval;

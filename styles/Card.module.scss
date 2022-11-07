@@ -1,0 +1,36 @@
+@import "variables.scss";
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 150px;
+  border: 1px solid $grey-blur;
+  border-radius: $borderRadius;
+  color: $grey;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: $transition2;
+  .cardText {
+    font-weight: $fw-bold;
+    font-size: $fs-lg;
+    margin-bottom: 0;
+  }
+  
+  &:hover{
+    border: 1px solid $primary-color-hover;
+    color: $primary-color;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    background-color: $primary-color-light;
+    transform: translateY(-5px);
+  }
+
+  span {
+    svg {
+      width: 30px;
+      height: 40px;
+      margin-top: 5px;
+    }
+  }
+}

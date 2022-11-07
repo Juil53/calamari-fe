@@ -15,6 +15,7 @@
 
         .tabHead {
             width: 100%;
+            color: $black;
             text-align: center;
             font-weight: $fw-bold;
             font-size: $fs-sm;
@@ -22,12 +23,22 @@
             cursor: pointer;
             transition: $transition;
 
+            &::after {
+                content: "";
+                display: block;
+                width: 0;
+                padding-top: 5px;
+                margin: auto;
+                border-bottom: 3px solid $primary-color;
+                transition: $transition;
+            }
+
             &:hover {
-                color: $green;
+                color: $primary-color;
             }
 
             &.active {
-                color: $green;
+                color: $primary-color;
 
                 &::after {
                     content: "";
@@ -35,7 +46,7 @@
                     width: 1.5rem;
                     padding-top: 5px;
                     margin: auto;
-                    border-bottom: 3px solid $green;
+                    border-bottom: 3px solid $primary-color;
                 }
             }
         }

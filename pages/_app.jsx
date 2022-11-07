@@ -11,7 +11,6 @@ import { useEffect } from "react";
 config.autoAddCss = false;
 
 function MyApp({ Component, pageProps }) {
-
   useEffect(()=>{
     import("/node_modules/bootstrap/dist/js/bootstrap");
 },[])

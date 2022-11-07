@@ -1,0 +1,121 @@
+@import "variables";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $grey-blur;
+
+  .leftSide {
+    flex-grow: 2;
+    li,
+    button,
+    h4 {
+      display: inline-block;
+    }
+    button.returnBtn {
+      width: 50px;
+      font-size: $fs-md;
+      margin-right: 0.5rem;
+      background-color: transparent;
+      color: $grey;
+      transition: $transition;
+      span {
+        margin-right: 5px;
+        font-size: $fs-sm;
+      }
+      &:hover{
+        color: $primary-color-hover;
+      }
+    }
+    button.approveBtn {
+      width: 100px;
+      margin-right: 1rem;
+      transition: $transition;
+      span {
+        margin-right: 5px;
+      }
+      &:hover {
+        background-color: $primary-color-hover;
+      }
+    }
+    h4.title {
+      height: 30px;
+      vertical-align: middle;
+      line-height: 35px;
+      margin-top: 10px;
+    }
+  }
+}
+
+.tabContent {
+  table {
+    width: 100%;
+    thead {
+      width: 100%;
+      height: 50px;
+      tr > th {
+        text-align: left;
+        color: $grey;
+        font-size: $fs-md;
+        font-weight: $fw-bold;
+      }
+      .rowActionTitle {
+        width: 15%;
+        text-align: center;
+        @include mobile {
+          width: 50%;
+        }
+        @include tablet {
+          width: 50%;
+        }
+      }
+    }
+
+    tbody {
+      text-align: left;
+      tr {
+        width: 50%;
+        height: 30px;
+        font-size: $fs-sm;
+        padding: 5px 0;
+        border-bottom: 1px solid $grey-blur;
+        
+        .rowAction{
+          width: 15%;
+          text-align: center;
+          @include mobile {
+            width: 50%;
+          }
+          @include tablet {
+            width: 50%;
+          }
+          button {
+            background-color: $white;
+            border-radius: $borderRadius;
+            margin: 5px 0;
+            transition: $transition;
+            &.btnEdit {
+              color: $green;
+              border: 1px solid $white;
+              &:hover {
+                color:$green;
+                background-color: $green-hover;
+                border: 1px solid $green;
+              }
+            }
+            &.btnDelete {
+              color: $primary-color;
+              border: 1px solid $white;
+              &:hover {
+                background-color: $primary-color-light;
+                border: 1px solid $primary-color;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

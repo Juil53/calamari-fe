@@ -9,15 +9,15 @@ import {
   faFileLines,
   faCircleCheck,
   faChartSimple,
+  faGear
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef } from "react";
 
 const Sidebar = (props) => {
+  const route = useRouter();
   const sidebar = useRef();
   const openSidebar = () => sidebar.current.classList.toggle(styles.active);
-
-  const route = useRouter();
 
   return (
     <nav>
@@ -28,8 +28,8 @@ const Sidebar = (props) => {
             <Image
               src="/imgs/logo.svg"
               alt=""
-              width={128}
-              height={77}
+              width={150}
+              height={40}
               className={styles.brandLogo}
             />
           </div>
@@ -54,7 +54,7 @@ const Sidebar = (props) => {
               </a>
             </Link>
           </li>
-          <li className={route.pathname == "/calendar" ? `${styles.navActive}` : ""}>
+          <li className={route.pathname.includes("/calendar") ? `${styles.navActive}` : ""}>
             <Link href="/calendar">
               <a>
                 <FontAwesomeIcon icon={faCalendar} />
@@ -62,7 +62,7 @@ const Sidebar = (props) => {
               </a>
             </Link>
           </li>
-          <li className={route.pathname == "/request" ? `${styles.navActive}` : ""}>
+          <li className={route.pathname.includes("/request") ? `${styles.navActive}` : ""}>
             <Link href="/request">
               <a>
                 <FontAwesomeIcon icon={faFileLines} />
@@ -70,7 +70,7 @@ const Sidebar = (props) => {
               </a>
             </Link>
           </li>
-          <li className={route.pathname == "/approval" ? `${styles.navActive}` : ""}>
+          <li className={route.pathname.includes("/approval") ? `${styles.navActive}` : ""}>
             <Link href="/approval">
               <a>
                 <FontAwesomeIcon icon={faCircleCheck} />
@@ -78,11 +78,19 @@ const Sidebar = (props) => {
               </a>
             </Link>
           </li>
-          <li className={route.pathname == "/entitlement" ? `${styles.navActive}` : ""}>
+          <li className={route.pathname.includes("/entitlement") ? `${styles.navActive}` : ""}>
             <Link href="/entitlement">
               <a>
                 <FontAwesomeIcon icon={faChartSimple} />
                 <span>Entitlement</span>
+              </a>
+            </Link>
+          </li>
+          <li className={route.pathname.includes("/configuration") ? `${styles.navActive}` : ""}>
+            <Link href="/configuration">
+              <a>
+                <FontAwesomeIcon icon={faGear} />
+                <span>Configuration</span>
               </a>
             </Link>
           </li>

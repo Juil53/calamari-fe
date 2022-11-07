@@ -16,6 +16,7 @@ const CalendarModal = ({ show, setShow, event }) => {
     start: "",
     end: "",
     title: "",
+    name: "",
     status: "",
     comment: "",
   });
@@ -29,6 +30,7 @@ const CalendarModal = ({ show, setShow, event }) => {
         title: event.title,
         comment: event.data.comment,
         status: event.data.status,
+        name: event.data.name,
       });
     }
   }, [event]);
@@ -57,17 +59,17 @@ const CalendarModal = ({ show, setShow, event }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(updatedEvent)
+    console.log(updatedEvent);
 
     //post updated Event
     try {
-      await axios.put(`${Constant.API}${event.id}`,updatedEvent);
-      alert('updated')
+      await axios.put(`${Constant.API}${event.id}`, updatedEvent);
+      alert("updated");
     } catch (error) {
       console.log(error);
-      alert('failed')
+      alert("failed");
     }
-  }
+  };
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -78,12 +80,14 @@ const CalendarModal = ({ show, setShow, event }) => {
         <Modal.Body>
           <CalendarFrom dataCalendarFrom={dataCalendarFrom} oldData={updatedEvent.start} />
           <CalendarTo dataCalendarTo={dataCalendarTo} oldData={updatedEvent.end} />
-          <input
-            type="text"
+          <label htmlFor="comment">Comment</label>
+          <textarea
+            id="comment"
+            rows="4"
             value={updatedEvent.comment}
             onChange={handleChange}
             name="comment"
-          ></input>
+          />
           <h6>Status: {handleStatus(updatedEvent.status)}</h6>
           <h6>Name: Nguyen Van A</h6>
         </Modal.Body>

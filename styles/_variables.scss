@@ -1,21 +1,52 @@
+//Color
+$primary-color: #bd1133;
+$primary-color-light: #ffc0cd;
+$primary-color-hover: #8d0f28;
+
 $white: #fff;
 $black: #333;
 $green: #27a082;
-$green-dark: #217963;
-$green-light: #44eac1;
-$green-hover:#e3f3f0;
+$green-hover: #e3f3f0;
 $grey: #717981;
 $grey-blur: #c9d1d3;
-$grey-light:#f9fafb;
-$orange :#fb8500;
+$grey-blur-2: #ebf0f1;
+$grey-light: #f9fafb;
+$orange: #fb8500;
 
+//FONT-SIZE
 $fs-sm: 0.8rem;
 $fs-md: 1rem;
 $fs-lg: 1.3rem;
 
+//FONT-WEIGHT
 $fw-light: 400;
 $fw-normal: 500;
 $fw-bold: 700;
 
+//TRANSITION & BORDER
 $transition: all 120ms ease;
+$transition2: all 300ms ease;
 $borderRadius: 4px;
+
+// DEVICE
+$mobile-width: 415px;
+$tablet-width: 768px;
+$desktop-width: 1280px;
+
+@mixin mobile {
+  @media (max-width: $mobile-width) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$mobile-width + 1px}) and (max-width: $tablet-width) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$tablet-width + 1px}) and (max-width:#{$desktop-width}) {
+    @content;
+  }
+}
