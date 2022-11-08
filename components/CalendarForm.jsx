@@ -11,7 +11,7 @@ const CalendarForm = ({ absences }) => {
   const [data, setData] = useState({});
 
   // filter Unique duration Type
-  const setAbs = [...new Set(absences.map((absence) => absence.duration_type))];
+  const setAbs = [...new Set(absences.map((absence) => absence.durationType))];
 
   const dataCalendarFrom = (start) => {
     setData({
@@ -38,10 +38,18 @@ const CalendarForm = ({ absences }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log(data);
     //Data add vao DB
     try {
-      await axios.post(Constant.API, data);
-      // alert("Post Success");
+      await axios({
+        method: "POST",
+        url: "/api/events",
+        data: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      alert("Post Success");
     } catch (error) {
       alert("Error", error);
     }
@@ -62,7 +70,7 @@ const CalendarForm = ({ absences }) => {
           ))}
         </select>
         <label htmlFor="durationType">Duration type</label>
-        <select name="duration_type" id="durationType" onChange={handleChange}>
+        <select name="durationType" id="durationType" onChange={handleChange}>
           <option value="">Select duration Type</option>
           {setAbs.map((abs, index) => (
             <React.Fragment key={index}>
@@ -73,7 +81,13 @@ const CalendarForm = ({ absences }) => {
         <div className={styles.color}>
           <div className={styles.colorText}>
             <label htmlFor="">Color</label>
-            <input type="color" id={styles.textColor} name="color" onChange={handleChange} defaultValue="#ffffff"/>
+            <input
+              type="color"
+              id={styles.textColor}
+              name="color"
+              onChange={handleChange}
+              defaultValue="#ffffff"
+            />
           </div>
           <div className={styles.colorBg}>
             <label htmlFor="">Background</label>

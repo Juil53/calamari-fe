@@ -78,11 +78,11 @@ const Sidebar = (props) => {
               </a>
             </Link>
           </li>
-          <li className={route.pathname.includes("/entitlement") ? `${styles.navActive}` : ""}>
-            <Link href="/entitlement">
+          <li className={route.pathname.includes("/users") ? `${styles.navActive}` : ""}>
+            <Link href="/users">
               <a>
                 <FontAwesomeIcon icon={faChartSimple} />
-                <span>Entitlement</span>
+                <span>Users</span>
               </a>
             </Link>
           </li>

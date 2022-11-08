@@ -81,7 +81,7 @@ select {
 }
 
 select:focus {
-  padding: 0.9rem 1rem;
+  /* padding: 0.9rem 1rem; */
   border: 1px solid #bd1133;
   outline: #bd1133;
   box-shadow: 0px 3px 13px 0 rgb(238 242 246 / 35%);

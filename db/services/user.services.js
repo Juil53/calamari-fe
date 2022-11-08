@@ -1,4 +1,4 @@
-const { User } = require("../models/user.model.js");
+const { User } = require("../models/index");
 
 //Get All Users
 const getUserList = async () => {
@@ -27,10 +27,10 @@ const getUserById = async (id) => {
 };
 
 //Create User
-const createUser = async (user) => {
+const createUser = async (body) => {
   await User.create({
-    firstName: user.body.firstName,
-    lastName: user.body.lastName,
+    firstName: body.firstName,
+    lastName: body.lastName,
   });
 };
 

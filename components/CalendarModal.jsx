@@ -1,4 +1,4 @@
-import * as Constant from "../config/constants";
+import * as Constant from "../constant/constants";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { handleStatus } from "../utils/utils";

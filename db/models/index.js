@@ -1,10 +1,16 @@
-const { Sequelize,DataTypes } = require("sequelize");
+const { Sequelize } = require("sequelize");
+const { createEventModel } = require("./event.model");
+const { createUserModel } = require("./user.model");
 
 // Option 3: Passing parameters separately (other dialects)
 const sequelize = new Sequelize("calamari", "root", "root", {
   host: "localhost",
   dialect: "mysql",
 });
+
+//Models
+const User = createUserModel(sequelize)
+const Event = createEventModel(sequelize)
 
 //Check connection
 const checkConnection = async () => {
@@ -19,12 +25,12 @@ const checkConnection = async () => {
 
 //Sync with DB
 const syncTable = async () => {
-  await sequelize.sync({ force: true });
+  await sequelize.sync({ alter: true });
   console.log("All models were synchronized successfully.");
 };
 // syncTable();
 
 module.exports = {
-  sequelize,
-  DataTypes,
-}
+  User,
+  Event
+};
