@@ -1,10 +1,16 @@
+import { hash } from "bcrypt";
 const { getUserList, createUser } = require("../../../db/services/user.services");
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const body = req.body;
-    const result = await createUser(body);
-    res.status(201).json({ data: result });
+    hash(body.password, 10, async function (err, hash) {
+      // Create user with hashed password
+      await createUser(body,hash);
+      // Show all users in DB to check in Postman
+      const users = await getUserList();
+      res.status(200).json({ data: users });
+    });
   } else {
     const users = await getUserList();
     if (users) {

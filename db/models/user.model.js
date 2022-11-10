@@ -5,11 +5,23 @@ const createUserModel = (sequelize) =>
     "User",
     {
       // Model attributes are defined here
-      firstName: {
+      fullName: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      lastName: {
+      role: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      image: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      password: {
         type: DataTypes.STRING,
         // allowNull defaults to true
       },

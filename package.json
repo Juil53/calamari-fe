@@ -23,9 +23,12 @@
     "@fullcalendar/timegrid": "^5.11.3",
     "axios": "^1.0.0",
     "babel-plugin-transform-require-ignore": "^0.1.1",
+    "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "bootstrap": "^5.2.2",
     "date-fns": "^2.29.3",
+    "formik": "^2.2.9",
+    "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.4",
     "mysql2": "^2.3.3",
     "next": "12.3.0",
@@ -38,7 +41,8 @@
     "react-dom": "18.2.0",
     "request": "^2.79.0",
     "sass": "^1.54.9",
-    "sequelize": "^6.25.3"
+    "sequelize": "^6.25.3",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "eslint": "8.23.0",

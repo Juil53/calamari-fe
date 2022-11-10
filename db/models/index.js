@@ -28,7 +28,7 @@ const syncTable = async () => {
   await sequelize.sync({ alter: true });
   console.log("All models were synchronized successfully.");
 };
-// syncTable();
+syncTable();
 
 module.exports = {
   User,

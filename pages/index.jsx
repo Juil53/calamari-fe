@@ -1,5 +1,6 @@
 import Head from "next/head";
 import styles from "../styles/Login.module.scss";
+import Link from "next/link";
 
 export default function Login() {
   return (
@@ -9,22 +10,24 @@ export default function Login() {
         <meta name="keywords" content="" />
       </Head>
 
-      <div className={styles.container}>
-        {/* Header */}
-        <nav className={styles.head}>
-          <div className={styles.logo}>
-            <img src="/imgs/logo.svg" alt="logo" />
-          </div>
-          <div className={styles.signup}>
-            <a href="#" className={styles.signup_blur}>
-              Don't have an account yet?
-            </a>
-            <a href="#" className={styles.signup_btn}>
+      <div className={styles.bgImage}></div>
+
+      {/* Header */}
+      <nav className={styles.head}>
+        <div className={styles.logo}>
+          <img src="/imgs/logo.svg" alt="logo" />
+        </div>
+        <div className={styles.signup}>
+          <Link href="/register">
+            <a className={styles.signup_btn}>
+              <span className={styles.signup_blur}>Don't have an account yet?</span>
               Sign up
             </a>
-          </div>
-        </nav>
+          </Link>
+        </div>
+      </nav>
 
+      <div className={styles.bgText}>
         {/* Form */}
         <section className={styles.content}>
           <h2>Login</h2>
@@ -32,13 +35,15 @@ export default function Login() {
             <form action="POST">
               <div className={styles.email}>
                 <label htmlFor="email">Email</label>
-                <input type="text" id="email" />
+                <input type="text" id="email" placeholder="jonsnow@gmail.com" />
               </div>
               <div className={styles.password}>
                 <label htmlFor="password">Password</label>
-                <input type="password" id="password" />
+                <input type="password" id="password" placeholder="" />
               </div>
-              <input type="submit" value="Login" className={styles.submit} />
+              <button type="submit" className={styles.submit}>
+                Login
+              </button>
             </form>
           </div>
         </section>
