@@ -44,7 +44,7 @@ const getUserByEmail = async (email) => {
 
 //Create User
 const createUser = async (body, hash) => {
-    await User.create({
+    User.create({
         fullName: body.fullName,
         role: body.role,
         image: body.image,
@@ -53,9 +53,20 @@ const createUser = async (body, hash) => {
     });
 };
 
+//Check exist
+const checkExist = async (body) => {
+    const user = await User.findOne({ where: { email: body.email } })
+    if (user) {
+        return true
+    } else {
+        return false
+    }
+}
+
 module.exports = {
     getUserList,
     getUserById,
     getUserByEmail,
     createUser,
+    checkExist
 };
