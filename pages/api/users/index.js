@@ -1,7 +1,18 @@
 import { hash } from "bcrypt";
+import { verify } from "jsonwebtoken";
 const { getUserList, createUser, checkExist } = require("../../../db/services/user.services");
 
-export default async function handler(req, res) {
+export const authenticated = (fn) => async (req, res) => {
+    // invalid token
+    verify(req.cookies.auth, process.env.SECRET_JWT, async function (err, decoded) {
+        if (!err && decoded) {
+            return await fn(req, res)
+        }
+        res.status(401).json({ message: 'Not authenticated!' })
+    });
+};
+//Add authen to page
+export default authenticated(async function handler(req, res) {
     if (req.method === "POST") {
         const body = req.body;
         hash(body.password, 10, async function (err, hash) {
@@ -25,4 +36,4 @@ export default async function handler(req, res) {
             res.status(404).json({ message: "Not found!" });
         }
     }
-}
+})

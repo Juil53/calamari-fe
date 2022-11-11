@@ -34,9 +34,15 @@ const Users = ({ userList }) => {
 export default Users;
 
 export const getStaticProps = async () => {
-  const res = await axios.get("http://localhost:3000/api/users");
+  const res = await axios({
+    url: "http://localhost:3000/api/users",
+    method: "GET",
+    headers: {
+        "Content-Type": "application/json",
+        // "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsIm15VXNlckVtYWlsIjoiaG9hbmdAZ21haWwuY29tIiwiaWF0IjoxNjY4MTQ4NTI1LCJleHAiOjE2NjgxNTIxMjV9.92PdZ05ERf4F20zgn8EpzMq0Nxy9zpDGFewPly4BRWI"
+    },
+});
   const userList = res.data;
-  console.log(userList);
 
   return {
     props: { userList },
