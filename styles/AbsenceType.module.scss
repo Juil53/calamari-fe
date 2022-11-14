@@ -67,7 +67,12 @@
           width: 50%;
         }
         @include tablet {
-          width: 50%;
+          width: 30%;
+          text-align: center;
+        }
+        @include desktop {
+          width: 20%;
+          text-align: center;
         }
       }
     }
@@ -82,13 +87,28 @@
         border-bottom: 1px solid $grey-blur;
         
         .rowAction{
-          width: 15%;
+          width: 50%;
           text-align: center;
           @include mobile {
-            width: 50%;
+            width: 100%;
           }
           @include tablet {
-            width: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            button {
+              width: 100%;
+              padding: 2px 0;
+            }
+          }
+          @include desktop {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            button {
+              width: 100%;
+              padding: 2px 0;
+            }
           }
           button {
             background-color: $white;

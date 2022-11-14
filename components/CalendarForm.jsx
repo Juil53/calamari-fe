@@ -52,6 +52,14 @@ const CalendarForm = ({ absences }) => {
                     [name]: value,
                 });
                 break;
+            case "holiday":
+                setData({
+                    ...data,
+                    color: "#fff",
+                    backgroundColor: "#00FFFF",
+                    [name]: value,
+                });
+                break;
             default:
                 setData({
                     ...data,

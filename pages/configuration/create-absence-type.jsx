@@ -1,4 +1,4 @@
-import * as Constant from "../../config/constants";
+import * as Constant from "../../constant/constants";
 import axios from "axios";
 import styles from "../../styles/CreateAbsenceType.module.scss";
 import Tabs from "../../components/Tabs";
@@ -12,7 +12,6 @@ const CreateAbsenceType = () => {
     const [index, setIndex] = useState(0);
     const [absenceType, setAbsenceType] = useState({
         name: "",
-        type: null,
         durationType: null,
     });
 
@@ -28,7 +27,7 @@ const CreateAbsenceType = () => {
         event.preventDefault();
 
         try {
-            await axios.post(Constant.API2, absenceType);
+            await axios.post(Constant.absencesAPI, absenceType);
             alert("Post success");
         } catch (error) {
             alert("Error", error);
@@ -62,12 +61,13 @@ const CreateAbsenceType = () => {
                     <div className={styles.tabsContent}>
                         <div className="generalTab" hidden={index != 0}>
                             <label htmlFor="typeName">Type Name</label>
-                            <input type="text" id="typeName" name="name" onChange={handleChange} />
+                            <input type="text" id="typeName" name="name" onChange={handleChange}/>
                             <label htmlFor="considerAs">Consider as</label>
-                            <select name="type" onChange={handleChange}>
+                            <select name="value" onChange={handleChange}>
                                 <option value="">Select type</option>
-                                <option value="timeoff">Time off</option>
-                                <option value="workfromhome">Work from home</option>
+                                <option value="sick">Sick</option>
+                                <option value="remote">Work from home</option>
+                                <option value="holiday">Holiday</option>
                             </select>
                             <label htmlFor="durationUnit">Duration unit</label>
                             <select name="durationType" onChange={handleChange}>

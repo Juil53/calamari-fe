@@ -74,7 +74,7 @@ const CalendarModal = ({ show, setShow, event }) => {
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Absence Type: {updatedEvent.title}</Modal.Title>
+                <Modal.Title>Absence Type: {updatedEvent.title.toUpperCase()}</Modal.Title>
             </Modal.Header>
             <form onSubmit={handleSubmit}>
                 <Modal.Body>
@@ -86,7 +86,7 @@ const CalendarModal = ({ show, setShow, event }) => {
                     <label htmlFor="comment">Comment</label>
                     <textarea
                         id="comment"
-                        rows="4"
+                        rows="2"
                         value={updatedEvent.comment}
                         onChange={handleChange}
                         name="comment"
@@ -95,10 +95,10 @@ const CalendarModal = ({ show, setShow, event }) => {
                     <h6>Name: Nguyen Van A</h6>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="danger" onClick={() => handleDelete(updatedEvent.id)}>
+                    <Button variant="danger" style={{width:'20%'}} onClick={() => handleDelete(updatedEvent.id)}>
                         Delete
                     </Button>
-                    <Button variant="success" type="submit">
+                    <Button variant="success" type="submit" style={{width:'20%'}}>
                         Submit
                     </Button>
                 </Modal.Footer>

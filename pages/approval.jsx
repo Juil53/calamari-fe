@@ -75,7 +75,7 @@ const Approval = ({ events }) => {
 };
 
 export const getStaticProps = async () => {
-    const res = await axios.get(Constant.API);
+    const res = await axios.get(Constant.eventsAPI);
     const events = res.data;
 
     return {

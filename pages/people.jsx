@@ -1,14 +1,17 @@
 import axios from "axios";
+import * as Constant from "../constant/constants"
+import styles from "../styles/People.module.scss"
 
 const Users = ({ userList }) => {
     return (
-        <div>
+        <div className={styles.wrapper}>
             <table>
                 <thead>
                     <tr>
+                        <th>ID</th>
+                        <th>Avatar</th>
                         <th>Full Name</th>
                         <th>Role</th>
-                        <th>Image</th>
                         <th>Email</th>
                         <th>Password</th>
                     </tr>
@@ -16,11 +19,12 @@ const Users = ({ userList }) => {
                 <tbody>
                     {userList?.map((user) => (
                         <tr key={user.id}>
+                            <td>{user.id}</td>
+                            <td>
+                                <img src={user.avatar} alt="avatar" width={30} height={30}/>
+                            </td>
                             <td>{user.fullName}</td>
                             <td>{user.role}</td>
-                            <td>
-                                <img src={user.image} alt="avatar" width={50} height={50} />
-                            </td>
                             <td>{user.email}</td>
                             <td>{user.password}</td>
                         </tr>
@@ -33,19 +37,17 @@ const Users = ({ userList }) => {
 
 export default Users;
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
     const res = await axios({
-        url: "http://localhost:3000/api/users",
+        url: Constant.usersAPI,
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            // "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsIm15VXNlckVtYWlsIjoiaG9hbmdAZ21haWwuY29tIiwiaWF0IjoxNjY4MTQ4NTI1LCJleHAiOjE2NjgxNTIxMjV9.92PdZ05ERf4F20zgn8EpzMq0Nxy9zpDGFewPly4BRWI"
         },
     });
     const userList = res.data;
 
     return {
         props: { userList },
-        revalidate: 1,
     };
 };

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useFormik } from "formik";
 import { validationUserSchema } from "../validation/validationSchema";
 import styles from "../styles/Login.module.scss";
+import * as Constant from "../constant/constants";
 
 export default function Register() {
     const formik = useFormik({
@@ -16,9 +17,12 @@ export default function Register() {
         },
         validationSchema: validationUserSchema,
         onSubmit: async (values) => {
+            const hash = bcrypt.hashSync(values.password, 10);
+            values.password = hash;
+
             try {
                 await axios({
-                    url: "/api/users",
+                    url: Constant.usersAPI,
                     method: "POST",
                     data: JSON.stringify(values),
                     headers: {
