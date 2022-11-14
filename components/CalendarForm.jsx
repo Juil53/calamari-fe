@@ -11,8 +11,7 @@ import CalendarTo from "./CalendarTo";
 const CalendarForm = ({ absences }) => {
     const router = useRouter();
     const [data, setData] = useState({
-        backgroundColor: "#fd6868",
-        color: "#fff",
+        status: Constant.PENDING,
     });
 
     // filter Unique duration Type
@@ -34,11 +33,32 @@ const CalendarForm = ({ absences }) => {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-        setData({
-            ...data,
-            status: Constant.PENDING,
-            [name]: value,
-        });
+        const title = document.querySelector("#absence_type").value;
+
+        switch (title) {
+            case "remote":
+                setData({
+                    ...data,
+                    color: "#fff",
+                    backgroundColor: "#fd6868",
+                    [name]: value,
+                });
+                break;
+            case "sick":
+                setData({
+                    ...data,
+                    color: "#fff",
+                    backgroundColor: "#0d6efd",
+                    [name]: value,
+                });
+                break;
+            default:
+                setData({
+                    ...data,
+                    [name]: value,
+                });
+                break;
+        }
     };
 
     const handleSubmit = async (event) => {
@@ -67,7 +87,7 @@ const CalendarForm = ({ absences }) => {
                     <option value="">Select absence type</option>
                     {absences.map((absence) => (
                         <React.Fragment key={absence.id}>
-                            <option value={absence.name}>{absence.name}</option>
+                            <option value={absence.value}>{absence.name}</option>
                         </React.Fragment>
                     ))}
                 </select>
@@ -80,26 +100,6 @@ const CalendarForm = ({ absences }) => {
                         </React.Fragment>
                     ))}
                 </select>
-                <div className={styles.color}>
-                    <div className={styles.colorText}>
-                        <label htmlFor="">Color</label>
-                        <input
-                            type="color"
-                            id={styles.textColor}
-                            name="color"
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className={styles.colorBg}>
-                        <label htmlFor="">Background</label>
-                        <input
-                            type="color"
-                            id={styles.bgColor}
-                            name="backgroundColor"
-                            onChange={handleChange}
-                        />
-                    </div>
-                </div>
                 <label htmlFor="comment">Comment</label>
                 <input type="text" name="comment" id="comment" onChange={handleChange} />
                 <button className="btn btn-success" type="submit">

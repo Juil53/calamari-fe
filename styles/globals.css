@@ -56,13 +56,15 @@ input:focus {
 textarea {
   width: 100%;
   padding: 0.2rem 0.5rem;
+  border: 3px solid transparent;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 textarea:focus {
   padding: 0.2rem 0.5rem;
-  border: 1px solid #bd1133;
-  outline: #bd1133;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-bottom: 4px solid rgba(57, 63, 84, 0.8);
+  outline: none;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 button {
@@ -91,10 +93,9 @@ select {
 }
 
 select:focus {
-  border: 1px solid #bd1133;
-  outline: #bd1133;
+  outline: none;
   background-color: #c9d1d3;
-  border: 3px solid #27a082;
+  border-bottom: 4px solid rgba(57, 63, 84, 0.8);
   border-radius: 4px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }

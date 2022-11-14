@@ -9,7 +9,6 @@ import CalendarModal from "./CalendarModal";
 import moment from "moment";
 
 const Calendar = ({ ref, events }) => {
-    console.log(events.result);
     const [show, setShow] = useState(false);
     const [event, setEvent] = useState({
         id: null,
