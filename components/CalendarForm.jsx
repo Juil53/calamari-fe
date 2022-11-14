@@ -88,7 +88,6 @@ const CalendarForm = ({ absences }) => {
                             id={styles.textColor}
                             name="color"
                             onChange={handleChange}
-                            defaultValue="#ffffff"
                         />
                     </div>
                     <div className={styles.colorBg}>
@@ -97,7 +96,6 @@ const CalendarForm = ({ absences }) => {
                             type="color"
                             id={styles.bgColor}
                             name="backgroundColor"
-                            defaultValue="#fd6868"
                             onChange={handleChange}
                         />
                     </div>

@@ -64,10 +64,24 @@
   .title {
     color: $primary-color;
   }
+  @include desktop {
+    width: 60%;
+  }
+
+  @include tablet {
+    width: 80%;
+  }
+
+  @include mobile {
+    width: 70%;
+  }
 
   .content {
     margin: 3rem auto;
     text-align: center;
+    @include mobile {
+      padding: 1rem;
+    }
 
     h2 {
       font-weight: $fw-bold;

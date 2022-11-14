@@ -5,43 +5,43 @@ import Card from "../../components/Card";
 import Link from "next/link";
 
 const Configuration = () => {
-  const settings = [
-    {
-      name: "Absence Type",
-      path: "configuration/absence-type",
-      icon: <FontAwesomeIcon icon={faBook} />,
-    },
-    {
-      name: "Approval Flow",
-      path: "/",
-      icon: <FontAwesomeIcon icon={faArrowsTurnToDots} />,
-    },
-    {
-      name: "People",
-      path: "/",
-      icon: <FontAwesomeIcon icon={faUser} />,
-    },
-  ];
+    const settings = [
+        {
+            name: "Absence Type",
+            path: "configuration/absence-type",
+            icon: <FontAwesomeIcon icon={faBook} />,
+        },
+        {
+            name: "Approval Flow",
+            path: "/",
+            icon: <FontAwesomeIcon icon={faArrowsTurnToDots} />,
+        },
+        {
+            name: "People",
+            path: "/",
+            icon: <FontAwesomeIcon icon={faUser} />,
+        },
+    ];
 
-  return (
-    <>
-      <div className={styles.header}>
-        <div className={styles.leftSide}>
-          <h4 className={styles.title}>SETTINGS</h4>
-        </div>
-      </div>
+    return (
+        <>
+            <div className={styles.header}>
+                <div className={styles.leftSide}>
+                    <h4 className={styles.title}>SETTINGS</h4>
+                </div>
+            </div>
 
-      <div className={styles.content}>
-        {settings.map((setting, index) => (
-          <Link href={setting.path} key={index}>
-            <a>
-              <Card name={setting.name} icon={setting.icon} />
-            </a>
-          </Link>
-        ))}
-      </div>
-    </>
-  );
+            <div className={styles.content}>
+                {settings.map((setting, index) => (
+                    <Link href={setting.path} key={index}>
+                        <a>
+                            <Card name={setting.name} icon={setting.icon} />
+                        </a>
+                    </Link>
+                ))}
+            </div>
+        </>
+    );
 };
 
 export default Configuration;
