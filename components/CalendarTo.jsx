@@ -13,10 +13,12 @@ const CalendarTo = ({ dataCalendarTo, oldData }) => {
         setCalendar(format(new Date(), "yyyy-MM-dd"));
         document.addEventListener("keydown", hideOnEsc, true);
         document.addEventListener("click", hideOnClickOutsite, true);
+        document.addEventListener("click", hideOnClickInside, true);
 
         return () => {
             document.removeEventListener("keydown", hideOnEsc, true);
             document.removeEventListener("click", hideOnClickOutsite, true);
+            document.removeEventListener("click", hideOnClickInside, true);
         };
     }, []);
 
@@ -28,6 +30,12 @@ const CalendarTo = ({ dataCalendarTo, oldData }) => {
 
     const hideOnClickOutsite = (event) => {
         if (refOne.current && !refOne.current.contains(event.target)) {
+            setOpen(false);
+        }
+    };
+
+    const hideOnClickInside = (event) => {
+        if (refOne.current && refOne.current.contains(event.target)) {
             setOpen(false);
         }
     };

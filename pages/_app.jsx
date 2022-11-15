@@ -5,7 +5,7 @@ import "@fullcalendar/common/main.css";
 import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
 import 'bootstrap/dist/css/bootstrap.css';
-import "../styles/globals.css";
+import "../styles/globals.scss";
 import { useEffect } from "react";
 
 config.autoAddCss = false;

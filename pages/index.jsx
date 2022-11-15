@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Image from "next/image";
 import styles from "../styles/Login.module.scss";
 import Link from "next/link";
 import axios from "axios";
@@ -40,7 +41,7 @@ export default function Login() {
             {/* Header */}
             <nav className={styles.head}>
                 <div className={styles.logo}>
-                    <img src="/imgs/logo.svg" alt="logo" />
+                    <Image src="/imgs/logo.svg" alt="logo" width={200} height={50}/>
                 </div>
                 <div className={styles.signup}>
                     <Link href="/register">

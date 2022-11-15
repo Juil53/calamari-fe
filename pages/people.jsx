@@ -21,7 +21,7 @@ const Users = ({ userList }) => {
                         <tr key={user.id}>
                             <td>{user.id}</td>
                             <td>
-                                <img src={user.avatar} alt="avatar" width={30} height={30}/>
+                                <img src={user.avatar} alt="avatar"/>
                             </td>
                             <td>{user.fullName}</td>
                             <td>{user.role}</td>
@@ -37,6 +37,7 @@ const Users = ({ userList }) => {
 
 export default Users;
 
+//generate when request => slower than getStaticProps
 export const getServerSideProps = async () => {
     const res = await axios({
         url: Constant.usersAPI,

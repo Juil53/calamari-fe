@@ -130,6 +130,10 @@ select:focus {
   display: flex;
 }
 
+.rdrSelected {
+  background: #bd1133 !important;
+}
+
 /* MOBILE */
 @media screen and (max-width: 415px) {
   .fc .fc-toolbar-title {

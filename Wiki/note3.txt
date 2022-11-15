@@ -1,0 +1,62 @@
+Check network ( Kiểm tra tốc độ load )
+1. Finish
+2. DOMContentLoad
+3. Load
+
+1. Xác định Static page bằng hàm getServerSideProps hoặc getInitialsProps
+=> Nếu không dùng thì default là Automatic Static Optimization
+
+2. Dynamic: Id
+Chạy getStaticPath  1 lần để lấy hết ID
+Chạy getStaticProps để generate ra static page theo số lượng Id từ trên
+
+dev Mode:
+. Khi chạy load page detail
+=> chạy getStaticPath
+=> chạy getStaticProps theo ID chứ ko chạy hết
+
+production Mode:
+=> các page đã đc build static sẵn
+=> kèm theo data pageProps
+=> nên khi load từ page này sang page khác => không fetch lại data nữa, mà lấy data từ json đã tải gắn vào luôn
+
+3. Component render phía client
+dynamic
+ssr:false (chỉ chạy client, server k chạy)
+ssr:true (chạy client, server chạy)
+
+4. Chỉ trigger update routing phía client, server ko chạy getStaticProps
+=> shallow routine cho phép update url mà ko gọi lại các method fetching data phía server
+=> shallow:true
+
+5. ServerSideRendering with Cache
+TTFB - time to first byte sẽ chậm hơn getStaticProps
+demo bằng cách chạy 2 page apply, people
+ => mỗi lần request tới page sử dụng SSR thì sẽ chậm performance
+
+
+Trên production
+. Using Cache
+TH1
+maxage = 5 lưu cache 5s, ko cần gọi lại SSR => hết 5s thì gọi lại SSR
+=> trong tgian cache, nếu update data thì vẫn lấy từ cache
+
+TH2
+request sau tgian cache
+.stale while revalidate 
+=> vẫn trả về kết quả cache và chạy thêm SSR
+=> set lại cache mới
+
+TH3
+request sau tgian cache
+.stale while revalidate = 5
+=>trong 5s đầu trả về data cache
+=>6->10s vẫn trả về data trg cache, gọi SSR
+=> >10s, gọi SSR, rồi lưu cache mới
+
+
+=> Nhược điểm khi dùng cache => nếu nhiều người có nội dung xem khác nhau, truy cập cùng lúc thì chỉ ra nội dung đã cache giống nhau
+
+=> Dùng cho Public page, ai cũng xem như nhau
+=>Từng user xem nội dung khác nhau thì nên dùng client fetching
+

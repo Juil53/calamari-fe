@@ -12,6 +12,7 @@ module.exports = withTM({
   // any other general next.js settings
   reactStrictMode: true,
   swcMinify: true,
+  eslint: { ignoreDuringBuilds: true },
 })
 
 

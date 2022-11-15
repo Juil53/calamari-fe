@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import { validationUserSchema } from "../validation/validationSchema";
 import styles from "../styles/Login.module.scss";
 import * as Constant from "../constant/constants";
+import Image from "next/image";
 
 export default function Register() {
     const formik = useFormik({
@@ -48,7 +49,7 @@ export default function Register() {
             {/* Header */}
             <nav className={styles.head}>
                 <div className={styles.logo}>
-                    <img src="/imgs/logo.svg" alt="logo" />
+                    <Image src="/imgs/logo.svg" alt="logo" width={50} height={50}/>
                 </div>
                 <div className={styles.signup}>
                     <Link href="/">
