@@ -8,98 +8,98 @@ import * as Constant from "../constant/constants";
 import { useRouter } from "next/router";
 
 export default function Login() {
-    const router = useRouter();
-    const [signIn, setSignIn] = useState({});
-    const [user, setUser] = useState({});
+  const router = useRouter();
+  const [signIn, setSignIn] = useState({});
+  const [user, setUser] = useState({});
 
-    const handleChange = (e) => {
-        e.preventDefault();
-        const { name, value } = e.target;
-        setSignIn({
-            ...signIn,
-            [name]: value,
-        });
-    };
+  const handleChange = (e) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    setSignIn({
+      ...signIn,
+      [name]: value,
+    });
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const res = await axios({
-                url: "https://dvhnghia-backend.herokuapp.com/login",
-                method: "POST",
-                data: JSON.stringify(signIn),
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-            console.log(res.data);
-        } catch (error) {
-            console.log(error);
-        }
-        // router.push("/apply")
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios({
+        url: "https://dvhnghia-backend.herokuapp.com/login",
+        method: "POST",
+        data: JSON.stringify(signIn),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+    // router.push("/apply")
+  };
 
-    return (
-        <>
-            <Head>
-                <title>Login</title>
-                <meta name="keywords" content="" />
-            </Head>
+  return (
+    <>
+      <Head>
+        <title>Login</title>
+        <meta name="keywords" content="" />
+      </Head>
 
-            <div className={styles.bgImage}></div>
+      <div className={styles.bgImage}></div>
 
-            {/* Header */}
-            <nav className={styles.head}>
-                <div className={styles.logo}>
-                    <Image src="/imgs/logo.svg" alt="logo" width={200} height={50} />
-                </div>
-                <div className={styles.signup}>
-                    <Link href="/register">
-                        <a className={styles.signup_btn}>
-                            <span className={styles.signup_blur}>Don't have an account yet?</span>
-                            Sign up
-                        </a>
-                    </Link>
-                </div>
-            </nav>
+      {/* Header */}
+      <nav className={styles.head}>
+        <div className={styles.logo}>
+          <Image src="/imgs/logo.svg" alt="logo" width={200} height={50} />
+        </div>
+        <div className={styles.signup}>
+          <Link href="/register">
+            <a className={styles.signup_btn}>
+              <span className={styles.signup_blur}>Don't have an account yet?</span>
+              Sign up
+            </a>
+          </Link>
+        </div>
+      </nav>
 
-            <div className={styles.bgText}>
-                {/* Form */}
-                <section className={styles.content}>
-                    <h2>Login</h2>
-                    <div className={styles.wrapper}>
-                        <form onSubmit={handleSubmit} method="POST">
-                            <div className={styles.email}>
-                                <label htmlFor="email">Email</label>
-                                <input
-                                    type="text"
-                                    id="email"
-                                    name="email"
-                                    placeholder="jonsnow@gmail.com"
-                                    onChange={handleChange}
-                                />
-                            </div>
-                            <div className={styles.password}>
-                                <label htmlFor="password">Password</label>
-                                <input
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    placeholder=""
-                                    onChange={handleChange}
-                                />
-                            </div>
-                            <button type="submit" className={styles.submit}>
-                                Login
-                            </button>
-                        </form>
-                    </div>
-                </section>
-            </div>
-        </>
-    );
+      <div className={styles.bgText}>
+        {/* Form */}
+        <section className={styles.content}>
+          <h2>Login</h2>
+          <div className={styles.wrapper}>
+            <form onSubmit={handleSubmit} method="POST">
+              <div className={styles.email}>
+                <label htmlFor="email">Email</label>
+                <input
+                  type="text"
+                  id="email"
+                  name="email"
+                  placeholder="jonsnow@gmail.com"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className={styles.password}>
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder=""
+                  onChange={handleChange}
+                />
+              </div>
+              <button type="submit" className={styles.submit}>
+                Login
+              </button>
+            </form>
+          </div>
+        </section>
+      </div>
+    </>
+  );
 }
 
 Login.getLayout = function PageLayout(page) {
-    return <>{page}</>;
+  return <>{page}</>;
 };

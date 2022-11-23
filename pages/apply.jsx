@@ -6,42 +6,42 @@ import * as Constant from "../constant/constants";
 import style from "../styles/Apply.module.scss";
 
 const Calendar = dynamic(() => import("../components/Calendar"), {
-    ssr: false,
+  ssr: false,
 });
 
 const Apply = ({ events, absences }) => {
-    const calendarRef = createRef();
+  const calendarRef = createRef();
 
-    return (
-        <>
-            <h2 className={style.title}>Absence Request</h2>
-            <div className={style.container}>
-                <div className={style.leftSide}>
-                    <Calendar ref={calendarRef} events={events} />
-                </div>
-                <div className={style.rightSide}>
-                    <CalendarForm absences={absences} />
-                </div>
-            </div>
-        </>
-    );
+  return (
+    <>
+      <h2 className={style.title}>Absence Request</h2>
+      <div className={style.container}>
+        <div className={style.leftSide}>
+          <Calendar ref={calendarRef} events={events} />
+        </div>
+        <div className={style.rightSide}>
+          <CalendarForm absences={absences} />
+        </div>
+      </div>
+    </>
+  );
 };
 
 //  This gets called on every request
 export const getStaticProps = async () => {
-    // Fetch API/DB
-    const res1 = await axios.get(Constant.eventsAPI);
-    const events = res1.data
-    const res2 = await axios.get(Constant.absencesAPI);
-    const absences = res2.data
+  // Fetch API/DB
+  const res1 = await axios.get(Constant.eventsAPI);
+  const events = res1.data;
+  const res2 = await axios.get(Constant.absencesAPI);
+  const absences = res2.data;
 
-    // Pass data to the page via props
-    return {
-        props: {
-            events,
-            absences
-        },
-    };
+  // Pass data to the page via props
+  return {
+    props: {
+      events,
+      absences,
+    },
+  };
 };
 
 export default Apply;
