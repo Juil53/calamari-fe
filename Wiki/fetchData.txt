@@ -58,5 +58,34 @@ request sau tgian cache
 => Nhược điểm khi dùng cache => nếu nhiều người có nội dung xem khác nhau, truy cập cùng lúc thì chỉ ra nội dung đã cache giống nhau
 
 => Dùng cho Public page, ai cũng xem như nhau
-=>Từng user xem nội dung khác nhau thì nên dùng client fetching
+=>  Từng user xem nội dung khác nhau thì nên dùng client fetching
 
+
+6. ISR Incremental Static Regeneration
+Generate HTML on demand (run-time): tức là khi server không có sẵn page đó, admin tạo ra page đó lên server sau thgian build, thì nếu page sử dụng ISR thì server sẽ tạo thêm page để lưu lại
+Nếu dùng SSG thì phải build lại cả trang => mất tgian, không hiệu quả
+
+Faster Builds:
+Higher Cache Hit Rate:
+
+revalidate:
+khi đặt revalidate SSG -> ISR
+mỗi khi có user request lên page sau tgian set revalidate
+=> sẽ trả về data cached và trigger generate page mới -> lưu vào cache
+
+getStaticPaths:
+fallback:blocking
+=> sẽ gọi getStaticProps tạo html -> return lại client
+=> Nhược điểm: TTFB sẽ lâu, VD từ trang khác, chuyển sang trang mới sẽ mất 1 khoảng tgian chờ generate page, client sẽ đứng yên tại trang cũ => ảnh hưởng UX
+
+fallback:true
+=> nếu access vào page mới, thì sẽ set fallback = true, route.Fallback nếu bằng true có thể chèn Loading vào, sau khi generate ra page mới thì fallback trở lại false => render nội dung page mới
+
+
+fallback:false 
+=> return  404 nếu page không tồn tại
+
+=>kết hợp fallback và revalidate để update page cũ và thêm page mới
+
+ISR sẽ generate pages ở tất cả các region => truy cập ở mọi nơi đều ok!
+SSR chỉ generate pages ở region hiện tại, nếu user ở region khác thì phải generate lại

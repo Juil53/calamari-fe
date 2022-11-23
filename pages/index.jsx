@@ -4,10 +4,13 @@ import styles from "../styles/Login.module.scss";
 import Link from "next/link";
 import axios from "axios";
 import { useState } from "react";
-import * as Constant from "../constant/constants"
+import * as Constant from "../constant/constants";
+import { useRouter } from "next/router";
 
 export default function Login() {
+    const router = useRouter();
     const [signIn, setSignIn] = useState({});
+    const [user, setUser] = useState({});
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -18,15 +21,22 @@ export default function Login() {
         });
     };
 
-    const handleSubmit = async () => {
-        const res = await axios({
-            url: "http://localhost:3000/api/login",
-            method: "POST",
-            data: JSON.stringify(signIn),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await axios({
+                url: "https://dvhnghia-backend.herokuapp.com/login",
+                method: "POST",
+                data: JSON.stringify(signIn),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            console.log(res.data);
+        } catch (error) {
+            console.log(error);
+        }
+        // router.push("/apply")
     };
 
     return (
@@ -41,7 +51,7 @@ export default function Login() {
             {/* Header */}
             <nav className={styles.head}>
                 <div className={styles.logo}>
-                    <Image src="/imgs/logo.svg" alt="logo" width={200} height={50}/>
+                    <Image src="/imgs/logo.svg" alt="logo" width={200} height={50} />
                 </div>
                 <div className={styles.signup}>
                     <Link href="/register">
@@ -58,7 +68,7 @@ export default function Login() {
                 <section className={styles.content}>
                     <h2>Login</h2>
                     <div className={styles.wrapper}>
-                        <form onSubmit={handleSubmit} action="POST">
+                        <form onSubmit={handleSubmit} method="POST">
                             <div className={styles.email}>
                                 <label htmlFor="email">Email</label>
                                 <input

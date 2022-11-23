@@ -40,13 +40,15 @@ export default Users;
 //generate when request => slower than getStaticProps
 export const getServerSideProps = async () => {
     const res = await axios({
-        url: Constant.usersAPI,
+        // url: Constant.usersAPI,
+        url:"https://dvhnghia-backend.herokuapp.com",
         method: "GET",
         headers: {
             "Content-Type": "application/json",
         },
     });
     const userList = res.data;
+    console.log(userList)
 
     return {
         props: { userList },

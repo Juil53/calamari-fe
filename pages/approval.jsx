@@ -10,6 +10,10 @@ const Approval = ({ events }) => {
     const [index, setIndex] = useState(0);
     const tabs = ["FOR APPROVAL", "HISTORY"];
 
+    const handleClick = (id) => {
+        console.log(`Row ${id} clicked!`);
+    };
+
     return (
         <>
             <div className={styles.header}>
@@ -50,10 +54,14 @@ const Approval = ({ events }) => {
                         </thead>
                         <tbody>
                             {events.map((event) => (
-                                <tr key={event.id}>
+                                <tr key={event.id} onClick={() => handleClick(event.id)}>
                                     <td className={styles.reporter}>
                                         <div className={styles.imgWrapper}>
-                                            {/* <img className={styles.avatar} src="/imgs/avatar.jpg" alt="avatar" /> */}
+                                            <img
+                                                className={styles.avatar}
+                                                src="/imgs/avatar.jpg"
+                                                alt="avatar"
+                                            />
                                         </div>
                                         Nguyen Van A
                                     </td>
