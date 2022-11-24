@@ -5,10 +5,13 @@ import {
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
+import Link from "next/link";
+import * as Constant from "../../constant/constants";
+import styles from "../../styles/Request.module.scss";
+import { handleStatus } from "../../utils/utils";
 
-import styles from "../styles/Request.module.scss";
-
-export default function Request() {
+export default function Request({ events }) {
   return (
     <div className={styles.my__request}>
       <div className={styles.filter}>
@@ -36,22 +39,40 @@ export default function Request() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Annual leave</td>
-            <td>10/9/2022 - 26/9/2022</td>
-            <td>1 day</td>
-            <td className={styles.status}>
-              <div className={styles.status__container}>
-                <FontAwesomeIcon
-                  icon={faCircle}
-                  className={`${styles.status__icon} ${styles.success}`}
-                />
-                <div>Success</div>
-              </div>
-            </td>
-          </tr>
+          {events.map((event) => (
+            <Link key={event.id} href={`/requests/${event.id}`}>
+              <tr>
+                <td>{event.title}</td>
+                <td>
+                  {event.start} - {event.end}
+                </td>
+                <td>1 day</td>
+                <td className={styles.status}>
+                  <div className={styles.status__container}>
+                    <FontAwesomeIcon
+                      icon={faCircle}
+                      className={`${styles.status__icon} ${styles.success}`}
+                    />
+                    <div>{handleStatus(event.status)}</div>
+                  </div>
+                </td>
+              </tr>
+            </Link>
+          ))}
         </tbody>
       </table>
     </div>
   );
 }
+
+export const getStaticProps = async () => {
+  // Fetch API/DB
+  const res1 = await axios.get(Constant.eventsAPI);
+  const events = res1.data;
+
+  return {
+    props: {
+      events,
+    },
+  };
+};

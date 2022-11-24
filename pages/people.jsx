@@ -3,6 +3,7 @@ import * as Constant from "../constant/constants";
 import styles from "../styles/People.module.scss";
 
 const Users = ({ userList }) => {
+  console.log(userList)
   return (
     <div className={styles.wrapper}>
       <table>
@@ -17,11 +18,11 @@ const Users = ({ userList }) => {
           </tr>
         </thead>
         <tbody>
-          {userList?.map((user) => (
+          {userList.data?.map((user) => (
             <tr key={user.id}>
               <td>{user.id}</td>
               <td>
-                <img src={user.avatar} alt="avatar" />
+                {/* <img src={user.avatar} alt="avatar" /> */}
               </td>
               <td>{user.fullName}</td>
               <td>{user.role}</td>
@@ -45,6 +46,7 @@ export const getServerSideProps = async () => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImR1eUBnbWFpbC5jb20iLCJpYXQiOjE2NjkyNzQyMTcsImV4cCI6MTY2OTI3NzgxN30.Vfc_DcfCR9pjx9I8Zpl9ZZA6gm_OPTSs6Pe20MdupkI"
     },
   });
   const userList = res.data;
