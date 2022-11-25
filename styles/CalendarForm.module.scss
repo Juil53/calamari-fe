@@ -1,4 +1,10 @@
+@import "variables";
+
 .calendarForm {
+    button {
+        width: 20%;
+    }
+
     .color {
         display: flex;
         margin-bottom: 3rem;

@@ -34,6 +34,7 @@ export const getStaticProps = async () => {
   const events = res1.data;
   const res2 = await axios.get(Constant.absencesAPI);
   const absences = res2.data;
+  console.log('helloworld!')
 
   // Pass data to the page via props
   return {

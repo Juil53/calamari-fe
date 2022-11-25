@@ -45,7 +45,7 @@ const Approval = ({ events }) => {
           <table>
             <thead>
               <tr>
-                <th>REPORTER</th>
+                <th>STAFFS</th>
                 <th>TYPE</th>
                 <th>ABSENCE PERIOD</th>
                 <th>REQUESTED</th>
@@ -57,7 +57,7 @@ const Approval = ({ events }) => {
                 <tr key={event.id} onClick={() => handleClick(event.id)}>
                   <td className={styles.reporter}>
                     <div className={styles.imgWrapper}>
-                      <img className={styles.avatar} src="/imgs/avatar.jpg" alt="avatar" />
+                      {/* <img className={styles.avatar} src="/imgs/avatar.jpg" alt="avatar" /> */}
                     </div>
                     Nguyen Van A
                   </td>

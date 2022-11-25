@@ -80,6 +80,7 @@
     }
 
     &:hover {
+      border-radius: $borderRadius;
       background-color: $primary-color-light;
       color: $primary-color-hover;
       font-weight: $fw-bold;
@@ -119,6 +120,7 @@
 }
 
 .navActive {
+  border-radius: $borderRadius;
   background-color: $primary-color-light;
   color: $primary-color;
 

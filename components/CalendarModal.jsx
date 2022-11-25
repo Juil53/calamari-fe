@@ -63,7 +63,7 @@ const CalendarModal = ({ show, setShow, event }) => {
 
         //post updated Event
         try {
-            await axios.put(`${Constant.API}${event.id}`, updatedEvent);
+            await axios.put(`https://633d07937e19b17829061bcf.mockapi.io/calendar/events/${event.id}`, updatedEvent);
             alert("updated");
         } catch (error) {
             console.log(error);
