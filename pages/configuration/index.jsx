@@ -13,7 +13,7 @@ const Configuration = () => {
         },
         {
             name: "Approval Flow",
-            path: "/",
+            path: "/configuration/flow",
             icon: <FontAwesomeIcon icon={faArrowsTurnToDots} />,
         },
         {

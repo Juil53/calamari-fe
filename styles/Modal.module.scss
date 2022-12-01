@@ -1,0 +1,52 @@
+@import "variables";
+
+.box {
+  position: absolute;
+  width: 400px;
+  top: 50%;
+  left: 50%;
+  padding: 1.5rem;
+  transform: translate(-50%, -50%);
+  border-radius: $borderRadius;
+  box-shadow: $bs;
+  background-color: $white;
+  font-weight: $fw-bold;
+  font-size: $fs-md;
+
+  textarea {
+    margin-top: 5px;
+  }
+
+  h5 {
+    margin-top: 5px;
+  }
+}
+
+.modalFooter {
+  margin-top: 10px;
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  button {
+    width: 100px;
+  }
+
+  button:nth-of-type(1) {
+    margin-right: 5px;
+  }
+}
+
+.closeIcon {
+  width: 10%;
+  background-color: $white;
+  color: $black;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  transition: $transition;
+  
+  &:hover {
+    color: $primary-color;
+  }
+}

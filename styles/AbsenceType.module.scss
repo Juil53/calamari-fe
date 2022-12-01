@@ -80,15 +80,20 @@
     tbody {
       text-align: left;
       tr {
-        width: 50%;
+        width: 80%;
         height: 30px;
         font-size: $fs-sm;
         padding: 5px 0;
         border-bottom: 1px solid $grey-blur;
         
         .rowAction{
-          width: 50%;
+          width: 20%;
           text-align: center;
+          button {
+            width: 80px;
+          }
+
+
           @include mobile {
             width: 100%;
           }
@@ -98,7 +103,7 @@
             justify-content: flex-end;
             button {
               width: 100%;
-              padding: 2px 0;
+              padding: 5px;
             }
           }
           @include desktop {
@@ -107,7 +112,7 @@
             justify-content: flex-end;
             button {
               width: 100%;
-              padding: 2px 0;
+              padding: 5px;
             }
           }
           button {

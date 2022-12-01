@@ -9,7 +9,7 @@ const Calendar = dynamic(() => import("../components/Calendar"), {
   ssr: false,
 });
 
-const Apply = ({ events, absences }) => {
+const Apply = ({events,absences}) => {
   const calendarRef = createRef();
 
   return (

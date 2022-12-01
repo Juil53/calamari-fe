@@ -74,7 +74,8 @@ button {
   background-color: #bd1133;
   font-weight: 600;
   transition: transform 90ms ease-in;
-  width: 60%;
+  width: 80px;
+  cursor: pointer;
 }
 button:active{
   transform: scale(0.95);

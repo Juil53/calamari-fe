@@ -1,33 +1,33 @@
 .calendarForm {
-    .color {
-        display: flex;
-        margin-bottom: 3rem;
-    }
+  .color {
+    display: flex;
+    margin-bottom: 3rem;
+  }
 
-    .colorText {
-        width: 30px;
-        height: 30px;
-        margin-right: 10px;
-        #textColor {
-            padding: 0;
-            height: 100%;
-            cursor: pointer;
-            &:focus {
-                padding: 0;
-            }
-        }
+  .colorText {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    #textColor {
+      padding: 0;
+      height: 100%;
+      cursor: pointer;
+      &:focus {
+        padding: 0;
+      }
     }
+  }
 
-    .colorBg {
-        width: 30px;
-        height: 30px;
-        #bgColor {
-            padding: 0;
-            height: 100%;
-            cursor: pointer;
-            &:focus {
-                padding: 0;
-            }
-        }
+  .colorBg {
+    width: 30px;
+    height: 30px;
+    #bgColor {
+      padding: 0;
+      height: 100%;
+      cursor: pointer;
+      &:focus {
+        padding: 0;
+      }
     }
+  }
 }
