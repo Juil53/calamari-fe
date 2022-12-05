@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
-import HorizontalLinearStepper from "../../components/Step";
 import styles from "../../styles/Flow.module.scss";
+import FlowStep from "../../components/FlowStep";
 
 const ApprovalFlow = () => {
   const flows = [
@@ -35,17 +35,19 @@ const ApprovalFlow = () => {
   return (
     <div>
       <div className={styles.header}>
-        <Link href="/configuration/absence-type">
+        <Link href="/configuration">
           <button className={styles.returnBtn}>
             <FontAwesomeIcon icon={faArrowLeftLong} />
           </button>
         </Link>
-        <button className={styles.createBtn}>
-          <span>
-            <FontAwesomeIcon icon={faPlus} />
-          </span>
-          CREATE FLOW
-        </button>
+        <Link href="/configuration/create-flow">
+          <button className={styles.createBtn}>
+            <span>
+              <FontAwesomeIcon icon={faPlus} />
+            </span>
+            CREATE FLOW
+          </button>
+        </Link>
       </div>
 
       <div className={styles.content}>
@@ -55,7 +57,7 @@ const ApprovalFlow = () => {
               <h3>Flow {index + 1}</h3>
             </div>
             <div className={styles.step}>
-              <HorizontalLinearStepper steps={flows[index]} />
+              <FlowStep steps={flows[index]} />
             </div>
           </div>
         ))}

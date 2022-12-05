@@ -1,4 +1,5 @@
 // @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap");
+@import "variables";
 
 * {
   margin: 0;
@@ -72,10 +73,15 @@ button {
   border: none;
   color: #fff;
   background-color: #bd1133;
+  box-shadow: $bs1;
   font-weight: 600;
-  transition: transform 90ms ease-in;
+  transition: $transition2;
   width: 80px;
   cursor: pointer;
+
+  &:hover {
+    background-color: $primary-color-hover;
+  }
 }
 button:active{
   transform: scale(0.95);

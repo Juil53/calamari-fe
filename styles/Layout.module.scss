@@ -6,6 +6,7 @@
   width: calc(100% - 300px);
   left: 300px;
   padding: 10px 20px 0 20px;
+
   @include mobile {
     width: calc(100% - 90px);
     left: 90px;

@@ -6,7 +6,7 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-export default function HorizontalLinearStepper({ steps }) {
+export default function FlowStep({ steps, isCreatePage }) {
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
@@ -37,10 +37,16 @@ export default function HorizontalLinearStepper({ steps }) {
 
       {activeStep === steps.length ? (
         <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>All steps completed - you&apos;re finished</Typography>
+          {isCreatePage !== true ? (
+            <Typography sx={{ mt: 2, mb: 1 }}>
+              All steps completed - you&apos;re finished
+            </Typography>
+          ) : (
+            ""
+          )}
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Box sx={{ flex: "1 1 auto" }} />
-            <Button onClick={handleReset}>Reset</Button>
+            {isCreatePage !== true ? <Button onClick={handleReset}>Reset</Button> : ""}
           </Box>
         </React.Fragment>
       ) : (
@@ -48,9 +54,11 @@ export default function HorizontalLinearStepper({ steps }) {
           {steps.map((step, index) => {
             if (index === activeStep) {
               return (
-                <Typography sx={{ mt: 2, mb: 1 }} key={index}>
-                  {step.description}
-                </Typography>
+                <div key={index} style={{ textAlign: "center" }}>
+                  <Typography variant="h4" sx={{ mt: 2, mb: 1 }} key={index}>
+                    {step.description}
+                  </Typography>
+                </div>
               );
             }
           })}

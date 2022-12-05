@@ -12,6 +12,7 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  box-shadow: $bs1;
   transition: $transition2;
   .cardText {
     font-weight: $fw-bold;
