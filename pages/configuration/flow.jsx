@@ -1,37 +1,25 @@
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../styles/Flow.module.scss";
 import FlowStep from "../../components/FlowStep";
+import axios from "axios";
 
-const ApprovalFlow = () => {
-  const flows = [
-    [
-      {
-        flow: "Creat a request",
-        description: "Create new request",
-      },
-      {
-        flow: "Waiting for Manager approval",
-        description: "Wait for manager approve and check at Request page",
-      },
-    ],
-    [
-      {
-        flow: "Creat a request",
-        description: "Create new request",
-      },
-      {
-        flow: "Waiting for Manager approval",
-        description: "Wait for manager approve and check at Request page",
-      },
-      {
-        flow: "Waiting for Admin approval",
-        description: "Wait for manager approve and check at Request page",
-      },
-    ],
-  ];
+export async function getStaticProps() {
+  const res = await axios.get("https://633d07937e19b17829061bcf.mockapi.io/calendar/flow");
+  const flows = res.data;
 
+  return {
+    props: {
+      flows,
+    },
+    revalidate: 10, // In seconds
+  };
+}
+
+const ApprovalFlow = ({ flows }) => {
+  console.log(flows);
   return (
     <div>
       <div className={styles.header}>
@@ -50,18 +38,17 @@ const ApprovalFlow = () => {
         </Link>
       </div>
 
-      <div className={styles.content}>
-        {flows.map((flow, index) => (
-          <div className={styles.flow} key={index}>
-            <div className={styles.title}>
-              <h3>Flow {index + 1}</h3>
-            </div>
-            <div className={styles.step}>
-              <FlowStep steps={flows[index]} />
-            </div>
-          </div>
-        ))}
-      </div>
+      {flows.length > 0 ? (
+        <div className={styles.content}>
+          {flows.map((flow, index) => (
+            <React.Fragment key={index}>
+              <FlowStep steps={flow} />
+            </React.Fragment>
+          ))}
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
