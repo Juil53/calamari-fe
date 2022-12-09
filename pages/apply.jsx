@@ -14,7 +14,7 @@ const Apply = ({events,absences}) => {
 
   return (
     <>
-      <h2 className={style.title}>Absence Request</h2>
+      <h4 className={style.title}>Absence Request</h4>
       <div className={style.container}>
         <div className={style.leftSide}>
           <Calendar ref={calendarRef} events={events} />
@@ -34,8 +34,6 @@ export const getStaticProps = async () => {
   const events = res1.data;
   const res2 = await axios.get(Constant.absencesAPI);
   const absences = res2.data;
-  console.log('helloworld!')
-
   // Pass data to the page via props
   return {
     props: {

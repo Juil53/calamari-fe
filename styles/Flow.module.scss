@@ -47,12 +47,19 @@ button.returnBtn {
     border-bottom: 1px solid $grey-blur;
     width: 100%;
     display: flex;
-    .title {
-      width: 20%;
+    align-items: center;
+    column-gap: 20px;
+    .flowDetail {
+      display: flex;
+      flex-direction: column;
+      width: 30%;
+      span {
+        font-size: $fs-sm;
+        color: $grey;
+      }
     }
-    .step {
-      width: 80%;
-      padding-left: 1rem;
+    .flowChart {
+      width: 70%;
     }
   }
 }

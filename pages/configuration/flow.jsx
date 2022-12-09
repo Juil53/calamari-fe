@@ -5,10 +5,13 @@ import { faPlus, faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../styles/Flow.module.scss";
 import FlowStep from "../../components/FlowStep";
 import axios from "axios";
+import moment from "moment";
+
 
 export async function getStaticProps() {
   const res = await axios.get("https://633d07937e19b17829061bcf.mockapi.io/calendar/flow");
   const flows = res.data;
+  flows.sort((a,b) => b.id - a.id)
 
   return {
     props: {
@@ -19,7 +22,6 @@ export async function getStaticProps() {
 }
 
 const ApprovalFlow = ({ flows }) => {
-  console.log(flows);
   return (
     <div>
       <div className={styles.header}>
@@ -37,13 +39,18 @@ const ApprovalFlow = ({ flows }) => {
           </button>
         </Link>
       </div>
-
       {flows.length > 0 ? (
         <div className={styles.content}>
           {flows.map((flow, index) => (
-            <React.Fragment key={index}>
-              <FlowStep steps={flow} />
-            </React.Fragment>
+            <div key={index} className={styles.flow}>
+              <div className={styles.flowDetail}>
+                <h4>Flow: {flow.id}</h4>
+                <span>Created At: {moment(flow.createdAt).format("yyyy-MM-DD")}</span>
+              </div>
+              <div className={styles.flowChart}>
+                <FlowStep steps={flow.flow} />
+              </div>
+            </div>
           ))}
         </div>
       ) : (

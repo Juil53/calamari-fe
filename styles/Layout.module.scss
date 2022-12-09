@@ -2,21 +2,21 @@
 
 .content {
   position: absolute;
-  height: 100%;
   width: calc(100% - 300px);
   left: 300px;
   padding: 10px 20px 0 20px;
-
+  background-color:  $bg-color;
   @include mobile {
     width: calc(100% - 90px);
     left: 90px;
+    background-color:  $bg-color;
   }
 }
 
 .activeContent {
   position: absolute;
-  height: 100%;
   width: calc(100% - 130px);
   left: 130px;
   padding: 10px 20px 0 20px;
+  background-color:  $bg-color;
 }

@@ -34,7 +34,7 @@ const CreateFlow = () => {
     const { name, value } = e.target;
     const tempFlows = [...flows];
     const tempFlow = { ...tempFlows[option], [name]: value };
-    tempFlows[option] = tempFlow;
+    tempFlows[option] = tempFlow.flow;
     setFlows(tempFlows);
   };
 
@@ -49,12 +49,6 @@ const CreateFlow = () => {
               <option value="MANAGER">MANAGER</option>
               <option value="ADMIN">ADMIN</option>
             </select>
-
-            <input
-              name="description"
-              onChange={(e) => handleChange(e, option)}
-              placeholder="Description..."
-            />
           </div>
         </form>
       </div>
@@ -63,7 +57,9 @@ const CreateFlow = () => {
 
   const handleSubmit = () => {
     try {
-      axios.post("https://633d07937e19b17829061bcf.mockapi.io/calendar/flow", [flows]);
+      axios.post("https://633d07937e19b17829061bcf.mockapi.io/calendar/flow", {
+        flow:flows
+      });
       alert("OKE");
     } catch (error) {
       console.log(error);
@@ -112,7 +108,7 @@ const CreateFlow = () => {
               {options.length > 0 ? <button onClick={handleResetOptions}>Reset</button> : ""}
             </div>
 
-            {flows.length > 0 ? (
+            {/* {flows.length > 0 ? (
               <div className={styles.stepsContent}>
                 <div className={styles.step}>
                   <FlowStep steps={flows} isCreatePage={true} />
@@ -120,7 +116,7 @@ const CreateFlow = () => {
               </div>
             ) : (
               ""
-            )}
+            )} */}
 
             {options.length > 0 ? renderInputStep() : ""}
           </div>

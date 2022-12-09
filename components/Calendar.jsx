@@ -54,6 +54,22 @@ const Calendar = ({ ref, events }) => {
         dayMaxEvents={3}
         events={events}
         eventClick={handleEvent}
+        slotLabelFormat={{
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: false,
+        }}
+        slotDuration={{
+          minute: 15,
+        }}
+        slotLabelInterval={{
+          hour:1
+        }}
+        buttonText={{
+          month:"M",
+          week:"W",
+          day:"D"
+        }}
       />
       <CalendarModal show={show} setShow={setShow} event={event} />
     </>
