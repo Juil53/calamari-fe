@@ -110,7 +110,7 @@ const CalendarForm = ({ absences }) => {
           ))}
         </select>
         <label htmlFor="comment">Comment</label>
-        <input type="text" name="comment" id="comment" onChange={handleChange} />
+        <textarea name="comment" id="comment" onChange={handleChange} />
         <Button
           variant="contained"
           color="success"

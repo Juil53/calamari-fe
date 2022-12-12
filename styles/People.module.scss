@@ -1,37 +1,45 @@
 @import "variables";
 
 .wrapper {
+  width: 100%;
+  text-align: center;
+  margin: 1rem auto;
+  background: $white;
+  border-radius: $borderRadius;
+  box-shadow: $bs1;
+  @include desktop {
     width: 100%;
-    text-align: center;
-    margin: 1rem auto;
+    overflow-x: scroll;
+  }
+
+  table {
+    width: 100%;
     @include desktop {
-        width: 100%;
-        overflow-x: scroll;
+      width: 1400px;
+    }
+    table-layout: auto;
+    thead {
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+      th {
+        padding: 10px 0;
+      }
     }
 
-    table {
-        width: 100%;
-        @include desktop {
-            width: 1400px;
+    tbody {
+      tr {
+        td {
+          height: 70px;
+          padding: 10px;
+          border-bottom: 1px solid $grey-blur;
+          color: $grey;
         }
-        table-layout: auto;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-        thead {
-            border-bottom: $grey;
-            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-        }
+      }
 
-        tbody {
-            td {
-                height: 50px;
-                border: 1px solid $grey-blur;
-                color: $grey;
-            }
-        }
     }
+  }
 
-    img {
-        height: 40px;
-        border-radius: 50%;
-    }
+  img {
+    height: 50px;
+    border-radius: 50%;
+  }
 }

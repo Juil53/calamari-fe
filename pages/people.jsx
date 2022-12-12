@@ -1,6 +1,25 @@
 import axios from "axios";
 import * as Constant from "../constant/constants";
 import styles from "../styles/People.module.scss";
+import moment from 'moment'
+
+export const getStaticProps = async () => {
+  const res = await axios({
+    url: Constant.usersAPI,
+    // url: "https://dvhnghia-backend.herokuapp.com",
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: "",
+    },
+  });
+  const userList = res.data;
+
+  return {
+    props: { userList },
+    revalidate: 10,
+  };
+};
 
 const Users = ({ userList }) => {
   console.log(userList)
@@ -14,20 +33,18 @@ const Users = ({ userList }) => {
             <th>Full Name</th>
             <th>Role</th>
             <th>Email</th>
-            <th>Password</th>
+            <th>Created At</th>
           </tr>
         </thead>
         <tbody>
-          {userList.data?.map((user) => (
+          {userList?.map((user) => (
             <tr key={user.id}>
               <td>{user.id}</td>
-              <td>
-                {/* <img src={user.avatar} alt="avatar" /> */}
-              </td>
+              <td><img src={user.avatar} alt="avatar" /></td>
               <td>{user.fullName}</td>
               <td>{user.role}</td>
               <td>{user.email}</td>
-              <td>{user.password}</td>
+              <td>{moment(user.createdAt).format("yyyy-MM-DD")}</td>
             </tr>
           ))}
         </tbody>
@@ -37,22 +54,3 @@ const Users = ({ userList }) => {
 };
 
 export default Users;
-
-//generate when request => slower than getStaticProps
-export const getServerSideProps = async () => {
-  const res = await axios({
-    // url: Constant.usersAPI,
-    url: "https://dvhnghia-backend.herokuapp.com",
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImR1eUBnbWFpbC5jb20iLCJpYXQiOjE2NjkyNzQyMTcsImV4cCI6MTY2OTI3NzgxN30.Vfc_DcfCR9pjx9I8Zpl9ZZA6gm_OPTSs6Pe20MdupkI"
-    },
-  });
-  const userList = res.data;
-  console.log(userList);
-
-  return {
-    props: { userList },
-  };
-};

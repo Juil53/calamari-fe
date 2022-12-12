@@ -41,7 +41,7 @@ input {
   cursor: pointer;
   outline: none;
   border: 3px solid transparent;
-  border-radius: 4px;
+  border-radius: $borderRadius;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
@@ -50,14 +50,18 @@ input:focus {
   outline: none;
   background-color: #c9d1d3;
   border-bottom: 4px solid rgba(57, 63, 84, 0.8);
-  border-radius: 4px;
+  border-radius: $borderRadius;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 textarea {
   width: 100%;
+  height: 3rem;
   padding: 0.2rem 0.5rem;
+  margin: 0.5rem 0;
   border: 3px solid transparent;
+  border-radius: $borderRadius;
+  transition: all 100ms ease;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
@@ -65,6 +69,7 @@ textarea:focus {
   padding: 0.2rem 0.5rem;
   border-bottom: 4px solid rgba(57, 63, 84, 0.8);
   outline: none;
+  background-color: #c9d1d3;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
@@ -91,7 +96,7 @@ select {
   width: 100%;
   height: 3rem;
   padding: 0.2rem 0.5rem;
-  margin: 0 0.5rem 1rem 0;
+  margin: 0.5rem 0;
   border: 3px solid transparent;
   border-radius: 4px;
   transition: all 120ms ease;

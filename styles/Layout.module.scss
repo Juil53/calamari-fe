@@ -3,6 +3,7 @@
 .content {
   position: absolute;
   width: calc(100% - 300px);
+  min-height: 100vh;
   left: 300px;
   padding: 10px 20px 0 20px;
   background-color:  $bg-color;
@@ -16,6 +17,7 @@
 .activeContent {
   position: absolute;
   width: calc(100% - 130px);
+  min-height: 100vh;
   left: 130px;
   padding: 10px 20px 0 20px;
   background-color:  $bg-color;
