@@ -8,6 +8,7 @@ import FlowStep from "../../../components/FlowStep";
 import styles from "../../../styles/Flow.module.scss";
 import { useRouter } from "next/router";
 import { useFetch } from "../../../hooks/useFetch";
+import Loading from "../../../components/Loading";
 
 const ApprovalFlow = () => {
   const router = useRouter();
@@ -30,9 +31,13 @@ const ApprovalFlow = () => {
   }
 
   return (
-    <>
-      {loading && <div>Loading...</div>}
-      
+    <div className={styles.wrapper}>
+      {loading && (
+        <div className={styles.overlay}>
+          <Loading />
+        </div>
+      )}
+
       <div className={styles.header}>
         <Link href="/configuration">
           <button className={styles.returnBtn}>
@@ -48,16 +53,19 @@ const ApprovalFlow = () => {
           </button>
         </Link>
       </div>
+
       {data && (
         <div className={styles.content}>
           {data.map((flow, index) => (
             <div key={index} className={styles.flow}>
-              <div className={styles.editIcon}>
-                <span>
-                  <FontAwesomeIcon icon={faPenToSquare} />
-                </span>
-                <span>Edit</span>
-              </div>
+              <Link href={`/configuration/flow/${flow.id}`}>
+                <div className={styles.editIcon}>
+                  <span>
+                    <FontAwesomeIcon icon={faPenToSquare} />
+                  </span>
+                  <span>Edit</span>
+                </div>
+              </Link>
               <div className={styles.deleteIcon} onClick={() => handleDelete(flow.id)}>
                 <span>
                   <FontAwesomeIcon icon={faPenToSquare} />
@@ -75,7 +83,7 @@ const ApprovalFlow = () => {
           ))}
         </div>
       )}
-    </>
+    </div>
   );
 };
 

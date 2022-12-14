@@ -24,6 +24,7 @@ export default RequestDetail;
 export const getStaticPaths = async () => {
   const response = await fetch("https://633d07937e19b17829061bcf.mockapi.io/calendar/events");
   const events = await response.json();
+  // console.log(events)
 
   return {
     paths: events.map((event) => ({ params: { requestId: event.id } })),

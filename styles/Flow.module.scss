@@ -1,5 +1,23 @@
 @import "variables";
 
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+
+  .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: $bg-color;
+    border-radius: $borderRadius;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+  }
+}
+
 .header {
   padding-bottom: 0.75rem;
   border-bottom: 1px solid $grey-blur;
@@ -92,7 +110,7 @@ button.returnBtn {
     padding: 5px 5px;
     transition: $transition;
     cursor: pointer;
-    span{
+    span {
       margin-right: 5px;
     }
     &:hover {
@@ -108,7 +126,7 @@ button.returnBtn {
     padding: 5px 8px;
     transition: $transition;
     cursor: pointer;
-    span{
+    span {
       margin-right: 5px;
     }
     &:hover {

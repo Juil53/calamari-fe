@@ -1,11 +1,10 @@
-import { useState, useRef } from "react";
-import Link from "next/link";
+import { faArrowLeftLong, faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFloppyDisk, faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
-import styles from "../../styles/CreateApproveFlow.module.scss";
-import FlowStep from "../../components/FlowStep";
-import { useRouter } from "next/router";
 import axios from "axios";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useRef, useState } from "react";
+import styles from "../../styles/CreateApproveFlow.module.scss";
 
 const CreateFlow = () => {
   const [options, setOptions] = useState([]);
@@ -107,16 +106,6 @@ const CreateFlow = () => {
 
               {options.length > 0 ? <button onClick={handleResetOptions}>Reset</button> : ""}
             </div>
-
-            {/* {flows.length > 0 ? (
-              <div className={styles.stepsContent}>
-                <div className={styles.step}>
-                  <FlowStep steps={flows} isCreatePage={true} />
-                </div>
-              </div>
-            ) : (
-              ""
-            )} */}
 
             {options.length > 0 ? renderInputStep() : ""}
           </div>

@@ -27,14 +27,12 @@ const Apply = ({events,absences}) => {
   );
 };
 
-//  This gets called on every request
 export const getStaticProps = async () => {
-  // Fetch API/DB
   const res1 = await axios.get(Constant.eventsAPI);
   const events = res1.data;
   const res2 = await axios.get(Constant.absencesAPI);
   const absences = res2.data;
-  // Pass data to the page via props
+
   return {
     props: {
       events,

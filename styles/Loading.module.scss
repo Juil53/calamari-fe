@@ -1,0 +1,28 @@
+@import "variables";
+
+.customLoader {
+  width: 120px;
+  height: 22px;
+  border-radius: 20px;
+  color: $primary-color;
+  border: 2px solid;
+  position: absolute;
+  inset: 50% 0 0 50%;
+  transform: translate(-50%,-50%);
+}
+
+.customLoader::before {
+  content: "";
+  position: absolute;
+  margin: 2px;
+  inset: 0 100% 0 0;
+  border-radius: inherit;
+  background: $primary-color;
+  animation: p6 2s infinite;
+}
+
+@keyframes p6 {
+  100% {
+    inset: 0;
+  }
+}
