@@ -9,7 +9,6 @@ import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
 import style from "../styles/Modal.module.scss";
-import { IconButton } from "@mui/material";
 
 const CalendarModal = ({ show, setShow, event }) => {
   const route = useRouter();
@@ -44,7 +43,7 @@ const CalendarModal = ({ show, setShow, event }) => {
   const handleDelete = async (id) => {
     setShow(false);
     try {
-      await axios.delete(`${Constant.API}${id}`);
+      await axios.delete(`${Constant.eventsAPI}${id}`);
       alert("Deleted");
       route.reload();
     } catch (err) {
@@ -62,8 +61,6 @@ const CalendarModal = ({ show, setShow, event }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(updatedEvent);
-
         //post updated Event
         try {
             await axios.put(`https://633d07937e19b17829061bcf.mockapi.io/calendar/events/${event.id}`, updatedEvent);

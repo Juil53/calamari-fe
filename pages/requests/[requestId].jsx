@@ -11,6 +11,7 @@ const RequestDetail = ({ request }) => {
   // }
 
   if (!request) return null;
+  if (router.isFallback) return <h1>Loading...</h1>;
 
   return (
     <div>
@@ -29,7 +30,7 @@ export const getStaticPaths = async () => {
   return {
     paths: events.map((event) => ({ params: { requestId: event.id } })),
     // fallback: false, // can also be true or 'blocking'
-    fallback:true,
+    fallback: true,
     // fallback:blocking,
   };
 };
