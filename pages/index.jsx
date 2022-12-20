@@ -1,60 +1,46 @@
+import { signIn } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
-import styles from "../styles/Login.module.scss";
 import Link from "next/link";
-import axios from "axios";
-import { useState } from "react";
-import * as Constant from "../constant/constants";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import styles from "../styles/Login.module.scss";
 
 export default function Login() {
   const router = useRouter();
-  const [signIn, setSignIn] = useState({});
   const [user, setUser] = useState({});
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
-    setSignIn({
-      ...signIn,
+    setUser({
+      ...user,
       [name]: value,
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
-    try {
-      const res = await axios({
-        url: "https://dvhnghia-backend.herokuapp.com/login",
-        method: "POST",
-        data: JSON.stringify(signIn),
-        headers: {
-          "Content-Type": "application/json",
-        },
+    signIn("credentials", { ...user, redirect: false })
+      .then((res) => {
+        if (res.ok) {
+          setIsDisabled(true);
+          router.push("/apply");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
       });
-      console.log(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-    // router.push("/apply")
   };
 
   return (
     <>
       <Head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap"
-          rel="stylesheet"
-        />
-
         <title>Login</title>
         <meta name="keywords" content="" />
       </Head>
-
       <div className={styles.bgImage}></div>
-
       {/* Header */}
       <nav className={styles.head}>
         <div className={styles.logo}>
@@ -69,13 +55,11 @@ export default function Login() {
           </Link>
         </div>
       </nav>
-
       <div className={styles.bgText}>
         {/* Form */}
         <section className={styles.content}>
-          <h2>Login</h2>
           <div className={styles.wrapper}>
-            <form onSubmit={handleSubmit} method="POST">
+            <form>
               <div className={styles.email}>
                 <label htmlFor="email">Email</label>
                 <input
@@ -96,8 +80,8 @@ export default function Login() {
                   onChange={handleChange}
                 />
               </div>
-              <button type="submit" className={styles.submit}>
-                Login
+              <button type="button" onClick={handleSignIn} disabled={isDisabled}>
+                Sign In
               </button>
             </form>
           </div>

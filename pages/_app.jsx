@@ -5,19 +5,21 @@ import "@fullcalendar/common/main.css";
 import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
 import "../styles/globals.scss";
+import { SessionProvider } from "next-auth/react";
 
 config.autoAddCss = false;
 
-function MyApp({ Component, pageProps }) {
-
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   if (Component.getLayout) {
     return Component.getLayout(<Component {...pageProps} />);
   }
 
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <SessionProvider session={session}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </SessionProvider>
   );
 }
 

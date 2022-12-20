@@ -4,13 +4,19 @@ import { createRef } from "react";
 import CalendarForm from "../components/CalendarForm";
 import * as Constant from "../constant/constants";
 import style from "../styles/Apply.module.scss";
+import { useSession } from "next-auth/react";
 
 const Calendar = dynamic(() => import("../components/Calendar"), {
   ssr: false,
 });
 
-const Apply = ({events,absences}) => {
+const Apply = ({ events, absences }) => {
   const calendarRef = createRef();
+  const { data: session } = useSession();
+
+  if (!session) {
+    return <h2>Redirect to Login Page</h2>;
+  }
 
   return (
     <>

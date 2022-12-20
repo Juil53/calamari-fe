@@ -76,20 +76,9 @@ textarea:focus {
 button {
   padding: 8px 10px;
   border: none;
-  color: #fff;
-  background-color: #bd1133;
-  box-shadow: $bs1;
   font-weight: 600;
-  transition: $transition2;
   width: max-content;
   cursor: pointer;
-
-  &:hover {
-    background-color: $primary-color-hover;
-  }
-}
-button:active{
-  transform: scale(0.95);
 }
 
 select {
