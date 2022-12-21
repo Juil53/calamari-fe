@@ -13,7 +13,7 @@ function Profile({ user }) {
     <div className={styles.wrapper} onClick={handleSignOut}>
       <Image className={styles.avatar} src={user.avatar} width={50} height={50} alt="avatar" />
       <div className={styles.info}>
-        <h3 className={styles.username}>{user.fullName}</h3>
+        <h4 className={styles.username}>{user.fullName}</h4>
         <span className={styles.role}>{user.role}</span>
       </div>
     </div>
