@@ -1,9 +1,9 @@
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useState } from "react";
 import styles from "../styles/Login.module.scss";
 
 export default function Login() {
@@ -21,17 +21,16 @@ export default function Login() {
   };
 
   const handleSignIn = async (e) => {
-    e.preventDefault();
-    signIn("credentials", { ...user, redirect: false })
-      .then((res) => {
-        if (res.ok) {
-          setIsDisabled(true);
-          router.push("/apply");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      e.preventDefault();
+      const res = signIn("credentials", { email: user.email, password: user.password });
+      if (res.ok) {
+        setIsDisabled(true);
+        router.push("/apply");
+      }
+    } catch (error) {
+      console.log(err);
+    }
   };
 
   return (
@@ -59,7 +58,7 @@ export default function Login() {
         {/* Form */}
         <section className={styles.content}>
           <div className={styles.wrapper}>
-            <form>
+            <form method="POST" onSubmit={handleSignIn}>
               <div className={styles.email}>
                 <label htmlFor="email">Email</label>
                 <input
@@ -80,7 +79,7 @@ export default function Login() {
                   onChange={handleChange}
                 />
               </div>
-              <button type="button" onClick={handleSignIn} disabled={isDisabled}>
+              <button type="submit" disabled={isDisabled}>
                 Sign In
               </button>
             </form>

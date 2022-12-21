@@ -1,10 +1,11 @@
 import axios from "axios";
+import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { createRef } from "react";
 import CalendarForm from "../components/CalendarForm";
+import Loading from "../components/Loading";
 import * as Constant from "../constant/constants";
 import style from "../styles/Apply.module.scss";
-import { useSession } from "next-auth/react";
 
 const Calendar = dynamic(() => import("../components/Calendar"), {
   ssr: false,
@@ -12,15 +13,21 @@ const Calendar = dynamic(() => import("../components/Calendar"), {
 
 const Apply = ({ events, absences }) => {
   const calendarRef = createRef();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  console.log(session);
 
-  if (!session) {
-    return <h2>Redirect to Login Page</h2>;
+  if (status === "loading") {
+    return <Loading />;
+  }
+
+  if (status === "unauthenticated") {
+    return <h2>You need to Login to access this Page</h2>;
   }
 
   return (
     <>
       <h4 className={style.title}>Absence Request</h4>
+      <p>Hello: {session.user.email}</p>
       <div className={style.container}>
         <div className={style.leftSide}>
           <Calendar ref={calendarRef} events={events} />
