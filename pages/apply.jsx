@@ -14,7 +14,6 @@ const Calendar = dynamic(() => import("../components/Calendar"), {
 const Apply = ({ events, absences }) => {
   const calendarRef = createRef();
   const { data: session, status } = useSession();
-  console.log(session);
 
   if (status === "loading") {
     return <Loading />;
@@ -27,7 +26,6 @@ const Apply = ({ events, absences }) => {
   return (
     <>
       <h4 className={style.title}>Absence Request</h4>
-      <p>Hello: {session.user.email}</p>
       <div className={style.container}>
         <div className={style.leftSide}>
           <Calendar ref={calendarRef} events={events} />

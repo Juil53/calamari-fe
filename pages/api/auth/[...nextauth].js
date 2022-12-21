@@ -5,7 +5,6 @@ import { fetchUser } from "../../../utils/utils";
 export default NextAuth({
   providers: [
     CredentialsProvider({
-      id: "email-login",
       name: "Credentials",
       credentials: {
         email: { label: "Email", type: "email", placeholder: "jsmith@google.com" },
@@ -14,7 +13,6 @@ export default NextAuth({
       async authorize(credentials, req) {
         try {
           const user = await fetchUser(credentials.email, credentials.password)
-          console.log(user)
           if (user) return user
         } catch (error) {
           throw new Error('Something wrong!')
@@ -23,7 +21,7 @@ export default NextAuth({
     })
   ],
   pages: {
-    // signIn: '/'
+    signIn: '/'
   },
   callbacks: {
     async jwt({ token, user }) {
@@ -38,9 +36,6 @@ export default NextAuth({
       }
       return session
     },
-    async redirect({ url, baseUrl }) {
-      return `${baseUrl}/apply`
-    }
   },
   session: {
     strategy: 'jwt'

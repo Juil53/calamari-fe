@@ -23,13 +23,17 @@ export default function Login() {
   const handleSignIn = async (e) => {
     try {
       e.preventDefault();
-      const res = signIn("credentials", { email: user.email, password: user.password });
+      const res = await signIn("credentials", {
+        email: user.email,
+        password: user.password,
+        callbackUrl: `${window.location.origin}/apply`,
+      });
       if (res.ok) {
         setIsDisabled(true);
         router.push("/apply");
       }
     } catch (error) {
-      console.log(err);
+      console.log(error);
     }
   };
 
@@ -58,7 +62,7 @@ export default function Login() {
         {/* Form */}
         <section className={styles.content}>
           <div className={styles.wrapper}>
-            <form method="POST" onSubmit={handleSignIn}>
+            <form>
               <div className={styles.email}>
                 <label htmlFor="email">Email</label>
                 <input
@@ -79,7 +83,7 @@ export default function Login() {
                   onChange={handleChange}
                 />
               </div>
-              <button type="submit" disabled={isDisabled}>
+              <button type="button" onClick={handleSignIn} disabled={isDisabled}>
                 Sign In
               </button>
             </form>
