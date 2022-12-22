@@ -12,19 +12,19 @@ import {
   faGear,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import Profile from "./Profile";
 
 const Sidebar = (props) => {
   const route = useRouter();
-  const sidebar = useRef();
   const { data: session, status } = useSession();
-  const openSidebar = () => sidebar.current.classList.toggle(styles.active);
+  const [open, setOpen] = useState(false);
+  const openSidebar = () => setOpen(!open);
 
   return (
     <nav>
-      <div className={`${styles.sidebar}`} ref={sidebar}>
+      <div className={open ? `${styles.sidebar} ${styles.active}` : `${styles.sidebar}`}>
         <div className={styles.menu}>
           {/* Logo */}
           <div className={styles.logoWrapper}>
@@ -102,7 +102,7 @@ const Sidebar = (props) => {
         </div>
 
         {/* Profile */}
-        {session ? <Profile user={session.user} /> : null}
+        {session ? <Profile user={session.user} open={open}/> : null}
       </div>
     </nav>
   );
