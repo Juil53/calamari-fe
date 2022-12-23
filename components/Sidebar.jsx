@@ -1,19 +1,13 @@
+import {
+  faBars, faCalendar, faChartSimple, faCircleCheck, faFileLines, faGear, faPenToSquare
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import styles from "../styles/Sidebar.module.scss";
-import {
-  faBars,
-  faPenToSquare,
-  faCalendar,
-  faFileLines,
-  faCircleCheck,
-  faChartSimple,
-  faGear,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRef, useState } from "react";
-import { useSession } from "next-auth/react";
 import Profile from "./Profile";
 
 const Sidebar = (props) => {
@@ -50,48 +44,48 @@ const Sidebar = (props) => {
 
           {/* NavBtn */}
           <ul className={styles.nav_lists}>
-            <li className={route.pathname == "/apply" ? `${styles.navActive}` : ""}>
-              <Link href="/apply">
+            <li className={route.pathname == "/admin/apply" ? `${styles.navActive}` : ""}>
+              <Link href="/admin/apply">
                 <a>
                   <FontAwesomeIcon icon={faPenToSquare} />
                   <span>Apply</span>
                 </a>
               </Link>
             </li>
-            <li className={route.pathname.includes("/calendar") ? `${styles.navActive}` : ""}>
-              <Link href="/calendar">
+            <li className={route.pathname.includes("/admin/calendar") ? `${styles.navActive}` : ""}>
+              <Link href="/admin/calendar">
                 <a>
                   <FontAwesomeIcon icon={faCalendar} />
                   <span>Calendar</span>
                 </a>
               </Link>
             </li>
-            <li className={route.pathname.includes("/request") ? `${styles.navActive}` : ""}>
-              <Link href="/requests">
+            <li className={route.pathname.includes("/admin/request") ? `${styles.navActive}` : ""}>
+              <Link href="/admin/requests">
                 <a>
                   <FontAwesomeIcon icon={faFileLines} />
                   <span>Request</span>
                 </a>
               </Link>
             </li>
-            <li className={route.pathname.includes("/approval") ? `${styles.navActive}` : ""}>
-              <Link href="/approval">
+            <li className={route.pathname.includes("/admin/approval") ? `${styles.navActive}` : ""}>
+              <Link href="/admin/approval">
                 <a>
                   <FontAwesomeIcon icon={faCircleCheck} />
                   <span>Approval</span>
                 </a>
               </Link>
             </li>
-            <li className={route.pathname.includes("/people") ? `${styles.navActive}` : ""}>
-              <Link href="/people">
+            <li className={route.pathname.includes("/admin/people") ? `${styles.navActive}` : ""}>
+              <Link href="/admin/people">
                 <a>
                   <FontAwesomeIcon icon={faChartSimple} />
                   <span>People</span>
                 </a>
               </Link>
             </li>
-            <li className={route.pathname.includes("/configuration") ? `${styles.navActive}` : ""}>
-              <Link href="/configuration">
+            <li className={route.pathname.includes("/admin/configuration") ? `${styles.navActive}` : ""}>
+              <Link href="/admin/configuration">
                 <a>
                   <FontAwesomeIcon icon={faGear} />
                   <span>Configuration</span>

@@ -1,27 +1,16 @@
 import axios from "axios";
-import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { createRef } from "react";
-import CalendarForm from "../components/CalendarForm";
-import Loading from "../components/Loading";
-import * as Constant from "../constant/constants";
-import style from "../styles/Apply.module.scss";
+import CalendarForm from "../../components/CalendarForm";
+import * as Constant from "../../constant/constants";
+import style from "../../styles/Apply.module.scss";
 
-const Calendar = dynamic(() => import("../components/Calendar"), {
+const Calendar = dynamic(() => import("../../components/Calendar"), {
   ssr: false,
 });
 
 const Apply = ({ events, absences }) => {
   const calendarRef = createRef();
-  const { data: session, status } = useSession();
-
-  if (status === "loading") {
-    return <Loading />;
-  }
-
-  if (status === "unauthenticated") {
-    return <h2>You need to Login to access this Page</h2>;
-  }
 
   return (
     <>

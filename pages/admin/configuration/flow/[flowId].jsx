@@ -4,8 +4,8 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
-import Loading from "../../../components/Loading";
-import styles from "../../../styles/CreateApproveFlow.module.scss";
+import Loading from "../../../../components/Loading";
+import styles from "../../../../styles/CreateApproveFlow.module.scss";
 
 const FlowDetail = ({ oldFlow }) => {
   const router = useRouter();
@@ -55,7 +55,7 @@ const FlowDetail = ({ oldFlow }) => {
     <>
       <div className={styles.header}>
         <div className={styles.leftSide}>
-          <Link href="/configuration/flow">
+          <Link href="/admin/configuration/flow">
             <button className={styles.returnBtn}>
               <FontAwesomeIcon icon={faArrowLeftLong} />
             </button>

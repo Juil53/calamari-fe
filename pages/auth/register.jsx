@@ -2,9 +2,9 @@ import Head from "next/head";
 import axios from "axios";
 import Link from "next/link";
 import { useFormik } from "formik";
-import { validationUserSchema } from "../validation/validationSchema";
-import styles from "../styles/Login.module.scss";
-import * as Constant from "../constant/constants";
+import { validationUserSchema } from "../../validation/validationSchema";
+import styles from "../../styles/Login.module.scss";
+import * as Constant from "../../constant/constants";
 import Image from "next/image";
 
 export default function Register() {

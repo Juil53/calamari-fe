@@ -12,11 +12,10 @@
   padding: 6px 14px;
   border-left: 50px solid $primary-color;
   border-right: 1px solid rgba(225, 170, 170, 0.3);
-  
   background-image: url(/imgs/sidebar.avif);
   background-position: center;
   background-size: cover;
-  box-shadow: $bs2;
+  box-shadow: $bs1;
   z-index: 10;
   transition: $transition;
 

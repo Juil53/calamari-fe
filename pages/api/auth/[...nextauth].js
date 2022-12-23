@@ -1,44 +1,51 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { redirect } from "next/dist/server/api-utils";
 import { fetchUser } from "../../../utils/utils";
 
 export default NextAuth({
   providers: [
     CredentialsProvider({
       name: "Credentials",
-      credentials: {
-        email: { label: "Email", type: "email", placeholder: "jsmith@google.com" },
-        password: { label: "Password", type: "password" }
-      },
       async authorize(credentials, req) {
         try {
           const user = await fetchUser(credentials.email, credentials.password)
           if (user) return user
         } catch (error) {
-          throw new Error('Something wrong!')
+          throw new Error(error)
         }
       }
     })
   ],
   pages: {
-    signIn: '/'
+    signIn: '/auth/login',
+    signOut: '/auth/logout',
+    error: '/auth/error'
   },
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
         token.user = user
+        token.role = user.role
       }
       return token;
     },
     async session({ session, token }) {
       if (token) {
         session.user = token.user
+        session.role = token.role
       }
       return session
     },
+    async redirect({ url, baseUrl }) {
+      console.log(url)
+      console.log(baseUrl)
+      return `${baseUrl}/admin/apply`
+    }
   },
   session: {
-    strategy: 'jwt'
+    strategy: "jwt",
   },
-  theme: {}
+  secret: process.env.NEXTAUTH_SECRET,
+  theme: {},
 })

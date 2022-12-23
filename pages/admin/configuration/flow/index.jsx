@@ -4,11 +4,11 @@ import axios from "axios";
 import moment from "moment";
 import Link from "next/link";
 import React from "react";
-import FlowStep from "../../../components/FlowStep";
-import styles from "../../../styles/Flow.module.scss";
+import FlowStep from "../../../../components/FlowStep";
+import styles from "../../../../styles/Flow.module.scss";
 import { useRouter } from "next/router";
-import { useFetch } from "../../../hooks/useFetch";
-import Loading from "../../../components/Loading";
+import { useFetch } from "../../../../hooks/useFetch";
+import Loading from "../../../../components/Loading";
 
 const ApprovalFlow = () => {
   const router = useRouter();
@@ -39,12 +39,12 @@ const ApprovalFlow = () => {
       )}
 
       <div className={styles.header}>
-        <Link href="/configuration">
+        <Link href="/admin/configuration">
           <button className={styles.returnBtn}>
             <FontAwesomeIcon icon={faArrowLeftLong} />
           </button>
         </Link>
-        <Link href="/configuration/create-flow">
+        <Link href="/admin/configuration/create-flow">
           <button className={styles.createBtn}>
             <span>
               <FontAwesomeIcon icon={faPlus} />
@@ -58,7 +58,7 @@ const ApprovalFlow = () => {
         <div className={styles.content}>
           {data.map((flow, index) => (
             <div key={index} className={styles.flow}>
-              <Link href={`/configuration/flow/${flow.id}`}>
+              <Link href={`/admin/configuration/flow/${flow.id}`}>
                 <div className={styles.editIcon}>
                   <span>
                     <FontAwesomeIcon icon={faPenToSquare} />

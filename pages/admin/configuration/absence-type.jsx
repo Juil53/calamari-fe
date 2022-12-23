@@ -1,4 +1,4 @@
-import styles from "../../styles/AbsenceType.module.scss";
+import styles from "../../../styles/AbsenceType.module.scss";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
@@ -8,13 +8,13 @@ const AbsenceType = () => {
     <>
       <div className={styles.header}>
         <div className={styles.leftSide}>
-          <Link href="/configuration">
+          <Link href="/admin/configuration">
             <button className={styles.returnBtn}>
               <FontAwesomeIcon icon={faArrowLeftLong} />
             </button>
           </Link>
           <li>
-            <Link href="/configuration/create-absence-type">
+            <Link href="/admin/configuration/create-absence-type">
               <a>
                 <button className={styles.approveBtn}>
                   <span>

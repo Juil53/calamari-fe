@@ -11,10 +11,8 @@ function Profile({ user, open }) {
 
   return (
     <div
-      className={open ? `${styles.wrapper} ${styles.active}` : `${styles.wrapper}`}
-      onClick={handleSignOut}
-    >
-      <div className={styles.avatarWrapper}>
+      className={open ? `${styles.wrapper} ${styles.active}` : `${styles.wrapper}`}>
+      <div className={styles.avatarWrapper} onClick={handleSignOut}>
         <Image className={styles.avatar} src={user.avatar} width={50} height={50} alt="avatar" />
       </div>
       <div className={open ? `${styles.info} ${styles.active}` : `${styles.info}`}>

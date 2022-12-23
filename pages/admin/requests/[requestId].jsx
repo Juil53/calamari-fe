@@ -1,14 +1,13 @@
-import axios from "axios";
-import * as Constant from "../../constant/constants";
 import { useRouter } from "next/router";
+import Loading from "../../../components/Loading";
 
 const RequestDetail = ({ request }) => {
   const router = useRouter();
 
   // test Case fallback true
-  // if (router.isFallback) {
-  //   return <div style={{ textAlign: "center", fontSize: "2rem" }}>Loading....</div>;
-  // }
+  if (router.isFallback) {
+    return <Loading />;
+  }
 
   if (!request) return null;
   if (router.isFallback) return <h1>Loading...</h1>;
@@ -30,8 +29,8 @@ export const getStaticPaths = async () => {
   return {
     paths: events.map((event) => ({ params: { requestId: event.id } })),
     // fallback: false, // can also be true or 'blocking'
-    fallback: true,
     // fallback:blocking,
+    fallback: true,
   };
 };
 

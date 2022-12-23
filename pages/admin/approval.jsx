@@ -2,9 +2,9 @@ import { faCheck, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useState } from "react";
-import Tabs from "../components/Tabs";
-import * as Constant from "../constant/constants";
-import styles from "../styles/Approval.module.scss";
+import Tabs from "../../components/Tabs";
+import * as Constant from "../../constant/constants";
+import styles from "../../styles/Approval.module.scss";
 
 const Approval = ({ events }) => {
   const [index, setIndex] = useState(0);

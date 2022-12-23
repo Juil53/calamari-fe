@@ -1,7 +1,7 @@
-import * as Constant from "../../constant/constants";
+import * as Constant from "../../../constant/constants";
 import axios from "axios";
-import styles from "../../styles/CreateAbsenceType.module.scss";
-import Tabs from "../../components/Tabs";
+import styles from "../../../styles/CreateAbsenceType.module.scss";
+import Tabs from "../../../components/Tabs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFloppyDisk, faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
@@ -38,7 +38,7 @@ const CreateAbsenceType = () => {
     <>
       <div className={styles.header}>
         <div className={styles.leftSide}>
-          <Link href="/configuration/absence-type">
+          <Link href="/admin/configuration/absence-type">
             <button className={styles.returnBtn}>
               <FontAwesomeIcon icon={faArrowLeftLong} />
             </button>
