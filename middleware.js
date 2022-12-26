@@ -1,7 +1,13 @@
 import { withAuth } from "next-auth/middleware"
+import { NextResponse } from "next/server"
 
 // More on how NextAuth.js middleware works: https://next-auth.js.org/configuration/nextjs#middleware
-export default withAuth({
+export default withAuth(
+  function middleware(req){
+    // return NextRespose
+    return NextResponse.rewrite(new URL('/auth/error',req.url))
+  },  
+  {
   callbacks: {
     authorized({ req, token }) {
       // `/admin` requires Admin role
