@@ -31,7 +31,6 @@
     }
     .signup_btn {
       transition: $transition;
-
       &:hover {
         color: $primary-color-hover;
       }
@@ -54,12 +53,12 @@
   width: 40%;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   text-align: center;
   color: $white;
   border: 1px solid #f1f1f1;
   border-radius: $borderRadius;
-  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   .title {
     color: $primary-color;
@@ -104,6 +103,22 @@
       .submit:hover {
         background-color: $primary-color-hover;
         cursor: pointer;
+      }
+
+      .signIn {
+        min-width: 40%;
+        margin-top: 1rem;
+        padding: 0.75rem 1.5rem;
+        border-radius: $borderRadius;
+        background-color: $primary-color;
+        color: $white;
+        text-align: center;
+        font-weight: $fw-bold;
+        font-size: $fs-lg;
+        transition: $transition2;
+        &:hover {
+          background: $primary-color-hover;
+        }
       }
     }
   }

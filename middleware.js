@@ -6,7 +6,6 @@ export default withAuth({
     authorized({ req, token }) {
       // `/admin` requires Admin role
       if (req.nextUrl.pathname.includes("/admin")) {
-        console.log(token)
         return token?.role === "Admin"
       }
       // `other pages` only requires the user to be logged in

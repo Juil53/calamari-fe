@@ -1,6 +1,5 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { redirect } from "next/dist/server/api-utils";
 import { fetchUser } from "../../../utils/utils";
 
 export default NextAuth({
@@ -38,9 +37,7 @@ export default NextAuth({
       return session
     },
     async redirect({ url, baseUrl }) {
-      console.log(url)
-      console.log(baseUrl)
-      return `${baseUrl}/admin/apply`
+      return `${baseUrl}`
     }
   },
   session: {

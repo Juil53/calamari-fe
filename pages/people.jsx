@@ -1,12 +1,11 @@
 import axios from "axios";
-import * as Constant from "../../constant/constants";
-import styles from "../../styles/People.module.scss";
+import * as Constant from "../constant/constants";
+import styles from "../styles/People.module.scss";
 import moment from 'moment'
 
 export const getStaticProps = async () => {
   const res = await axios({
     url: Constant.usersAPI,
-    // url: "https://dvhnghia-backend.herokuapp.com",
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +21,6 @@ export const getStaticProps = async () => {
 };
 
 const Users = ({ userList }) => {
-  console.log(userList)
   return (
     <div className={styles.wrapper}>
       <table>

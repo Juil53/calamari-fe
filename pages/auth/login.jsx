@@ -1,6 +1,7 @@
-import { signIn } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,11 +29,9 @@ export default function Login() {
         password: user.password,
         redirect: true,
       });
-
       if (res.ok) {
         setIsDisabled(true);
       } else {
-        console.log(res.error);
         router.push({
           pathname: "/auth/error",
           query: {
@@ -53,6 +52,7 @@ export default function Login() {
       </Head>
       <div className={styles.bgImage}></div>
       {/* Header */}
+
       <nav className={styles.head}>
         <div className={styles.logo}>
           <Image src="/imgs/logo.svg" alt="logo" width={200} height={50} />
@@ -66,6 +66,7 @@ export default function Login() {
           </Link>
         </div>
       </nav>
+
       <div className={styles.bgText}>
         {/* Form */}
         <section className={styles.content}>
@@ -91,7 +92,12 @@ export default function Login() {
                   onChange={handleChange}
                 />
               </div>
-              <button type="button" onClick={handleSignIn} disabled={isDisabled}>
+              <button
+                className={styles.signIn}
+                type="button"
+                onClick={handleSignIn}
+                disabled={isDisabled}
+              >
                 Sign In
               </button>
             </form>

@@ -44,24 +44,24 @@ const Sidebar = (props) => {
 
           {/* NavBtn */}
           <ul className={styles.nav_lists}>
-            <li className={route.pathname == "/admin/apply" ? `${styles.navActive}` : ""}>
-              <Link href="/admin/apply">
+            <li className={route.pathname == "/apply" ? `${styles.navActive}` : ""}>
+              <Link href="/apply">
                 <a>
                   <FontAwesomeIcon icon={faPenToSquare} />
                   <span>Apply</span>
                 </a>
               </Link>
             </li>
-            <li className={route.pathname.includes("/admin/calendar") ? `${styles.navActive}` : ""}>
-              <Link href="/admin/calendar">
+            <li className={route.pathname.includes("/calendar") ? `${styles.navActive}` : ""}>
+              <Link href="/calendar">
                 <a>
                   <FontAwesomeIcon icon={faCalendar} />
                   <span>Calendar</span>
                 </a>
               </Link>
             </li>
-            <li className={route.pathname.includes("/admin/request") ? `${styles.navActive}` : ""}>
-              <Link href="/admin/requests">
+            <li className={route.pathname.includes("/request") ? `${styles.navActive}` : ""}>
+              <Link href="/requests">
                 <a>
                   <FontAwesomeIcon icon={faFileLines} />
                   <span>Request</span>
@@ -76,8 +76,8 @@ const Sidebar = (props) => {
                 </a>
               </Link>
             </li>
-            <li className={route.pathname.includes("/admin/people") ? `${styles.navActive}` : ""}>
-              <Link href="/admin/people">
+            <li className={route.pathname.includes("/people") ? `${styles.navActive}` : ""}>
+              <Link href="/people">
                 <a>
                   <FontAwesomeIcon icon={faChartSimple} />
                   <span>People</span>
