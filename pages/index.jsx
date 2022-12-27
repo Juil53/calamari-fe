@@ -4,9 +4,11 @@ import Link from "next/link";
 import Head from "next/head";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-
+import { useSession } from "next-auth/react";
 
 const Dashboard = () => {
+  const { data: session } = useSession();
+
   return (
     <div>
       <Head>
@@ -21,11 +23,11 @@ const Dashboard = () => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit dolore et ea officiis
             quis, at eum inventore voluptas nobis sint.
           </p>
-          <Link href="/apply" passHref>
+          <Link href={session ? "/apply" : "/auth/login"} passHref>
             <button className={styles.start}>
               Get started!
               <span className={styles.icon}>
-                <FontAwesomeIcon icon={faArrowRight}/>
+                <FontAwesomeIcon icon={faArrowRight} />
               </span>
             </button>
           </Link>

@@ -1,5 +1,11 @@
 import {
-  faBars, faCalendar, faChartSimple, faCircleCheck, faFileLines, faGear, faPenToSquare
+  faBars,
+  faCalendar,
+  faChartSimple,
+  faCircleCheck,
+  faFileLines,
+  faGear,
+  faPenToSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSession } from "next-auth/react";
@@ -23,13 +29,15 @@ const Sidebar = (props) => {
           {/* Logo */}
           <div className={styles.logoWrapper}>
             <div className={styles.logo}>
-              <Image
-                src="/imgs/logo.svg"
-                alt=""
-                width={150}
-                height={40}
-                className={styles.brandLogo}
-              />
+              <Link href='/'>
+                <Image
+                  src="/imgs/logo.svg"
+                  alt=""
+                  width={150}
+                  height={40}
+                  className={styles.brandLogo}
+                />
+              </Link>
             </div>
             <div className={styles.hamWrapper}>
               <FontAwesomeIcon
@@ -84,7 +92,11 @@ const Sidebar = (props) => {
                 </a>
               </Link>
             </li>
-            <li className={route.pathname.includes("/admin/configuration") ? `${styles.navActive}` : ""}>
+            <li
+              className={
+                route.pathname.includes("/admin/configuration") ? `${styles.navActive}` : ""
+              }
+            >
               <Link href="/admin/configuration">
                 <a>
                   <FontAwesomeIcon icon={faGear} />
@@ -96,7 +108,7 @@ const Sidebar = (props) => {
         </div>
 
         {/* Profile */}
-        {session ? <Profile user={session.user} open={open}/> : null}
+        {session ? <Profile user={session.user} open={open} /> : null}
       </div>
     </nav>
   );

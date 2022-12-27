@@ -1,11 +1,11 @@
 import axios from "axios";
 import dynamic from "next/dynamic";
 import { createRef } from "react";
-import CalendarForm from "../components/CalendarForm";
-import * as Constant from "../constant/constants";
-import style from "../styles/Apply.module.scss";
+import CalendarForm from "../../components/CalendarForm";
+import * as Constant from "../../constant/constants";
+import style from "../../styles/Apply.module.scss";
 
-const Calendar = dynamic(() => import("../components/Calendar"), {
+const Calendar = dynamic(() => import("../../components/Calendar"), {
   ssr: false,
 });
 

@@ -8,8 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import Link from "next/link";
 import * as Constant from "../../constant/constants";
-import styles from "../../styles/Request.module.scss";
-import { handleStatus } from "../../utils/utils";
+import styles from "../../../styles/Request.module.scss";
+import { handleStatus } from "../../../utils/utils";
 
 export default function Request({ events }) {
   return (

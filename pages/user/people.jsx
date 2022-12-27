@@ -1,6 +1,6 @@
 import axios from "axios";
-import * as Constant from "../constant/constants";
-import styles from "../styles/People.module.scss";
+import * as Constant from "../../constant/constants";
+import styles from "../../styles/People.module.scss";
 import moment from 'moment'
 
 export const getStaticProps = async () => {

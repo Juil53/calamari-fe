@@ -32,7 +32,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   if (loading) return <Loading />;
 
   if (Component.getLayout) {
-    return <>{Component.getLayout(<Component {...pageProps} />)}</>;
+    return (
+      <SessionProvider session={session}>
+        {Component.getLayout(<Component {...pageProps} />)}
+      </SessionProvider>
+    );
   }
 
   return (

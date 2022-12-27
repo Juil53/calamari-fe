@@ -27,10 +27,11 @@ export default function Login() {
       const res = await signIn("credentials", {
         email: user.email,
         password: user.password,
-        redirect: true,
+        redirect: false,
       });
       if (res.ok) {
         setIsDisabled(true);
+        router.push('/user/apply')
       } else {
         router.push({
           pathname: "/auth/error",
