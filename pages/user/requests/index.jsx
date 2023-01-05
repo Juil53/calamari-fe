@@ -7,7 +7,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import Link from "next/link";
-import * as Constant from "../../constant/constants";
+import * as Constant from "../../../constant/constants";
 import styles from "../../../styles/Request.module.scss";
 import { handleStatus } from "../../../utils/utils";
 
@@ -40,7 +40,7 @@ export default function Request({ events }) {
         </thead>
         <tbody>
           {events.map((event) => (
-            <Link key={event.id} href={`/requests/${event.id}`}>
+            <Link key={event.id} href={`/user/requests/${event.id}`}>
               <tr>
                 <td>{event.title}</td>
                 <td>
