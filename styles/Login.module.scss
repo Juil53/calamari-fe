@@ -41,7 +41,7 @@
 .bgImage {
   width: 100%;
   height: 100vh;
-  background-image: url(/imgs/background.jpg);
+  background-image: url(/imgs/background_1.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -57,7 +57,7 @@
   text-align: center;
   color: $white;
   border: 1px solid #f1f1f1;
-  border-radius: $borderRadius;
+  border-radius: $borderRadius-2;
   background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   .title {

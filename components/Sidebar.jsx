@@ -22,6 +22,93 @@ const Sidebar = (props) => {
   const [open, setOpen] = useState(false);
   const openSidebar = () => setOpen(!open);
 
+  const conditionRenderSidebar = () => {
+    if (session?.role == "admin") {
+      return (
+        <ul className={styles.nav_lists}>
+          <li className={route.pathname == "/staff/apply" ? `${styles.navActive}` : ""}>
+            <Link href="/staff/apply">
+              <a>
+                <FontAwesomeIcon icon={faPenToSquare} />
+                <span>Apply</span>
+              </a>
+            </Link>
+          </li>
+          <li className={route.pathname.includes("/staff/calendar") ? `${styles.navActive}` : ""}>
+            <Link href="/staff/calendar">
+              <a>
+                <FontAwesomeIcon icon={faCalendar} />
+                <span>Calendar</span>
+              </a>
+            </Link>
+          </li>
+          <li className={route.pathname.includes("/staff/request") ? `${styles.navActive}` : ""}>
+            <Link href="/staff/requests">
+              <a>
+                <FontAwesomeIcon icon={faFileLines} />
+                <span>Request</span>
+              </a>
+            </Link>
+          </li>
+          <li className={route.pathname.includes("/admin/approval") ? `${styles.navActive}` : ""}>
+            <Link href="/admin/approval">
+              <a>
+                <FontAwesomeIcon icon={faCircleCheck} />
+                <span>Approval</span>
+              </a>
+            </Link>
+          </li>
+          <li className={route.pathname.includes("/staff/people") ? `${styles.navActive}` : ""}>
+            <Link href="/staff/people">
+              <a>
+                <FontAwesomeIcon icon={faChartSimple} />
+                <span>People</span>
+              </a>
+            </Link>
+          </li>
+          <li
+            className={route.pathname.includes("/admin/configuration") ? `${styles.navActive}` : ""}
+          >
+            <Link href="/admin/configuration">
+              <a>
+                <FontAwesomeIcon icon={faGear} />
+                <span>Configuration</span>
+              </a>
+            </Link>
+          </li>
+        </ul>
+      );
+    }
+    return (
+      <ul className={styles.nav_lists}>
+        <li className={route.pathname == "/staff/apply" ? `${styles.navActive}` : ""}>
+          <Link href="/staff/apply">
+            <a>
+              <FontAwesomeIcon icon={faPenToSquare} />
+              <span>Apply</span>
+            </a>
+          </Link>
+        </li>
+        <li className={route.pathname.includes("/staff/calendar") ? `${styles.navActive}` : ""}>
+          <Link href="/staff/calendar">
+            <a>
+              <FontAwesomeIcon icon={faCalendar} />
+              <span>Calendar</span>
+            </a>
+          </Link>
+        </li>
+        <li className={route.pathname.includes("/staff/request") ? `${styles.navActive}` : ""}>
+          <Link href="/staff/requests">
+            <a>
+              <FontAwesomeIcon icon={faFileLines} />
+              <span>Request</span>
+            </a>
+          </Link>
+        </li>
+      </ul>
+    );
+  };
+
   return (
     <nav>
       <div className={open ? `${styles.sidebar} ${styles.active}` : `${styles.sidebar}`}>
@@ -29,7 +116,7 @@ const Sidebar = (props) => {
           {/* Logo */}
           <div className={styles.logoWrapper}>
             <div className={styles.logo}>
-              <Link href='/'>
+              <Link href="/">
                 <Image
                   src="/imgs/logo.svg"
                   alt=""
@@ -51,60 +138,7 @@ const Sidebar = (props) => {
           </div>
 
           {/* NavBtn */}
-          <ul className={styles.nav_lists}>
-            <li className={route.pathname == "/user/apply" ? `${styles.navActive}` : ""}>
-              <Link href="/user/apply">
-                <a>
-                  <FontAwesomeIcon icon={faPenToSquare} />
-                  <span>Apply</span>
-                </a>
-              </Link>
-            </li>
-            <li className={route.pathname.includes("/user/calendar") ? `${styles.navActive}` : ""}>
-              <Link href="/user/calendar">
-                <a>
-                  <FontAwesomeIcon icon={faCalendar} />
-                  <span>Calendar</span>
-                </a>
-              </Link>
-            </li>
-            <li className={route.pathname.includes("/user/request") ? `${styles.navActive}` : ""}>
-              <Link href="/user/requests">
-                <a>
-                  <FontAwesomeIcon icon={faFileLines} />
-                  <span>Request</span>
-                </a>
-              </Link>
-            </li>
-            <li className={route.pathname.includes("/admin/approval") ? `${styles.navActive}` : ""}>
-              <Link href="/admin/approval">
-                <a>
-                  <FontAwesomeIcon icon={faCircleCheck} />
-                  <span>Approval</span>
-                </a>
-              </Link>
-            </li>
-            <li className={route.pathname.includes("/user/people") ? `${styles.navActive}` : ""}>
-              <Link href="/user/people">
-                <a>
-                  <FontAwesomeIcon icon={faChartSimple} />
-                  <span>People</span>
-                </a>
-              </Link>
-            </li>
-            <li
-              className={
-                route.pathname.includes("/admin/configuration") ? `${styles.navActive}` : ""
-              }
-            >
-              <Link href="/admin/configuration">
-                <a>
-                  <FontAwesomeIcon icon={faGear} />
-                  <span>Configuration</span>
-                </a>
-              </Link>
-            </li>
-          </ul>
+          {conditionRenderSidebar()}
         </div>
 
         {/* Profile */}

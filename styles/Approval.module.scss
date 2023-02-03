@@ -4,67 +4,40 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 5px;
+  background-color: $white;
+  border-radius: $borderRadius;
+  box-shadow: $bs1;
+  padding: 5px;
 
   .leftSide {
-    flex-grow: 2;
-    button,
-    h4 {
-      display: inline-block;
-    }
+    display: flex;
+    width: 75%;
     button.approveBtn {
       width: 170px;
       margin-right: 1rem;
-      transition: $transition;
+      border-radius: $borderRadius;
+      transition: $transition2;
       span {
         margin-right: 5px;
       }
       &:hover {
-        background-color: $primary-color-hover;
+        background-color: $primary-color-light;
+        border: 2px solid $primary-color-hover;
+        color: $primary-color;
+        font-weight: $fw-bold;
       }
-    }
-    h4.title {
-      height: 30px;
-      vertical-align: middle;
-      line-height: 35px;
     }
   }
 
   .rightSide {
-    flex-grow: 0.25;
+    width: 25%;
     text-align: right;
   }
 }
 
-.searchBar {
-  width: 100%;
-  height: 35px;
-  background-color: $grey-light;
-  margin-top: 10px;
-
-  .searchBox {
-    position: relative;
-    width: 70px;
-    height: 100%;
-    border: 1px solid $grey-blur;
-    cursor: pointer;
-
-    .searchIcon {
-      position: absolute;
-      top: 5px;
-      left: 5px;
-      color: $grey-blur;
-    }
-
-    span {
-      position: absolute;
-      top: 5px;
-      right: 10px;
-    }
-  }
-}
-
 .tabContent {
+  background-color: $white;
+  box-shadow: $bs1;
   margin: 1rem 0 0 0;
   table {
     width: 100%;
@@ -75,7 +48,7 @@
 
     thead > tr > th {
       text-align: center;
-      padding-bottom: 1rem;
+      padding: 1rem 0;
       color: $grey-blur;
       font-size: $fs-sm;
       font-weight: $fw-bold;
@@ -90,26 +63,21 @@
       tr {
         height: 50px;
         font-size: $fs-sm;
+        transition: all $transition2;
+        &:hover {
+          background-color: $primary-color-light;
+          border: 1px solid $primary-color-hover;
+          color: $primary-color-hover;
+          cursor: pointer;
+        }
       }
 
-      .reporter {
-        position: relative;
-
-        .imgWrapper {
-          position: absolute;
-          width: 25px;
-          height: 25px;
-          top: 13px;
-          left: 20px;
-
-          .avatar {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            object-position: top center;
-          }
-        }
+      .avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center top;
       }
     }
   }

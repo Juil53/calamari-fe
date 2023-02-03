@@ -1,17 +1,20 @@
-import { faCheck, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import * as Constant from "../../constant/constants";
+import { useState } from "react";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-import { useState } from "react";
+import Search from "../../components/Search";
 import Tabs from "../../components/Tabs";
-import * as Constant from "../../constant/constants";
 import styles from "../../styles/Approval.module.scss";
 
 const Approval = ({ events }) => {
   const [index, setIndex] = useState(0);
+  const [selectedEvent, setSelectedEvent] = useState({});
+  const [approvedEvent,setApprovedEvent] = useState(selectedEvent)
   const tabs = ["FOR APPROVAL", "HISTORY"];
 
-  const handleClick = (id) => {
-    console.log(`Row ${id} clicked!`);
+  const handleSelectEvent = (id) => {
+    setSelectedEvent(events[id]);
   };
 
   return (
@@ -24,19 +27,10 @@ const Approval = ({ events }) => {
             </span>
             APPROVE ALL
           </button>
-          <h4 className={styles.title}>Approval</h4>
+          <Search />
         </div>
         <div className={styles.rightSide}>
           <Tabs index={index} setIndex={setIndex} tabs={tabs} />
-        </div>
-      </div>
-
-      <div className={styles.searchBar}>
-        <div className={styles.searchBox}>
-          <div className={styles.searchIcon}>
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </div>
-          <span>...</span>
         </div>
       </div>
 
@@ -45,22 +39,21 @@ const Approval = ({ events }) => {
           <table>
             <thead>
               <tr>
-                <th>STAFFS</th>
+                <th>IMAGE</th>
+                <th>STAFF</th>
                 <th>TYPE</th>
                 <th>ABSENCE PERIOD</th>
                 <th>REQUESTED</th>
-                <th>STARTS</th>
+                <th>START</th>
               </tr>
             </thead>
             <tbody>
               {events.map((event) => (
-                <tr key={event.id} onClick={() => handleClick(event.id)}>
-                  <td className={styles.reporter}>
-                    <div className={styles.imgWrapper}>
-                      {/* <img className={styles.avatar} src="/imgs/avatar.jpg" alt="avatar" /> */}
-                    </div>
-                    Nguyen Van A
+                <tr key={event.id} onClick={() => handleSelectEvent(event.id)}>
+                  <td>
+                    <img className={styles.avatar} src="/imgs/avatar.jpg" alt="avatar" />
                   </td>
+                  <td className={styles.reporter}>Nguyen Van A</td>
                   <td>{event.title}</td>
                   <td>
                     {event.start} - {event.end}

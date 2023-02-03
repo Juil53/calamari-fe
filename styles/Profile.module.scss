@@ -4,16 +4,18 @@
   display: flex;
   align-items: center;
   color: $black;
-  padding-top: 10px;
+  padding: 6px 14px;
   width: 100%;
   border-top: 1px solid $grey;
   font-weight: $fw-bold;
   overflow: hidden;
   z-index: 10;
+  background-color: $primary-color-light;
+  border-radius: $borderRadius;
 
   .avatarWrapper{
     border: 2px solid transparent;
-    border-radius: $borderRadius-2;
+    border-radius: $borderRadius;
     width: 50px;
     height: 50px;
     transition: $transition;
@@ -23,7 +25,7 @@
       background-color: $primary-color-light;
     }
     .avatar {
-      border-radius: $borderRadius-2;
+      border-radius: $borderRadius;
     }
   }
 
@@ -35,6 +37,8 @@
     }
     .role {
       color: $primary-color;
+      font-style: italic;
+      font-size: $fs-sm;
     }
 
     &.active {

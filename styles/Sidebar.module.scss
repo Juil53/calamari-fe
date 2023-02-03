@@ -12,17 +12,18 @@
   padding: 6px 14px;
   border-left: 50px solid $primary-color;
   border-right: 1px solid rgba(225, 170, 170, 0.3);
-  background-image: url(/imgs/sidebar.avif);
+  background-image: url(/imgs/background_1.jpg);
   background-position: center;
   background-size: cover;
   box-shadow: $bs1;
   z-index: 10;
   transition: $transition;
+  text-transform: uppercase;
 
   &::before {
     content: "";
-    backdrop-filter: blur(5px);
-    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(1px);
+    background: rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(254, 220, 220, 0.3);
     width: 100%;
     height: 100%;

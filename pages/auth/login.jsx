@@ -1,10 +1,9 @@
-import { signIn, signOut } from "next-auth/react";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import styles from "../../styles/Login.module.scss";
 
 export default function Login() {
@@ -31,7 +30,7 @@ export default function Login() {
       });
       if (res.ok) {
         setIsDisabled(true);
-        router.push('/user/apply')
+        router.push('/staff/apply')
       } else {
         router.push({
           pathname: "/auth/error",

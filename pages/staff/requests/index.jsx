@@ -40,7 +40,7 @@ export default function Request({ events }) {
         </thead>
         <tbody>
           {events.map((event) => (
-            <Link key={event.id} href={`/user/requests/${event.id}`}>
+            <Link key={event.id} href={`/staff/requests/${event.id}`}>
               <tr>
                 <td>{event.title}</td>
                 <td>
