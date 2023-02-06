@@ -66,9 +66,9 @@ const Calendar = ({ ref, events }) => {
           hour:1
         }}
         buttonText={{
-          month:"M",
-          week:"W",
-          day:"D"
+          month:"Month",
+          week:"Week",
+          day:"Day"
         }}
       />
       <CalendarModal show={show} setShow={setShow} event={event} />

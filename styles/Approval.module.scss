@@ -22,7 +22,6 @@
       }
       &:hover {
         background-color: $primary-color-light;
-        border: 2px solid $primary-color-hover;
         color: $primary-color;
         font-weight: $fw-bold;
       }
@@ -41,6 +40,8 @@
   margin: 1rem 0 0 0;
   table {
     width: 100%;
+    border-spacing: 0; /* Removes the cell spacing via CSS */
+    border-collapse: collapse; /* Optional - if you don't want to have double border where cells touch */
     thead {
       width: 100%;
       border-bottom: 1px solid $grey-blur;
@@ -62,13 +63,11 @@
       text-align: center;
       tr {
         height: 50px;
-        font-size: $fs-sm;
-        transition: all $transition2;
+        font-size: $fs-md;
+        transition: $transition;
         &:hover {
-          background-color: $primary-color-light;
-          border: 1px solid $primary-color-hover;
+          background-color: $primary-color-hover-2;
           color: $primary-color-hover;
-          cursor: pointer;
         }
       }
 

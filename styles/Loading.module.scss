@@ -21,6 +21,11 @@
   animation: p6 2s infinite;
 }
 
+.loadingText {
+  margin-top: 20px;
+  text-align: center;
+}
+
 @keyframes p6 {
   100% {
     inset: 0;

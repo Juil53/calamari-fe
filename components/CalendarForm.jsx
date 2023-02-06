@@ -93,23 +93,23 @@ const CalendarForm = ({ absences }) => {
         <CalendarTo dataCalendarTo={dataCalendarTo} />
         <label htmlFor="absence_type">Absence Type</label>
         <select name="title" id="absence_type" onChange={handleChange}>
-          <option value="">Select absence type</option>
+          <option value="">Select absences</option>
           {absences.map((absence) => (
             <React.Fragment key={absence.id}>
               <option value={absence.value}>{absence.name}</option>
             </React.Fragment>
           ))}
         </select>
-        <label htmlFor="durationType">Duration type</label>
+        <label htmlFor="durationType">Duration</label>
         <select name="durationType" id="durationType" onChange={handleChange}>
-          <option value="">Select duration Type</option>
+          <option value="">Select duration</option>
           {setAbs.map((abs, index) => (
             <React.Fragment key={index}>
               <option value={abs}>{abs}</option>
             </React.Fragment>
           ))}
         </select>
-        <label htmlFor="comment">Comment</label>
+        <label htmlFor="comment">Reason</label>
         <textarea name="comment" id="comment" onChange={handleChange} />
         <Button
           variant="contained"
