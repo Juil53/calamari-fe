@@ -1,27 +1,37 @@
-import * as Constant from "../../constant/constants";
-import React, { useState } from "react";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios";
-import Search from "../../components/Search";
-import Tabs from "../../components/Tabs";
-import styles from "../../styles/Approval.module.scss";
-import Checkbox from "@mui/material/Checkbox";
 import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import { IconButton } from "@mui/material";
-import { handleStatus } from "../../utils/utils";
+import Checkbox from "@mui/material/Checkbox";
 import { Stack } from "@mui/system";
+import axios from "axios";
+import React, { useState } from "react";
+import Search from "../../components/Search";
+import Tabs from "../../components/Tabs";
+import * as Constant from "../../constant/constants";
+import styles from "../../styles/Approval.module.scss";
+import { handleStatus } from "../../utils/utils";
 
 const Approval = ({ events }) => {
   const [index, setIndex] = useState(0);
   const [datas, setDatas] = useState(events);
   const tabs = ["FOR APPROVAL", "HISTORY"];
 
-  const handleEventEdit = (id) => {
+  const handleEventApprove = (id) => {
     // Approve Event
     const eventSelected = events[id];
     const eventUpdated = { ...eventSelected, status: 1 };
+    const updatedData = datas.map((data) => (data.id === id ? eventUpdated : data));
+    setDatas(updatedData);
+  };
+
+  const handleEventDecline = (id) => {
+    // Decline Event
+    const eventSelected = events[id];
+    const eventUpdated = { ...eventSelected, status: 0 };
     const updatedData = datas.map((data) => (data.id === id ? eventUpdated : data));
     setDatas(updatedData);
   };
@@ -70,29 +80,29 @@ const Approval = ({ events }) => {
                   <td className={styles.reporter}>Nguyen Van A</td>
                   <td>{data.title}</td>
                   <td>
-                    {data.start} - {data.end}
+                    {data.start} / {data.end}
                   </td>
                   <td>{handleStatus(data.status)}</td>
                   <td>1 day</td>
                   <td className={styles.reporter}>
-                  <Stack direction="row" spacing={2} justifyContent="center">
-                    <IconButton
-                      aria-label="delete"
-                      size="small"
-                      color="success"
-                      onClick={() => handleEventEdit(data.id)}
-                    >
-                      <ThumbUpAltOutlinedIcon />
-                    </IconButton>
-                    <IconButton
-                      aria-label="delete"
-                      size="small"
-                      color="error"
-                      onClick={() => handleEventEdit(data.id)}
-                    >
-                      <ThumbDownAltOutlinedIcon />
-                    </IconButton>
-                  </Stack>
+                    <Stack direction="row" spacing={2} justifyContent="center">
+                      <IconButton
+                        aria-label="delete"
+                        size="small"
+                        color="success"
+                        onClick={() => handleEventApprove(data.id)}
+                      >
+                        {data.status === 1 ? <ThumbUpIcon /> : <ThumbUpAltOutlinedIcon />}
+                      </IconButton>
+                      <IconButton
+                        aria-label="delete"
+                        size="small"
+                        color="error"
+                        onClick={() => handleEventDecline(data.id)}
+                      >
+                        {data.status === 0 ? <ThumbDownIcon /> : <ThumbDownAltOutlinedIcon />}
+                      </IconButton>
+                    </Stack>
                   </td>
                 </tr>
               ))}

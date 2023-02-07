@@ -9,7 +9,7 @@ import CalendarFrom from "./CalendarFrom";
 import CalendarTo from "./CalendarTo";
 import { Button } from "@mui/material";
 
-const CalendarForm = ({ absences }) => {
+const CalendarForm = ({ absences,flows,sessionInfo}) => {
   const router = useRouter();
   const [data, setData] = useState({
     status: Constant.PENDING,
@@ -40,30 +40,38 @@ const CalendarForm = ({ absences }) => {
       case "remote":
         setData({
           ...data,
+          submitter: sessionInfo.user.email,
           color: "#fff",
           backgroundColor: "#fd6868",
+          createdAt:new Date(),
           [name]: value,
         });
         break;
       case "sick":
         setData({
           ...data,
+          submitter: sessionInfo.user.email,
           color: "#fff",
           backgroundColor: "#0d6efd",
+          createdAt:new Date(),
           [name]: value,
         });
         break;
       case "holiday":
         setData({
           ...data,
+          submitter: sessionInfo.user.email,
           color: "#fff",
-          backgroundColor: "#00FFFF",
+          backgroundColor: "#00ff66",
+          createdAt:new Date(),
           [name]: value,
         });
         break;
       default:
         setData({
           ...data,
+          createdAt:new Date(),
+          submitter: sessionInfo.user.email || 'default',
           [name]: value,
         });
         break;
@@ -74,11 +82,7 @@ const CalendarForm = ({ absences }) => {
     event.preventDefault();
     //Data add vao DB
     try {
-      await axios({
-        method: "POST",
-        url: Constant.eventsAPI,
-        data,
-      });
+      await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/event`,data);
       alert("Post Success");
       router.reload();
     } catch (error) {
@@ -96,7 +100,7 @@ const CalendarForm = ({ absences }) => {
           <option value="">Select absences</option>
           {absences.map((absence) => (
             <React.Fragment key={absence.id}>
-              <option value={absence.value}>{absence.name}</option>
+              <option value={absence.value}>{absence.name.toUpperCase()}</option>
             </React.Fragment>
           ))}
         </select>
@@ -105,7 +109,16 @@ const CalendarForm = ({ absences }) => {
           <option value="">Select duration</option>
           {setAbs.map((abs, index) => (
             <React.Fragment key={index}>
-              <option value={abs}>{abs}</option>
+              <option value={abs}>{abs.toUpperCase()}</option>
+            </React.Fragment>
+          ))}
+        </select>
+        <label htmlFor="flow">Flow</label>
+        <select name="flow" id="flow" onChange={handleChange}>
+          <option value="">Select a flow</option>
+          {flows.map((flow, index) => (
+            <React.Fragment key={index}>
+              <option value={flow.name}>{flow.name.toUpperCase()}</option>
             </React.Fragment>
           ))}
         </select>

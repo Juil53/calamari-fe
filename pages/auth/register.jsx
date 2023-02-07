@@ -14,7 +14,7 @@ export default function Register() {
       email: "",
       password: "",
       confirmPassword: "",
-      role: "STAFF",
+      role: "staff",
     },
     validationSchema: validationUserSchema,
     onSubmit: async (values) => {
@@ -23,7 +23,7 @@ export default function Register() {
 
       try {
         await axios({
-          url: Constant.usersAPI,
+          url: `${process.env.API_ENDPOINT}/users`,
           method: "POST",
           data: JSON.stringify(values),
           headers: {
