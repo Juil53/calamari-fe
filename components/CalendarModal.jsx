@@ -11,9 +11,10 @@ import CloseIcon from "@mui/icons-material/Close";
 import style from "../styles/Modal.module.scss";
 
 const CalendarModal = ({ show, setShow, event }) => {
+  console.log(event)
   const route = useRouter();
   const handleClose = () => setShow(false);
-  const [updatedEvent, setUpdatedEvent] = useState({
+  const [currentEvent, setCurrentEvent] = useState({
     id: "",
     start: "",
     end: "",
@@ -25,25 +26,25 @@ const CalendarModal = ({ show, setShow, event }) => {
 
   useEffect(() => {
     if (event.id) {
-      setUpdatedEvent({
+      setCurrentEvent({
         id: event.id,
         start: event.start,
         end: event.end,
         title: event.title,
         comment: event.data.comment,
         status: event.data.status,
-        name: event.data.name,
+        name: event.data.submitter,
       });
     }
   }, [event]);
 
-  const dataCalendarFrom = (start) => setUpdatedEvent({ ...updatedEvent, start });
-  const dataCalendarTo = (end) => setUpdatedEvent({ ...updatedEvent, end });
+  const dataCalendarFrom = (start) => setCurrentEvent({ ...currentEvent, start });
+  const dataCalendarTo = (end) => setCurrentEvent({ ...currentEvent, end });
 
   const handleDelete = async (id) => {
     setShow(false);
     try {
-      await axios.delete(`${Constant.eventsAPI}${id}`);
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/event/${id}`);
       alert("Deleted");
       route.reload();
     } catch (err) {
@@ -53,8 +54,8 @@ const CalendarModal = ({ show, setShow, event }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUpdatedEvent({
-      ...updatedEvent,
+    setCurrentEvent({
+      ...currentEvent,
       [name]: value,
     });
   };
@@ -63,11 +64,11 @@ const CalendarModal = ({ show, setShow, event }) => {
     e.preventDefault();
         //post updated Event
         try {
-            await axios.put(`https://633d07937e19b17829061bcf.mockapi.io/calendar/events/${event.id}`, updatedEvent);
-            alert("updated");
+            await axios.put(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/event/${event.id}`, currentEvent);
+            alert("Updated");
         } catch (error) {
             console.log(error);
-            alert("failed");
+            alert("Failed");
         }
     };
 
@@ -78,25 +79,25 @@ const CalendarModal = ({ show, setShow, event }) => {
           <button className={style.closeIcon}>
             <CloseIcon onClick={handleClose}/>
           </button>
-          <h2>Absence Type: {updatedEvent.title.toUpperCase()}</h2>
+          <h2>Reason: {currentEvent.title.toUpperCase()}</h2>
           <form onSubmit={handleSubmit}>
-            <CalendarFrom dataCalendarFrom={dataCalendarFrom} oldData={updatedEvent.start} />
-            <CalendarTo dataCalendarTo={dataCalendarTo} oldData={updatedEvent.end} />
+            <CalendarFrom dataCalendarFrom={dataCalendarFrom} oldData={currentEvent.start} />
+            <CalendarTo dataCalendarTo={dataCalendarTo} oldData={currentEvent.end} />
             <label htmlFor="comment">Comment</label>
             <textarea
               id="comment"
               rows="2"
-              value={updatedEvent.comment}
+              value={currentEvent.comment}
               onChange={handleChange}
               name="comment"
             />
-            <h5>Status: {handleStatus(updatedEvent.status)}</h5>
-            <h5>Name: Nguyen Van A</h5>
+            <h5>Status: {handleStatus(currentEvent.status)}</h5>
+            <h5>Submitter: {currentEvent.name}</h5>
             <div className={style.modalFooter}>
               <Button
                 variant="outlined"
                 color="error"
-                onClick={() => handleDelete(updatedEvent.id)}
+                onClick={() => handleDelete(currentEvent.id)}
               >
                 Delete
               </Button>

@@ -1,28 +1,31 @@
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import { IconButton } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import { Stack } from "@mui/system";
 import axios from "axios";
+import moment from "moment";
 import React, { useState } from "react";
 import Search from "../../components/Search";
 import Tabs from "../../components/Tabs";
-import * as Constant from "../../constant/constants";
 import styles from "../../styles/Approval.module.scss";
 import { handleStatus } from "../../utils/utils";
 
-const Approval = ({ events }) => {
+const Approval = ({ formatEvents }) => {
+  console.log(formatEvents)
+
   const [index, setIndex] = useState(0);
-  const [datas, setDatas] = useState(events);
+  const [datas, setDatas] = useState(formatEvents);
   const tabs = ["FOR APPROVAL", "HISTORY"];
 
   const handleEventApprove = (id) => {
     // Approve Event
-    const eventSelected = events[id];
+    const selectedIndex = formatEvents.findIndex((item) => item.id === id);
+    const eventSelected = formatEvents[selectedIndex];
     const eventUpdated = { ...eventSelected, status: 1 };
     const updatedData = datas.map((data) => (data.id === id ? eventUpdated : data));
     setDatas(updatedData);
@@ -30,7 +33,8 @@ const Approval = ({ events }) => {
 
   const handleEventDecline = (id) => {
     // Decline Event
-    const eventSelected = events[id];
+    const selectedIndex = formatEvents.findIndex((item) => item.id === id);
+    const eventSelected = formatEvents[selectedIndex];
     const eventUpdated = { ...eventSelected, status: 0 };
     const updatedData = datas.map((data) => (data.id === id ? eventUpdated : data));
     setDatas(updatedData);
@@ -60,7 +64,7 @@ const Approval = ({ events }) => {
               <tr>
                 <th></th>
                 <th>IMAGE</th>
-                <th>STAFF</th>
+                <th>EMAIL</th>
                 <th>TYPE</th>
                 <th>ABSENCE PERIOD</th>
                 <th>STATUS</th>
@@ -77,7 +81,7 @@ const Approval = ({ events }) => {
                   <td>
                     <img className={styles.avatar} src="/imgs/default_avatar.jpg" alt="avatar" />
                   </td>
-                  <td className={styles.reporter}>Nguyen Van A</td>
+                  <td className={styles.reporter}>{data.submitter}</td>
                   <td>{data.title}</td>
                   <td>
                     {data.start} / {data.end}
@@ -116,11 +120,16 @@ const Approval = ({ events }) => {
 };
 
 export const getStaticProps = async () => {
-  const res = await axios.get(Constant.eventsAPI);
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/events`);
   const events = res.data;
+  const formatEvents = events.map((event) => ({
+    ...event,
+    start: moment(event.start).format("yyyy-MM-DD"),
+    end: moment(event.end).format("yyyy-MM-DD"),
+  }));
 
   return {
-    props: { events },
+    props: { formatEvents },
     revalidate: 1,
   };
 };

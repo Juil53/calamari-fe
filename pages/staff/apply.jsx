@@ -4,25 +4,26 @@ import { createRef } from "react";
 import CalendarForm from "../../components/CalendarForm";
 import * as Constant from "../../constant/constants";
 import style from "../../styles/Apply.module.scss";
-import { useSession } from "next-auth/react"
+import { useSession } from "next-auth/react";
+import moment from "moment";
 
 const Calendar = dynamic(() => import("../../components/Calendar"), {
   ssr: false,
 });
 
-const Apply = ({ events, absences,flows }) => {
+const Apply = ({ formatEvents, absences, flows }) => {
   const calendarRef = createRef();
-  const { data: session, status } = useSession()
-  
+  const { data: session } = useSession();
+
   return (
     <>
       <h4 className={style.title}>Absence Request</h4>
       <div className={style.container}>
         <div className={style.leftSide}>
-          <Calendar ref={calendarRef} events={events} />
+          <Calendar ref={calendarRef} events={formatEvents} />
         </div>
         <div className={style.rightSide}>
-          <CalendarForm absences={absences} flows={flows} sessionInfo={session}/>
+          <CalendarForm absences={absences} flows={flows} sessionInfo={session} />
         </div>
       </div>
     </>
@@ -32,16 +33,21 @@ const Apply = ({ events, absences,flows }) => {
 export const getStaticProps = async () => {
   const res1 = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/events`);
   const events = res1.data;
+  const formatEvents = events.map((event) => ({
+    ...event,
+    start: moment(event.start).format("yyyy-MM-DD"),
+    end: moment(event.end).format("yyyy-MM-DD"),
+  }));
   const res2 = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/type`);
   const absences = res2.data;
-  const res3 = await axios.get(Constant.flowAPI)
+  const res3 = await axios.get(Constant.flowAPI);
   const flows = res3.data;
 
   return {
     props: {
-      events,
+      formatEvents,
       absences,
-      flows
+      flows,
     },
   };
 };
