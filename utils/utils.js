@@ -1,5 +1,4 @@
 import axios from "axios";
-import moment from "moment";
 
 export const handleStatus = (type) => {
   switch (type) {
@@ -16,7 +15,6 @@ export const handleStatus = (type) => {
 
 export const fetchUser = async (email, password) => {
   try {
-    // const res = await axios.get("https://633d07937e19b17829061bcf.mockapi.io/calendar/users")
     const res = await axios.get(`${process.env.API_ENDPOINT}/users`)
     const users = res.data
     const user = users.find(user => user.email === email && user.password === password)

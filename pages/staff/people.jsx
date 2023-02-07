@@ -1,17 +1,9 @@
 import axios from "axios";
-import * as Constant from "../../constant/constants";
 import styles from "../../styles/People.module.scss";
 import moment from "moment";
 
 export const getStaticProps = async () => {
-  const res = await axios({
-    url: `${process.env.API_ENDPOINT}/users`,
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      authorization: "",
-    },
-  });
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/users`);
   const userList = res.data;
 
   return {
