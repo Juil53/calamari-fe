@@ -15,7 +15,7 @@ export const handleStatus = (type) => {
 
 export const fetchUser = async (email, password) => {
   try {
-    const res = await axios.get(`${process.env.API_ENDPOINT}/users`)
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/users`)
     const users = res.data
     const user = users.find(user => user.email === email && user.password === password)
     if (user) {

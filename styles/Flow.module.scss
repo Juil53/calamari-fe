@@ -53,54 +53,65 @@ button.returnBtn {
 
 .content {
   display: flex;
-  flex-direction: column;
   margin-top: 1.5rem;
-  padding-bottom: 1.5rem;
-  align-items: flex-start;
+  // align-items: center;
   justify-content: space-between;
+  column-gap: 5%;
 
-  .flow {
-    position: relative;
-    margin-bottom: 2.5rem;
-    padding: 1rem;
-    border: 1px solid transparent;
-    background-color: $white;
-    box-shadow: $bs1;
-    border-radius: $borderRadius;
-    width: 100%;
+  .leftSide {
     display: flex;
-    align-items: center;
-    column-gap: 10px;
-    transition: $transition2;
-    overflow: hidden;
+    flex-direction: column;
+    width: 70%;
+    align-items: flex-start;
+    justify-content: space-between;
 
-    .flowDetail {
+    .flow {
+      position: relative;
+      min-height: 150px;
+      padding: 1rem;
+      border: 1px solid transparent;
+      background-color: $white;
+      box-shadow: $bs1;
+      border-radius: $borderRadius;
+      width: 100%;
       display: flex;
-      flex-direction: column;
-      width: 30%;
-      span {
-        font-size: $fs-sm;
-        color: $grey;
+      align-items: center;
+      column-gap: 10px;
+      transition: $transition2;
+      overflow: hidden;
+  
+      .flowDetail {
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+        span {
+          font-size: $fs-sm;
+          color: $grey;
+        }
       }
-    }
-    .flowChart {
-      width: 70%;
-    }
-
-    &:hover {
-      transform: translateY(-5px);
-      border: 1px solid $primary-color-hover;
-      .editIcon {
-        top: 10px;
-        color: $green;
+      .flowChart {
+        width: 70%;
       }
-      .deleteIcon {
-        top: 10px;
-        left: 90px;
-        color: $primary-color-hover;
+  
+      &:hover {
+        transform: translateY(-5px);
+        border: 1px solid $primary-color-hover;
+        .editIcon {
+          top: 10px;
+          color: $green;
+        }
+        .deleteIcon {
+          top: 10px;
+          left: 90px;
+          color: $primary-color-hover;
+        }
       }
     }
   }
+
+  .rightSide {
+    width: 25%;
+  }  
 
   .editIcon {
     position: absolute;

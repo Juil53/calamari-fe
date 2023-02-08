@@ -23,7 +23,7 @@ export default function Register() {
 
       try {
         await axios({
-          url: `${process.env.API_ENDPOINT}/users`,
+          url: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/users`,
           method: "POST",
           data: JSON.stringify(values),
           headers: {

@@ -16,8 +16,6 @@ import styles from "../../styles/Approval.module.scss";
 import { handleStatus } from "../../utils/utils";
 
 const Approval = ({ formatEvents }) => {
-  console.log(formatEvents)
-
   const [index, setIndex] = useState(0);
   const [datas, setDatas] = useState(formatEvents);
   const tabs = ["FOR APPROVAL", "HISTORY"];

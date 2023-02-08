@@ -27,7 +27,7 @@ const CreateAbsenceType = () => {
     event.preventDefault();
 
     try {
-      await axios.post(`${process.env.API_ENDPOINT}/type`, absenceType);
+      await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/type`, absenceType);
       alert("Post success");
     } catch (error) {
       alert("Error", error);
