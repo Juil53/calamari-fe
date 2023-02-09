@@ -9,6 +9,7 @@ import styles from "../../../../styles/CreateApproveFlow.module.scss";
 
 const FlowDetail = ({ oldFlow }) => {
   const router = useRouter();
+
   if (!oldFlow) {
     return null;
   }
@@ -16,7 +17,7 @@ const FlowDetail = ({ oldFlow }) => {
     return <Loading />;
   }
 
-  const [currentFlow, setCurrentFlow] = useState(oldFlow.flow);
+  const [currentFlow, setCurrentFlow] = useState(oldFlow);
   const selectRef = useRef();
 
   const selectStep = (e) => {
@@ -40,9 +41,10 @@ const FlowDetail = ({ oldFlow }) => {
 
   const handleSubmit = async (id) => {
     try {
-      await axios.put(`https://633d07937e19b17829061bcf.mockapi.io/calendar/flow/${id}`, {
+      await axios.put(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/flows/${id}`, {
         flow: currentFlow,
       });
+      console.log('test revalidate')
       await axios.post("/api/revalidate", { id: id });
       alert("Update Success");
       router.reload();
@@ -63,7 +65,7 @@ const FlowDetail = ({ oldFlow }) => {
           <button
             type="submit"
             className={styles.approveBtn}
-            onClick={() => handleSubmit(oldFlow.id)}
+            onClick={() => handleSubmit(currentFlow.id)}
           >
             <span>
               <FontAwesomeIcon icon={faFloppyDisk} />
@@ -79,7 +81,7 @@ const FlowDetail = ({ oldFlow }) => {
           <div className={styles.tabsContent}>
             <div className={styles.steps}>
               <h4>Choose Number of Steps</h4>
-              <select onChange={selectStep} ref={selectRef} value={currentFlow.length}>
+              <select onChange={selectStep} ref={selectRef}>
                 <option value="1">1 Steps</option>
                 <option value="2">2 Steps</option>
                 <option value="3">3 Steps</option>
@@ -87,18 +89,16 @@ const FlowDetail = ({ oldFlow }) => {
               </select>
             </div>
             <div>
-              {currentFlow.map((flow, index) => (
-                <form key={index}>
-                  <h3>Step {index + 1}</h3>
-                  <div className={styles.stepWrapper}>
-                    <select name="flow" onChange={(e) => handleChange(e, index)} value={flow}>
-                      <option value="REQUEST">REQUEST</option>
-                      <option value="MANAGER">MANAGER</option>
-                      <option value="ADMIN">ADMIN</option>
-                    </select>
-                  </div>
-                </form>
-              ))}
+              <form>
+                <h3>{currentFlow.flowName}</h3>
+                <div className={styles.stepWrapper}>
+                  <select name="flow" onChange={(e) => handleChange(e, index)}>
+                    <option value="REQUEST">REQUEST</option>
+                    <option value="MANAGER">MANAGER</option>
+                    <option value="ADMIN">ADMIN</option>
+                  </select>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -118,23 +118,19 @@ const FlowDetail = ({ oldFlow }) => {
 export default FlowDetail;
 
 export const getStaticPaths = async () => {
-  const response = await axios.get("https://633d07937e19b17829061bcf.mockapi.io/calendar/flow");
+  const response = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/flows`);
   const flows = await response.data;
   return {
-    paths: flows.map((flow) => ({ params: { flowId: flow.id } })),
+    paths: flows.map((flow) => ({ params: { flowId: flow.id.toString() } })),
     fallback: true,
   };
 };
 
 export const getStaticProps = async ({ params }) => {
-  const response = await axios.get(
-    `https://633d07937e19b17829061bcf.mockapi.io/calendar/flow/${params.flowId}`
-  );
+  const response = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/flow/${params.flowId}`);
   const oldFlow = await response.data;
-
-  console.log(`Generating page for /flow/${params.flowId}`);
   return {
     props: { oldFlow },
-    revalidate: 120,
+    revalidate: 60,
   };
 };

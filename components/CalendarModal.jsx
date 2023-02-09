@@ -11,7 +11,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import style from "../styles/Modal.module.scss";
 
 const CalendarModal = ({ show, setShow, event }) => {
-  console.log(event)
   const route = useRouter();
   const handleClose = () => setShow(false);
   const [currentEvent, setCurrentEvent] = useState({

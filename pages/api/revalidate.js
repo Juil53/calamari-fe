@@ -5,6 +5,7 @@ export default async function handler(req, res) {
     }
 
     const body = req.body;
+    // console.log('body', body)
     if (!body) {
       res.status(400).send("Bad request no body");
       return;

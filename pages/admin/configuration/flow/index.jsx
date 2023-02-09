@@ -6,19 +6,27 @@ import moment from "moment";
 import Link from "next/link";
 import React from "react";
 import FlowStep from "../../../../components/FlowStep";
-import Loading from "../../../../components/Loading";
 import styles from "../../../../styles/Flow.module.scss";
 
 const ApprovalFlow = ({ flows }) => {
   const router = useRouter();
+
+  const handleRevalidation = async () => {
+    await axios.post(
+      `/api/revalidate-page?secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET_TOKEN}`,
+      { path: router.pathname }
+    );
+    router.reload();
+  };
+
   const handleDelete = async (id) => {
-    try {
-      await axios.delete(`https://633d07937e19b17829061bcf.mockapi.io/calendar/flow/${id}`);
-      alert("Delete Successfully!");
-      router.reload();
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   await axios.delete(`https://633d07937e19b17829061bcf.mockapi.io/calendar/flow/${id}`);
+    //   alert("Delete Successfully!");
+    //   router.reload();
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (
@@ -37,6 +45,9 @@ const ApprovalFlow = ({ flows }) => {
             CREATE FLOW
           </button>
         </Link>
+        <button className={styles.revalidateBtn} onClick={handleRevalidation}>
+          REVALIDATE
+        </button>
       </div>
 
       {flows && (
@@ -70,7 +81,16 @@ const ApprovalFlow = ({ flows }) => {
           </div>
 
           <div className={styles.rightSide}>
-            Description
+            <h3>Description</h3>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque expedita eum iste sed
+              dolore reiciendis autem porro, sunt nemo voluptatibus.
+            </p>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem quos sed cumque
+              perferendis magnam! Consectetur assumenda quasi aliquid nihil tempora, asperiores
+              laboriosam, sequi deserunt voluptatum iste officia. Ab, beatae consequatur.
+            </p>
           </div>
         </div>
       )}
@@ -86,6 +106,6 @@ export const getStaticProps = async () => {
 
   return {
     props: { flows },
-    revalidate: 60,
+    revalidate: 360,
   };
 };

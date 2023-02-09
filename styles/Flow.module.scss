@@ -3,7 +3,6 @@
 .wrapper {
   position: relative;
   width: 100%;
-  height: 100vh;
 
   .overlay {
     position: absolute;
@@ -26,13 +25,20 @@
 button.createBtn {
   width: 150px;
   margin-right: 1rem;
+  border: 1px solid transparent;
   transition: $transition;
   span {
     margin-right: 5px;
   }
   &:hover {
-    background-color: $primary-color-hover;
+    background-color: $primary-color-light;
+    border: 1px solid $primary-color-hover;
   }
+}
+
+button.revalidateBtn {
+  background-color: $primary-color-light;
+  border: 1px solid $primary-color-hover;
 }
 
 button.returnBtn {
@@ -53,8 +59,8 @@ button.returnBtn {
 
 .content {
   display: flex;
+  height: 100%;
   margin-top: 1.5rem;
-  // align-items: center;
   justify-content: space-between;
   column-gap: 5%;
 
@@ -63,12 +69,12 @@ button.returnBtn {
     flex-direction: column;
     width: 70%;
     align-items: flex-start;
-    justify-content: space-between;
 
     .flow {
       position: relative;
       min-height: 150px;
       padding: 1rem;
+      margin-bottom: 1rem;
       border: 1px solid transparent;
       background-color: $white;
       box-shadow: $bs1;
@@ -79,7 +85,7 @@ button.returnBtn {
       column-gap: 10px;
       transition: $transition2;
       overflow: hidden;
-  
+
       .flowDetail {
         display: flex;
         flex-direction: column;
@@ -92,7 +98,7 @@ button.returnBtn {
       .flowChart {
         width: 70%;
       }
-  
+
       &:hover {
         transform: translateY(-5px);
         border: 1px solid $primary-color-hover;
@@ -111,7 +117,17 @@ button.returnBtn {
 
   .rightSide {
     width: 25%;
-  }  
+    height: 80vh;
+    text-align: center;
+    padding-top: 1.5rem;
+    background-color: $white;
+    box-shadow: $bs1;
+    border-radius: $borderRadius;
+    p {
+      text-align: left;
+      padding: 0.75rem 1rem;
+    }
+  }
 
   .editIcon {
     position: absolute;

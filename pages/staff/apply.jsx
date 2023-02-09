@@ -38,7 +38,7 @@ export const getStaticProps = async () => {
     start: moment(event.start).format("yyyy-MM-DD"),
     end: moment(event.end).format("yyyy-MM-DD"),
   }));
-  const res2 = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/type`);
+  const res2 = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/types`);
   const absences = res2.data;
   const res3 = await axios.get(Constant.flowAPI);
   const flows = res3.data;
