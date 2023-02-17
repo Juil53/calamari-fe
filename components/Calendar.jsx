@@ -70,6 +70,7 @@ const Calendar = ({ ref, events }) => {
           week:"Week",
           day:"Day"
         }}
+        aspectRatio="2"
       />
       <CalendarModal show={show} setShow={setShow} event={event} />
     </>

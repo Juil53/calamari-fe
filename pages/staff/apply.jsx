@@ -29,7 +29,8 @@ const Apply = ({ formatEvents, absences, flows }) => {
             <LinearIndeterminate />
           </div>
         </div>
-        <div className={style.icon}>
+        <div className={style.iconWrapper}>
+          <span>Hello User!</span>
           <IconButton className={style.iconButton}>
             <MenuBookTwoToneIcon fontSize="large"/>
           </IconButton>
@@ -43,12 +44,12 @@ const Apply = ({ formatEvents, absences, flows }) => {
       </div>
 
       <div className={style.container}>
-        <div className={style.leftSide}>
+        <div className={style.calendarWrapper}>
           <Calendar ref={calendarRef} events={formatEvents} />
         </div>
-        <div className={style.rightSide}>
+        {/* <div className={style.rightSide}>
           <CalendarForm absences={absences} flows={flows} sessionInfo={session} />
-        </div>
+        </div> */}
       </div>
     </>
   );
