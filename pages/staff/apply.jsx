@@ -5,6 +5,11 @@ import CalendarForm from "../../components/CalendarForm";
 import style from "../../styles/Apply.module.scss";
 import { useSession } from "next-auth/react";
 import moment from "moment";
+import LinearIndeterminate from "../../components/Progress";
+import MenuBookTwoToneIcon from "@mui/icons-material/MenuBookTwoTone";
+import ViewListTwoToneIcon from "@mui/icons-material/ViewListTwoTone";
+import AccountCircleTwoToneIcon from "@mui/icons-material/AccountCircleTwoTone";
+import IconButton from "@mui/material/IconButton";
 
 const Calendar = dynamic(() => import("../../components/Calendar"), {
   ssr: false,
@@ -16,7 +21,27 @@ const Apply = ({ formatEvents, absences, flows }) => {
 
   return (
     <>
-      <h4 className={style.title}>Absence Request</h4>
+      <div className={style.topWrapper}>
+        <h4 className={style.header}>APPLY</h4>
+        <div className={style.dayLeft}>
+          <p>Day Left</p>
+          <div className={style.progress}>
+            <LinearIndeterminate />
+          </div>
+        </div>
+        <div className={style.icon}>
+          <IconButton className={style.iconButton}>
+            <MenuBookTwoToneIcon fontSize="large"/>
+          </IconButton>
+          <IconButton className={style.iconButton}>
+            <ViewListTwoToneIcon fontSize="large"/>
+          </IconButton>
+          <IconButton className={style.iconButton}>
+            <AccountCircleTwoToneIcon fontSize="large"/>
+          </IconButton>
+        </div>
+      </div>
+
       <div className={style.container}>
         <div className={style.leftSide}>
           <Calendar ref={calendarRef} events={formatEvents} />

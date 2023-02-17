@@ -19,7 +19,7 @@ export default NextAuth({
   pages: {
     signIn: '/auth/login',
     signOut: '/auth/logout',
-    error: '/auth/error'
+    error: '/auth/login'
   },
   callbacks: {
     async jwt({ token, user }) {

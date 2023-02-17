@@ -18,11 +18,11 @@ import Profile from "./Profile";
 
 const Sidebar = (props) => {
   const route = useRouter();
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const [open, setOpen] = useState(false);
   const openSidebar = () => setOpen(!open);
 
-  const conditionRenderSidebar = () => {
+  const adminMenu = () => {
     if (session?.role == "admin") {
       return (
         <ul className={styles.nav_lists}>
@@ -79,73 +79,48 @@ const Sidebar = (props) => {
         </ul>
       );
     }
-    return (
-      <ul className={styles.nav_lists}>
-        <li className={route.pathname == "/staff/apply" ? `${styles.navActive}` : ""}>
-          <Link href="/staff/apply">
-            <a>
-              <FontAwesomeIcon icon={faPenToSquare} />
-              <span>Apply</span>
-            </a>
-          </Link>
-        </li>
-        <li className={route.pathname.includes("/staff/calendar") ? `${styles.navActive}` : ""}>
-          <Link href="/staff/calendar">
-            <a>
-              <FontAwesomeIcon icon={faCalendar} />
-              <span>Calendar</span>
-            </a>
-          </Link>
-        </li>
-        <li className={route.pathname.includes("/staff/request") ? `${styles.navActive}` : ""}>
-          <Link href="/staff/requests">
-            <a>
-              <FontAwesomeIcon icon={faFileLines} />
-              <span>Request</span>
-            </a>
-          </Link>
-        </li>
-      </ul>
-    );
   };
 
-  return (
-    <nav>
-      <div className={open ? `${styles.sidebar} ${styles.active}` : `${styles.sidebar}`}>
-        <div className={styles.menu}>
-          {/* Logo */}
-          <div className={styles.logoWrapper}>
-            <div className={styles.logo}>
-              <Link href="/">
-                <Image
-                  src="/imgs/logo.svg"
-                  alt=""
-                  width={150}
-                  height={40}
-                  className={styles.brandLogo}
+  if (session?.role == "admin") {
+    return (
+      <nav>
+        <div className={open ? `${styles.sidebar} ${styles.active}` : `${styles.sidebar}`}>
+          <div className={styles.menu}>
+            {/* Logo */}
+            <div className={styles.logoWrapper}>
+              <div className={styles.logo}>
+                <Link href="/">
+                  <Image
+                    src="/imgs/logo.svg"
+                    alt=""
+                    width={150}
+                    height={40}
+                    className={styles.brandLogo}
+                  />
+                </Link>
+              </div>
+              <div className={styles.hamWrapper}>
+                <FontAwesomeIcon
+                  icon={faBars}
+                  id={styles.hamburger}
+                  onClick={() => {
+                    openSidebar(), props.changeStatus(!props.show);
+                  }}
                 />
-              </Link>
+              </div>
             </div>
-            <div className={styles.hamWrapper}>
-              <FontAwesomeIcon
-                icon={faBars}
-                id={styles.hamburger}
-                onClick={() => {
-                  openSidebar(), props.changeStatus(!props.show);
-                }}
-              />
-            </div>
+            {/* Admin Menu */}
+            {adminMenu()}
+
+            {/* Leader Menu */}
           </div>
 
-          {/* NavBtn */}
-          {conditionRenderSidebar()}
+          {/* Profile */}
+          {session ? <Profile user={session.user} open={open} /> : null}
         </div>
-
-        {/* Profile */}
-        {session ? <Profile user={session.user} open={open} /> : null}
-      </div>
-    </nav>
-  );
+      </nav>
+    );
+  }
 };
 
 export default Sidebar;

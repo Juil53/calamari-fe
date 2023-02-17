@@ -1,9 +1,36 @@
 @import 'variables';
 
-.title {
+.topWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   font-size: $fs-lg;
   color: $grey;
+  padding-bottom: 10px;
   border-bottom: 2px solid $grey-blur;
+  .header {
+    font-weight: $fw-bold;
+  }
+
+  .dayLeft {
+    display: flex;
+    align-items: center;
+    flex-grow: 0.5;
+    p {
+      width: 20%;
+    }
+    .progress {
+      width: 80%;
+    }
+  }
+
+  .icon {
+    display: flex;
+    justify-content: space-evenly;
+    .iconButton {
+      text-align: center;
+    }
+  }
 };
 
 .container {
