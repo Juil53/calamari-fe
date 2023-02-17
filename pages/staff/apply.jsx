@@ -2,7 +2,6 @@ import axios from "axios";
 import dynamic from "next/dynamic";
 import { createRef } from "react";
 import CalendarForm from "../../components/CalendarForm";
-import * as Constant from "../../constant/constants";
 import style from "../../styles/Apply.module.scss";
 import { useSession } from "next-auth/react";
 import moment from "moment";
@@ -40,7 +39,7 @@ export const getStaticProps = async () => {
   }));
   const res2 = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/types`);
   const absences = res2.data;
-  const res3 = await axios.get(Constant.flowAPI);
+  const res3 = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/flows`);
   const flows = res3.data;
 
   return {

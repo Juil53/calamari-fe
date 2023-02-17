@@ -3,67 +3,76 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import styles from "../../../styles/CreateApproveFlow.module.scss";
+import { handleConvertNumber } from "../../../utils/utils";
 
 const CreateFlow = () => {
-  const [options, setOptions] = useState([]);
-  const [flows, setFlows] = useState([]);
   const router = useRouter();
-  const selectRef = useRef();
-
-  const handleResetOptions = () => {
-    setOptions([]);
-    setFlows([]);
-    selectRef.current.value = 0;
-  };
+  const [flowLength, setFlowLength] = useState(null);
+  const [flow, setFlow] = useState({
+    flowName: "Default flow",
+    stepOne: null,
+    stepTwo: null,
+    stepThree: null,
+  });
 
   const selectStep = (e) => {
     const count = Number(e.target.value);
     if (count > 0) {
-      const tempArray = [];
+      const stepLength = null;
       for (let i = 0; i < count; i++) {
-        tempArray.push(i);
+        stepLength++;
       }
-      setOptions(tempArray);
+      setFlowLength(stepLength);
     }
   };
 
-  const handleChange = (e, option) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    const tempFlows = [...flows];
-    const tempFlow = { ...tempFlows[option], [name]: value };
-    tempFlows[option] = tempFlow.flow;
-    setFlows(tempFlows);
+    setFlow({
+      ...flow,      
+      [name]: value,
+    });
   };
 
-  const renderInputStep = () => {
-    return options.map((option, index) => (
-      <div key={index}>
-        <form>
-          <h3>Step {option + 1}</h3>
+  const handleSubmit = () => {
+    try {
+      axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/flow`, flow);
+      handleRevalidation()
+      alert("Create successfully");
+    } catch (error) {
+      console.log(error);
+    }
+    router.push("/admin/configuration/flow");
+  };
+
+  const renderInputStep = (flowLength) => {
+    const content = [];
+    for (let i = 0; i < flowLength; i++) {
+      content.push(
+        <form key={i}>
+          <h3>Step</h3>
           <div className={styles.stepWrapper}>
-            <select name="flow" onChange={(e) => handleChange(e, option)}>
+            <select name={`step${handleConvertNumber(i+1)}`} onChange={handleChange}>
               <option value="">Select options</option>
+              <option value="REQUEST">REQUEST</option>
               <option value="MANAGER">MANAGER</option>
               <option value="ADMIN">ADMIN</option>
             </select>
           </div>
         </form>
-      </div>
-    ));
+      );
+    }
+    return content;
   };
 
-  const handleSubmit = () => {
-    try {
-      axios.post("https://633d07937e19b17829061bcf.mockapi.io/calendar/flow", {
-        flow:flows
-      });
-      alert("OKE");
-    } catch (error) {
-      console.log(error);
-    }
-    router.push("/admin/configuration/flow");
+  const handleRevalidation = async () => {
+    await axios.post(
+      `/api/revalidate-page?secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET_TOKEN}`,
+      { path: "/admin/configuration/flow" }
+    );
+    router.reload("/admin/configuration/flow");
   };
 
   return (
@@ -90,24 +99,17 @@ const CreateFlow = () => {
           <div className={styles.tabsContent}>
             <div className={styles.steps}>
               <h4>Choose Number of Steps</h4>
-              {options.length === 0 ? (
-                <select name="" id="" onChange={selectStep} ref={selectRef}>
-                  <option value="0">0</option>
-                  <option value="1">1 Step</option>
-                  <option value="2">2 Steps</option>
-                  <option value="3">3 Steps</option>
-                  <option value="4">4 Steps</option>
-                </select>
-              ) : (
-                <select name="" id="" onChange={selectStep} ref={selectRef} disabled>
-                  <option value="">{options.length} Steps</option>
-                </select>
-              )}
-
-              {options.length > 0 ? <button onClick={handleResetOptions}>Reset</button> : ""}
+              <select name="" id="" onChange={selectStep} defaultValue={"default"}>
+                <option value="default" disabled>
+                  Select Steps
+                </option>
+                <option value="1">1 Step</option>
+                <option value="2">2 Steps</option>
+                <option value="3">3 Steps</option>
+              </select>
             </div>
 
-            {options.length > 0 ? renderInputStep() : ""}
+            {flowLength && renderInputStep(flowLength)}
           </div>
         </div>
 

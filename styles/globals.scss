@@ -29,7 +29,9 @@ label {
   display: block;
   text-align: left;
   font-size: 0.9rem;
-  color: #aaa;
+  font-weight: $fw-bold;
+  color: $primary-color-hover;
+  margin: 0.2rem 0;
 }
 
 input {
@@ -39,14 +41,13 @@ input {
   transition: all 100ms ease;
   cursor: pointer;
   outline: none;
-  border: 3px solid transparent;
+  border: 1px solid transparent;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  font-size: $fs-md;
 }
 
 input:focus {
-  padding: 0.2rem 0.8rem;
-  outline: none;
-  border-bottom: 4px solid rgba(57, 63, 84, 0.8);
+  border-bottom: 1px solid $primary-color;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
@@ -113,14 +114,15 @@ select:focus {
 .fc .fc-button-primary.fc-button-active {
   background-color: #bd1133 !important;
   border-radius: none;
-  border: none;
+  border: 1px solid $primary-color-hover;
 }
 .fc .fc-button-primary.fc-button-active:focus {
   box-shadow: none;
   border: none;
 }
 .fc .fc-button-primary:disabled {
-  background-color: #bd1133;
+  background-color: transparent;
+  color: $primary-color;
   border: none;
 }
 .fc-toolbar-chunk {
@@ -128,7 +130,7 @@ select:focus {
 }
 
 .rdrSelected {
-  background: #bd1133 !important;
+  background: #bd11336d !important;
 }
 
 /* MOBILE */

@@ -26,3 +26,16 @@ export const fetchUser = async (email, password) => {
     throw new Error("Something wrong!")
   }
 }
+
+export const handleConvertNumber = (number) => {
+  switch (number) {
+    case 1:
+      return "One"
+    case 2:
+      return "Two"  
+    case 3:
+      return "Three"
+    default:
+      break;
+  }
+}

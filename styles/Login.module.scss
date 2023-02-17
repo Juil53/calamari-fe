@@ -20,7 +20,8 @@
   .signup {
     .signup_blur {
       margin-right: 1rem;
-      color: $grey-blur;
+      color: $primary-color;
+      font-style: italic;
       font-size: 0.8rem;
       font-weight: $fw-light;
     }
@@ -50,21 +51,21 @@
 
 .bgText {
   position: absolute;
-  width: 40%;
+  width: 30%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
   color: $white;
-  border: 1px solid #f1f1f1;
+  border: 1px solid $primary-color-hover;
   border-radius: $borderRadius-2;
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */
+  background-color: rgba(0, 0, 0, 0.3); /* Black w/opacity/see-through */
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   .title {
     color: $primary-color;
   }
   @include desktop {
-    width: 60%;
+    width: 50%;
   }
 
   @include tablet {
@@ -89,7 +90,7 @@
     }
 
     .wrapper {
-      max-width: 400px;
+      max-width: 350px;
       margin: 0 auto;
 
       .submit {

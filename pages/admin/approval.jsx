@@ -18,24 +18,37 @@ import { handleStatus } from "../../utils/utils";
 const Approval = ({ formatEvents }) => {
   const [index, setIndex] = useState(0);
   const [datas, setDatas] = useState(formatEvents);
+  const [updatedEvent,setUpdatedEvent] = useState({})
   const tabs = ["FOR APPROVAL", "HISTORY"];
 
-  const handleEventApprove = (id) => {
+  const handleEventApprove = async (id) => {
     // Approve Event
     const selectedIndex = formatEvents.findIndex((item) => item.id === id);
     const eventSelected = formatEvents[selectedIndex];
     const eventUpdated = { ...eventSelected, status: 1 };
     const updatedData = datas.map((data) => (data.id === id ? eventUpdated : data));
     setDatas(updatedData);
+    setUpdatedEvent(eventUpdated)
   };
 
   const handleEventDecline = (id) => {
     // Decline Event
     const selectedIndex = formatEvents.findIndex((item) => item.id === id);
     const eventSelected = formatEvents[selectedIndex];
-    const eventUpdated = { ...eventSelected, status: 0 };
+    const eventUpdated = { ...eventSelected, status: 2 };
     const updatedData = datas.map((data) => (data.id === id ? eventUpdated : data));
     setDatas(updatedData);
+    setUpdatedEvent(eventUpdated)
+  };
+
+  const handleSubmit = async (e,id) => {
+    e.preventDefault();
+    try {
+      await axios.put(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/event/${id}`, updatedEvent);
+      alert("Saved!");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -46,7 +59,7 @@ const Approval = ({ formatEvents }) => {
             <span>
               <FontAwesomeIcon icon={faCheck} />
             </span>
-            APPROVE ALL
+            SAVE
           </button>
           <Search />
         </div>
@@ -60,7 +73,7 @@ const Approval = ({ formatEvents }) => {
           <table className={styles.noSpacing}>
             <thead>
               <tr>
-                <th></th>
+                {/* <th></th> */}
                 <th>IMAGE</th>
                 <th>EMAIL</th>
                 <th>TYPE</th>
@@ -73,9 +86,9 @@ const Approval = ({ formatEvents }) => {
             <tbody>
               {datas.map((data) => (
                 <tr key={data.id}>
-                  <td className={styles.reporter}>
+                  {/* <td className={styles.reporter}>
                     <Checkbox />
-                  </td>
+                  </td> */}
                   <td>
                     <img className={styles.avatar} src="/imgs/default_avatar.jpg" alt="avatar" />
                   </td>
@@ -102,9 +115,12 @@ const Approval = ({ formatEvents }) => {
                         color="error"
                         onClick={() => handleEventDecline(data.id)}
                       >
-                        {data.status === 0 ? <ThumbDownIcon /> : <ThumbDownAltOutlinedIcon />}
+                        {data.status === 2 ? <ThumbDownIcon /> : <ThumbDownAltOutlinedIcon />}
                       </IconButton>
                     </Stack>
+                  </td>
+                  <td>
+                    <button onClick={(e) => handleSubmit(e, data.id)}>Save</button>
                   </td>
                 </tr>
               ))}
@@ -128,7 +144,7 @@ export const getStaticProps = async () => {
 
   return {
     props: { formatEvents },
-    revalidate: 1,
+    revalidate: 60,
   };
 };
 

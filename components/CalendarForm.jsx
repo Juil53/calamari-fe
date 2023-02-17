@@ -118,7 +118,7 @@ const CalendarForm = ({ absences,flows,sessionInfo}) => {
           <option value="">Select a flow</option>
           {flows.map((flow, index) => (
             <React.Fragment key={index}>
-              <option value={flow.name}>{flow.name.toUpperCase()}</option>
+              <option value={flow.name}>{flow.flowName.toUpperCase()}</option>
             </React.Fragment>
           ))}
         </select>

@@ -23,7 +23,7 @@ const Dashboard = () => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit dolore et ea officiis
             quis, at eum inventore voluptas nobis sint.
           </p>
-          <Link href={session ? "/staff/apply" : "/auth/login"} passHref>
+          <Link href={session ? "/staff/apply" : "/auth/login"}>
             <button className={styles.start}>
               Get started!
               <span className={styles.icon}>

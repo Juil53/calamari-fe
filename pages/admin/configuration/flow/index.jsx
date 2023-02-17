@@ -16,17 +16,17 @@ const ApprovalFlow = ({ flows }) => {
       `/api/revalidate-page?secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET_TOKEN}`,
       { path: router.pathname }
     );
-    router.reload();
   };
 
   const handleDelete = async (id) => {
-    // try {
-    //   await axios.delete(`https://633d07937e19b17829061bcf.mockapi.io/calendar/flow/${id}`);
-    //   alert("Delete Successfully!");
-    //   router.reload();
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/flow/${id}`);
+      handleRevalidation();
+      alert("Delete Successfully!");
+      router.reload("/admin/configuration/flow");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -45,9 +45,6 @@ const ApprovalFlow = ({ flows }) => {
             CREATE FLOW
           </button>
         </Link>
-        <button className={styles.revalidateBtn} onClick={handleRevalidation}>
-          REVALIDATE
-        </button>
       </div>
 
       {flows && (
@@ -70,7 +67,7 @@ const ApprovalFlow = ({ flows }) => {
                   <span>Delete</span>
                 </div>
                 <div className={styles.flowDetail}>
-                  <h4>{flow.flowName.toUpperCase()}</h4>
+                  <h4>{flow.flowName?.toUpperCase()}</h4>
                   <span>Created At: {moment(flow.createdAt).format("yyyy-MM-DD")}</span>
                 </div>
                 <div className={styles.flowChart}>

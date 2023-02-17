@@ -10,7 +10,8 @@
   .leftSide {
     flex-grow: 2;
     button,
-    h4,h2 {
+    h4,
+    h2 {
       display: inline-block;
     }
     button.returnBtn {
@@ -77,7 +78,7 @@
         align-items: center;
       }
     }
-    .stepsContent{
+    .stepsContent {
       margin: 2rem 0;
     }
   }
@@ -86,7 +87,9 @@
     height: 90vh;
     margin-top: 0.5rem;
     padding: 1rem;
-    background-color: $grey-blur-2;
+    background-color: $white;
+    box-shadow: $bs1;
+    border-radius: $borderRadius;
     .title {
       color: $primary-color;
     }

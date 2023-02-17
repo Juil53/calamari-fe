@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import Loading from "../../../../components/Loading";
 import styles from "../../../../styles/CreateApproveFlow.module.scss";
 
@@ -18,7 +18,6 @@ const FlowDetail = ({ oldFlow }) => {
   }
 
   const [currentFlow, setCurrentFlow] = useState(oldFlow);
-  const selectRef = useRef();
 
   const selectStep = (e) => {
     const count = Number(e.target.value);
@@ -44,7 +43,6 @@ const FlowDetail = ({ oldFlow }) => {
       await axios.put(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/flows/${id}`, {
         flow: currentFlow,
       });
-      console.log('test revalidate')
       await axios.post("/api/revalidate", { id: id });
       alert("Update Success");
       router.reload();
@@ -81,7 +79,7 @@ const FlowDetail = ({ oldFlow }) => {
           <div className={styles.tabsContent}>
             <div className={styles.steps}>
               <h4>Choose Number of Steps</h4>
-              <select onChange={selectStep} ref={selectRef}>
+              <select onChange={selectStep}>
                 <option value="1">1 Steps</option>
                 <option value="2">2 Steps</option>
                 <option value="3">3 Steps</option>

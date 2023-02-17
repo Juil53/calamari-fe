@@ -27,7 +27,12 @@ const errors = {
 
 const SignInError = ({ error }) => {
   const errorMessage = error && (errors[error] ?? errors.default);
-  return <div>{errorMessage}</div>;
+  return (
+    <div>
+      <h2>This is Error Page</h2>
+      <p>{errorMessage}</p>
+    </div>
+  );
 };
 
 Error.getLayout = function PageLayout(page) {

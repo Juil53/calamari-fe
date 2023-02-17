@@ -1,17 +1,16 @@
 import {
   faCaretDown,
   faCaretUp,
-  faCircle,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
+import moment from "moment";
 import Link from "next/link";
-import * as Constant from "../../../constant/constants";
 import styles from "../../../styles/Request.module.scss";
 import { handleStatus } from "../../../utils/utils";
 
-export default function Request({ events }) {
+export default function Request({ formatEvents }) {
   return (
     <div className={styles.my__request}>
       <div className={styles.filter}>
@@ -24,7 +23,8 @@ export default function Request({ events }) {
       <table>
         <thead>
           <tr>
-            <th>Absence type</th>
+            <th>Name</th>
+            <th>Reason</th>
             <th className={styles.period}>
               <div className={styles.period__container}>
                 <div>Absence period</div>
@@ -34,26 +34,23 @@ export default function Request({ events }) {
                 </div>
               </div>
             </th>
-            <th>Request</th>
+            <th>Requested</th>
             <th>Status</th>
           </tr>
         </thead>
         <tbody>
-          {events.map((event) => (
+          {formatEvents.map((event) => (
             <Link key={event.id} href={`/staff/requests/${event.id}`}>
               <tr>
-                <td>{event.title}</td>
+                <td>{event.submitter}</td>
+                <td>{event.title.toUpperCase()}</td>
                 <td>
-                  {event.start} - {event.end}
+                  {event.start} / {event.end}
                 </td>
                 <td>1 day</td>
                 <td className={styles.status}>
                   <div className={styles.status__container}>
-                    <FontAwesomeIcon
-                      icon={faCircle}
-                      className={`${styles.status__icon} ${styles.success}`}
-                    />
-                    <div>{handleStatus(event.status)}</div>
+                    <span>{handleStatus(event.status)}</span>
                   </div>
                 </td>
               </tr>
@@ -66,13 +63,18 @@ export default function Request({ events }) {
 }
 
 export const getStaticProps = async () => {
-  // Fetch API/DB
-  const res1 = await axios.get(Constant.eventsAPI);
-  const events = res1.data;
+  const result = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/events`);
+  const events = result.data;
+  const formatEvents = events.map((event) => ({
+    ...event,
+    start: moment(event.start).format("yyyy-MM-DD"),
+    end: moment(event.end).format("yyyy-MM-DD"),
+  }));
 
   return {
     props: {
-      events,
+      formatEvents,
+      revalidate: 60,
     },
   };
 };
