@@ -9,7 +9,9 @@ import LinearIndeterminate from "../../components/Progress";
 import MenuBookTwoToneIcon from "@mui/icons-material/MenuBookTwoTone";
 import ViewListTwoToneIcon from "@mui/icons-material/ViewListTwoTone";
 import AccountCircleTwoToneIcon from "@mui/icons-material/AccountCircleTwoTone";
+import AddBoxIcon from '@mui/icons-material/AddBox';
 import IconButton from "@mui/material/IconButton";
+import { Button } from "@mui/material";
 
 const Calendar = dynamic(() => import("../../components/Calendar"), {
   ssr: false,
@@ -32,18 +34,23 @@ const Apply = ({ formatEvents, absences, flows }) => {
         <div className={style.iconWrapper}>
           <span>Hello User!</span>
           <IconButton className={style.iconButton}>
-            <MenuBookTwoToneIcon fontSize="large"/>
+            <MenuBookTwoToneIcon fontSize="large" />
           </IconButton>
           <IconButton className={style.iconButton}>
-            <ViewListTwoToneIcon fontSize="large"/>
+            <ViewListTwoToneIcon fontSize="large" />
           </IconButton>
           <IconButton className={style.iconButton}>
-            <AccountCircleTwoToneIcon fontSize="large"/>
+            <AccountCircleTwoToneIcon fontSize="large" />
           </IconButton>
         </div>
       </div>
 
       <div className={style.container}>
+        <div className={style.addEvent}>
+          <Button variant="contained" size="small" endIcon={<AddBoxIcon/>}>
+            Create Request
+          </Button>
+        </div>
         <div className={style.calendarWrapper}>
           <Calendar ref={calendarRef} events={formatEvents} />
         </div>

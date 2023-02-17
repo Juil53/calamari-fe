@@ -63,14 +63,18 @@ const Calendar = ({ ref, events }) => {
           minute: 15,
         }}
         slotLabelInterval={{
-          hour:1
+          hour: 1,
         }}
         buttonText={{
-          month:"Month",
-          week:"Week",
-          day:"Day"
+          month: "Month",
+          week: "Week",
+          day: "Day",
         }}
-        aspectRatio="2"
+        dayHeaderFormat={{
+          // will produce something like "Tuesday, September 18, 2018"
+          weekday: "long",
+        }}
+        height="750px"
       />
       <CalendarModal show={show} setShow={setShow} event={event} />
     </>
