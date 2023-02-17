@@ -1,71 +1,8 @@
 @import "variables";
 
-.main {
-  position: relative;
-  min-height: 100vh;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.container {
+  height: 100vh;
   background-image: url(/imgs/background_1.jpg);
   background-position: center;
   background-size: cover;
-}
-
-.logo {
-  position: absolute;
-  top: 15px;
-  left: 0;
-}
-
-.intro {
-  width: 50%;
-  border: 1px solid $primary-color;
-  border-radius: $borderRadius-2;
-  background-color: rgba(0, 0, 0, 0.3); /* Black w/opacity/see-through */
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  color: $white;
-  text-align: center;
-  padding: 2rem 3rem;
-}
-
-.paragraph {
-  margin-bottom: 1.5rem;
-  font-size: $fs-lg;
-}
-
-.start {
-  width: 250px;
-  position: relative;
-  padding: 1rem 1.75rem;
-  border-radius: $borderRadius;
-  background-color: $primary-color;
-  color: $white;
-  text-align: center;
-  font-weight: $fw-bold;
-  font-size: $fs-lg;
-  transition: $transition2;
-  &:hover {
-    background: $primary-color-hover;
-  }
-
-  .icon {
-    position: absolute;
-    color: $white;
-    margin-left: 10px;
-    animation: move 1s infinite ease-in-out;
-  }
-}
-
-@keyframes move {
-  0% {
-    left: 72%;
-  }
-  50% {
-    left: 75%;
-  }
-  100% {
-    left: 72%;
-  }
 }

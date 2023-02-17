@@ -93,6 +93,15 @@
       max-width: 350px;
       margin: 0 auto;
 
+      .error {
+        margin-top: 10px;
+      }
+
+      .errorText {
+        color: $primary-color-hover;
+        font-weight: $fw-bold;
+      }
+
       .submit {
         background: $primary-color;
         color: $white;
@@ -118,7 +127,7 @@
         font-size: $fs-lg;
         transition: $transition2;
         &:hover {
-          background: $primary-color-hover;
+          background-color: $primary-color-hover;
         }
       }
     }

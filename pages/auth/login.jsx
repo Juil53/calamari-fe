@@ -1,15 +1,21 @@
 import { signIn } from "next-auth/react";
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import styles from "../../styles/Login.module.scss";
+import errors from "./errorMessage";
 
 export default function Login() {
   const router = useRouter();
+  const [error, setError] = useState();
   const [user, setUser] = useState({});
   const [isDisabled, setIsDisabled] = useState(false);
+
+  const SignInError = ({ error }) => {
+    const errorMessage = error && (errors[error] ?? errors.default);
+    return <p className={styles.errorText}>{errorMessage}</p>;
+  };
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -23,21 +29,17 @@ export default function Login() {
   const handleSignIn = async (e) => {
     try {
       e.preventDefault();
+      setIsDisabled(true);
       const res = await signIn("credentials", {
         email: user.email,
         password: user.password,
         redirect: false,
       });
       if (res.ok) {
-        setIsDisabled(true);
-        router.push('/staff/apply')
+        router.push("/staff/apply");
       } else {
-        router.push({
-          pathname: "/auth/error",
-          query: {
-            error: res.error,
-          },
-        });
+        setError(res.error);
+        setIsDisabled(false);
       }
     } catch (error) {
       console.log(error);
@@ -46,13 +48,6 @@ export default function Login() {
 
   return (
     <>
-      <Head>
-        <title>Login</title>
-        <meta name="keywords" content="" />
-      </Head>
-      <div className={styles.bgImage}></div>
-      {/* Header */}
-
       <nav className={styles.head}>
         <div className={styles.logo}>
           <Image src="/imgs/logo.svg" alt="logo" width={200} height={50} />
@@ -68,7 +63,6 @@ export default function Login() {
       </nav>
 
       <div className={styles.bgText}>
-        {/* Form */}
         <section className={styles.content}>
           <div className={styles.wrapper}>
             <form method="POST" action="/api/auth/callback/credentials">
@@ -100,6 +94,7 @@ export default function Login() {
               >
                 Sign In
               </button>
+              <div className={styles.error}>{error && <SignInError error={error} />}</div>
             </form>
           </div>
         </section>
