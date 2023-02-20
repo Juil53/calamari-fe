@@ -1,42 +1,13 @@
 @import "variables";
 
-.filter {
-  display: flex;
-  align-items: center;
-  max-width: 50%;
-
-  .title {
-    text-transform: uppercase;
-    color: $green;
-    margin-right: 30px;
-  }
-
-  .filter__ip {
-    display: flex;
-    align-items: center;
-    border: 1px solid $grey-blur;
-
-    .filter__ip__ic {
-      margin-left: 5px;
-      color: $grey-blur;
-    }
-
-    input {
-      margin: 0;
-      width: 80px;
-      border: none;
-      height: 35px;
-      background-color: transparent;
-      transition: $transition;
-    }
-
-    input:focus {
-      width: 200px;
-    }
+.searchBox {
+  .inputAdornment {
+    background-color: $primary-color-hover;
+    color: $white;
   }
 }
 
-.my__request {
+.myRequest {
   table {
     width: 100%;
     border-collapse: collapse;
@@ -55,12 +26,12 @@
   }
 
   th.period {
-    .period__container {
+    .periodContainer {
       display: flex;
       align-items: center;
     }
 
-    .period__icon__container {
+    .periodIconWrapper {
       font-size: 14px;
       display: flex;
       margin-left: 10px;
@@ -68,17 +39,17 @@
       cursor: pointer;
     }
 
-    .period__icon:hover {
+    .periodIcon:hover {
       color: $green;
     }
   }
 
   td.status {
-    .status__container {
+    .statusContainer {
       display: flex;
       align-items: center;
 
-      .status__icon {
+      .statusIcon {
         margin-right: 10px;
         font-size: 7px
       }

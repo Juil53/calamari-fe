@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import moment from "moment";
 import LinearIndeterminate from "../../components/Progress";
 import MenuBookTwoToneIcon from "@mui/icons-material/MenuBookTwoTone";
-import ViewListTwoToneIcon from "@mui/icons-material/ViewListTwoTone";
+import TableChartIcon from "@mui/icons-material/TableChart";
 import AccountCircleTwoToneIcon from "@mui/icons-material/AccountCircleTwoTone";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import IconButton from "@mui/material/IconButton";
@@ -28,7 +28,9 @@ const Apply = ({ formatEvents, absences }) => {
   const calendarRef = createRef();
 
   const handleOpen = () => setOpen(true);
+  
   const handleClose = (childData) => setOpen(childData);
+
   const handleChangeViewMode = (viewMode) => {
     switch (viewMode) {
       case "calendar":
@@ -68,11 +70,11 @@ const Apply = ({ formatEvents, absences }) => {
           </IconButton>
           {viewMode === "calendar" ? (
             <IconButton className={style.iconButton} onClick={() => handleChangeViewMode(viewMode)}>
-              <ViewListTwoToneIcon fontSize="large" />
+              <TableChartIcon fontSize="large" className={style.iconColor} />
             </IconButton>
           ) : (
             <IconButton className={style.iconButton} onClick={() => handleChangeViewMode(viewMode)}>
-              <CalendarMonthIcon fontSize="large" />
+              <CalendarMonthIcon fontSize="large" className={style.iconColor} />
             </IconButton>
           )}
           <IconButton className={style.iconButton}>

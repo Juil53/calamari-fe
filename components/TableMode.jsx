@@ -1,40 +1,45 @@
-import {
-  faCaretDown,
-  faCaretUp,
-  faMagnifyingGlass,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown, faCaretUp, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { TextField } from "@mui/material";
 import Link from "next/link";
-import styles from "../styles/Request.module.scss"
+import { memo } from "react";
+import styles from "../styles/Request.module.scss";
 import { handleStatus } from "../utils/utils";
+import InputAdornment from "@mui/material/InputAdornment";
 
-const TableMode = ({events}) => {
-  console.log(events)
-
+const TableMode = ({ events }) => {
   return (
-    <div className={styles.my__request}>
-      <div className={styles.filter}>
-        <div className={styles.title}>Filters</div>
-        <div className={styles.filter__ip}>
-          <FontAwesomeIcon icon={faMagnifyingGlass} className={styles.filter__ip__ic} />
-          <input type="text" placeholder="..." />
-        </div>
+    <div className={styles.myRequest}>
+      <div className={styles.searchBox}>
+        <TextField
+          id="outlined-start-adornment"
+          sx={{ m: 1, width: "25ch" }}
+          size="small"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment  position="start" className={styles.inputAdornment}>
+                Submitter
+              </InputAdornment>
+            ),
+          }}
+        />
       </div>
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Reason</th>
+            <th>ID</th>
+            <th>Submitter</th>
+            <th>TYPE</th>
             <th className={styles.period}>
-              <div className={styles.period__container}>
+              <div className={styles.periodContainer}>
                 <div>Absence period</div>
-                <div className={styles.period__icon__container}>
-                  <FontAwesomeIcon icon={faCaretUp} className={styles.period__icon} />
-                  <FontAwesomeIcon icon={faCaretDown} className={styles.period__icon} />
+                <div className={styles.periodIconWrapper}>
+                  <FontAwesomeIcon icon={faCaretUp} className={styles.periodIcon} />
+                  <FontAwesomeIcon icon={faCaretDown} className={styles.periodIcon} />
                 </div>
               </div>
             </th>
-            <th>Requested</th>
+            <th>COMMENT</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -42,14 +47,15 @@ const TableMode = ({events}) => {
           {events.map((event) => (
             <Link key={event.id} href={`/staff/requests/${event.id}`}>
               <tr>
+                <td>{event.id}</td>
                 <td>{event.submitter}</td>
                 <td>{event.title.toUpperCase()}</td>
                 <td>
                   {event.start} / {event.end}
                 </td>
-                <td>1 day</td>
+                <td>{event.comment}</td>
                 <td className={styles.status}>
-                  <div className={styles.status__container}>
+                  <div className={styles.statusContainer}>
                     <span>{handleStatus(event.status)}</span>
                   </div>
                 </td>
@@ -59,7 +65,7 @@ const TableMode = ({events}) => {
         </tbody>
       </table>
     </div>
-  )
-}
+  );
+};
 
-export default TableMode
+export default memo(TableMode);

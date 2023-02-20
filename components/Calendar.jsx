@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 import * as Constant from "../constant/constants";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -81,4 +81,4 @@ const Calendar = ({ ref, events }) => {
   );
 };
 
-export default Calendar;
+export default memo(Calendar);
