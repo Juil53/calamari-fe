@@ -8,15 +8,13 @@ import styles from "../styles/CalendarForm.module.scss";
 import CalendarFrom from "./CalendarFrom";
 import CalendarTo from "./CalendarTo";
 import { Button } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
 
-const CalendarForm = ({ absences,flows,sessionInfo}) => {
+const CalendarForm = ({ absences, sessionInfo }) => {
   const router = useRouter();
   const [data, setData] = useState({
     status: Constant.PENDING,
   });
-
-  // filter Unique duration Type
-  const setAbs = [...new Set(absences.map((absence) => absence.durationType))];
 
   const dataCalendarFrom = (start) => {
     setData({
@@ -42,8 +40,7 @@ const CalendarForm = ({ absences,flows,sessionInfo}) => {
           ...data,
           submitter: sessionInfo.user.email,
           color: "#fff",
-          backgroundColor: "#fd6868",
-          createdAt:new Date(),
+          backgroundColor: "#ff4081",
           [name]: value,
         });
         break;
@@ -52,8 +49,7 @@ const CalendarForm = ({ absences,flows,sessionInfo}) => {
           ...data,
           submitter: sessionInfo.user.email,
           color: "#fff",
-          backgroundColor: "#0d6efd",
-          createdAt:new Date(),
+          backgroundColor: "#7986cb",
           [name]: value,
         });
         break;
@@ -62,16 +58,14 @@ const CalendarForm = ({ absences,flows,sessionInfo}) => {
           ...data,
           submitter: sessionInfo.user.email,
           color: "#fff",
-          backgroundColor: "#00ff66",
-          createdAt:new Date(),
+          backgroundColor: "#4db6ac",
           [name]: value,
         });
         break;
       default:
         setData({
           ...data,
-          createdAt:new Date(),
-          submitter: sessionInfo.user.email || 'default',
+          submitter: sessionInfo.user.email || "no email",
           [name]: value,
         });
         break;
@@ -80,9 +74,8 @@ const CalendarForm = ({ absences,flows,sessionInfo}) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    //Data add vao DB
     try {
-      await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/event`,data);
+      await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/event`, data);
       alert("Post Success");
       router.reload();
     } catch (error) {
@@ -92,6 +85,7 @@ const CalendarForm = ({ absences,flows,sessionInfo}) => {
 
   return (
     <div className={styles.calendarForm}>
+      <h3>CREATE A REQUEST</h3>
       <form onSubmit={handleSubmit}>
         <CalendarFrom dataCalendarFrom={dataCalendarFrom} />
         <CalendarTo dataCalendarTo={dataCalendarTo} />
@@ -104,34 +98,23 @@ const CalendarForm = ({ absences,flows,sessionInfo}) => {
             </React.Fragment>
           ))}
         </select>
-        <label htmlFor="durationType">Duration</label>
-        <select name="durationType" id="durationType" onChange={handleChange}>
-          <option value="">Select duration</option>
-          {setAbs.map((abs, index) => (
-            <React.Fragment key={index}>
-              <option value={abs}>{abs.toUpperCase()}</option>
-            </React.Fragment>
-          ))}
-        </select>
-        <label htmlFor="flow">Flow</label>
-        <select name="flow" id="flow" onChange={handleChange}>
-          <option value="">Select a flow</option>
-          {flows.map((flow, index) => (
-            <React.Fragment key={index}>
-              <option value={flow.name}>{flow.flowName.toUpperCase()}</option>
-            </React.Fragment>
-          ))}
-        </select>
+        <label htmlFor="title">Title</label>
+        <input name="title" id="title" onChange={handleChange} />
         <label htmlFor="comment">Reason</label>
         <textarea name="comment" id="comment" onChange={handleChange} />
+        <label htmlFor="approver">Select Approver</label>
+        <select name="approver" id="approver" onChange={handleChange}>
+          <option value="">Select absences</option>
+          <option value="leader">Leader</option>
+          <option value="admin">Admin</option>
+        </select>
         <Button
           variant="contained"
           color="success"
-          size="small"
-          sx={{ width: "80px" }}
           type="submit"
+          endIcon={<SendIcon/>}
         >
-          Submit
+          SEND
         </Button>
       </form>
     </div>
