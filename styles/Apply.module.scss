@@ -26,6 +26,7 @@
     p {
       min-width: max-content;
       margin-right: 10px;
+      font-size: $fs-md;
     }
     .progress {
       width: 80%;
@@ -39,10 +40,17 @@
     .iconButton {
       text-align: center;
     }
-    span {
+    p {
       margin-right: 5px;
+      font-size: $fs-md;
       @include mobile {
         display: none;
+      }
+
+      span {
+        color: $primary-color;
+        font-weight: $fw-bold;
+        font-size: $fs-md;
       }
     }
     button {

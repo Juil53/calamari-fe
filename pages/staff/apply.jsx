@@ -1,28 +1,27 @@
-import React, { useState } from "react";
-import axios from "axios";
-import dynamic from "next/dynamic";
-import { createRef } from "react";
-import style from "../../styles/Apply.module.scss";
-import { useSession } from "next-auth/react";
-import moment from "moment";
-import LinearIndeterminate from "../../components/Progress";
-import MenuBookTwoToneIcon from "@mui/icons-material/MenuBookTwoTone";
-import TableChartSharpIcon from "@mui/icons-material/TableChartSharp";
 import AccountBoxSharpIcon from "@mui/icons-material/AccountBoxSharp";
 import AddBoxIcon from "@mui/icons-material/AddBox";
-import IconButton from "@mui/material/IconButton";
-import { Button } from "@mui/material";
-import BasicModal from "../../components/Modal";
-import CalendarForm from "../../components/CalendarForm";
-import TableMode from "../../components/TableMode";
 import CalendarTodaySharpIcon from "@mui/icons-material/CalendarTodaySharp";
+import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
+import TableChartSharpIcon from "@mui/icons-material/TableChartSharp";
+import { Button } from "@mui/material";
+import { useSession } from "next-auth/react";
+import React, { createRef, useState } from "react";
+import IconButton from "@mui/material/IconButton";
+import axios from "axios";
+import moment from "moment";
+import dynamic from "next/dynamic";
+import CalendarForm from "../../components/CalendarForm";
+import BasicModal from "../../components/Modal";
+import LinearIndeterminate from "../../components/Progress";
+import TableMode from "../../components/TableMode";
+import style from "../../styles/Apply.module.scss";
+import Link from "next/link";
 
 const Calendar = dynamic(() => import("../../components/Calendar"), {
   ssr: false,
 });
 
 const Apply = ({ formatEvents, absences }) => {
-  console.log(formatEvents);
   const [open, setOpen] = useState(false);
   const [viewMode, setViewMode] = useState("calendar");
   const calendarRef = createRef();
@@ -64,17 +63,21 @@ const Apply = ({ formatEvents, absences }) => {
           </div>
         </div>
         <div className={style.iconWrapper}>
-          <span>Hello User!</span>
-          <IconButton className={style.iconButton}>
-            <MenuBookTwoToneIcon fontSize="large" />
-          </IconButton>
+          <p>
+            Hello <span>{session?.user.full_name}</span>
+          </p>
+          <Link href="/staff/events/events-log">
+            <IconButton className={style.iconButton}>
+              <StickyNote2OutlinedIcon fontSize="large" />
+            </IconButton>
+          </Link>
           {viewMode === "calendar" ? (
             <IconButton className={style.iconButton} onClick={() => handleChangeViewMode(viewMode)}>
-              <TableChartSharpIcon fontSize="large" className={style.iconColor} />
+              <TableChartSharpIcon fontSize="large" />
             </IconButton>
           ) : (
             <IconButton className={style.iconButton} onClick={() => handleChangeViewMode(viewMode)}>
-              <CalendarTodaySharpIcon fontSize="large" className={style.iconColor} />
+              <CalendarTodaySharpIcon fontSize="large" />
             </IconButton>
           )}
           <IconButton className={style.iconButton}>

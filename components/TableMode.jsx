@@ -34,7 +34,7 @@ const TableMode = ({ events }) => {
           </thead>
           <tbody>
             {events.map((event, index) => (
-              <Link key={event._id} href={`/staff/requests/${event.id}`}>
+              <Link key={event._id} href={`/staff/events/${event._id}`}>
                 <tr>
                   <td>{index + 1}</td>
                   <td>{event.submitter}</td>

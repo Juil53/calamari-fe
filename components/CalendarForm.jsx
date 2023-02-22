@@ -1,14 +1,14 @@
+import SendIcon from "@mui/icons-material/Send";
+import { Button } from "@mui/material";
 import axios from "axios";
-import React, { useState } from "react";
 import { useRouter } from "next/router";
+import React, { useState } from "react";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import * as Constant from "../constant/constants";
 import styles from "../styles/CalendarForm.module.scss";
 import CalendarFrom from "./CalendarFrom";
 import CalendarTo from "./CalendarTo";
-import { Button } from "@mui/material";
-import SendIcon from "@mui/icons-material/Send";
 
 const CalendarForm = ({ absences, sessionInfo }) => {
   const router = useRouter();
@@ -108,12 +108,7 @@ const CalendarForm = ({ absences, sessionInfo }) => {
           <option value="leader">Leader</option>
           <option value="admin">Admin</option>
         </select>
-        <Button
-          variant="contained"
-          color="success"
-          type="submit"
-          endIcon={<SendIcon/>}
-        >
+        <Button variant="contained" color="success" type="submit" endIcon={<SendIcon />}>
           SEND
         </Button>
       </form>
