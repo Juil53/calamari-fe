@@ -3,11 +3,11 @@ import axios from "axios";
 export const handleStatus = (type) => {
   switch (type) {
     case 0:
-      return <span style={{ color: 'orange', backgroundColor:'#ffffcc',padding:'5px',borderRadius:'4px', width:'100%' }}>Pending</span>;
+      return <span style={{ color: 'orange', backgroundColor: '#ffffcc', padding: '5px', borderRadius: '4px', border: '1px solid orange', width: '100%' }}>Pending</span>;
     case 1:
-      return <span style={{ color: 'green',backgroundColor:'#9cf3ca',padding:'5px',borderRadius:'4px' }}>Approved</span>;
+      return <span style={{ color: 'green', backgroundColor: '#9cf3ca', padding: '5px', borderRadius: '4px', border: '1px solid green' }}>Approved</span>;
     case 2:
-      return <span style={{ color: 'crimson',backgroundColor:'#fbcbc8',padding:'5px',borderRadius:'4px' }}>Denied</span>;
+      return <span style={{ color: 'crimson', backgroundColor: '#fbcbc8', padding: '5px', borderRadius: '4px', border: '1px solid crimson' }}>Denied</span>;
     default:
       break;
   }
@@ -32,7 +32,7 @@ export const handleConvertNumber = (number) => {
     case 1:
       return "One"
     case 2:
-      return "Two"  
+      return "Two"
     case 3:
       return "Three"
     default:

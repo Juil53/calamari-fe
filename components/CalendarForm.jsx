@@ -40,7 +40,7 @@ const CalendarForm = ({ absences, sessionInfo }) => {
           ...data,
           submitter: sessionInfo.user.email,
           color: "#fff",
-          backgroundColor: "#ff4081",
+          background_color: "#ff4081",
           [name]: value,
         });
         break;
@@ -49,7 +49,7 @@ const CalendarForm = ({ absences, sessionInfo }) => {
           ...data,
           submitter: sessionInfo.user.email,
           color: "#fff",
-          backgroundColor: "#7986cb",
+          background_color: "#7986cb",
           [name]: value,
         });
         break;
@@ -58,7 +58,7 @@ const CalendarForm = ({ absences, sessionInfo }) => {
           ...data,
           submitter: sessionInfo.user.email,
           color: "#fff",
-          backgroundColor: "#4db6ac",
+          background_color: "#4db6ac",
           [name]: value,
         });
         break;

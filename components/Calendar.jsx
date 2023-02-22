@@ -71,7 +71,6 @@ const Calendar = ({ ref, events }) => {
           day: "Day",
         }}
         dayHeaderFormat={{
-          // will produce something like "Tuesday, September 18, 2018"
           weekday: "long",
         }}
         height="750px"

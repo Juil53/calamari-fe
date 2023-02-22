@@ -7,28 +7,28 @@ import { useSession } from "next-auth/react";
 import moment from "moment";
 import LinearIndeterminate from "../../components/Progress";
 import MenuBookTwoToneIcon from "@mui/icons-material/MenuBookTwoTone";
-import TableChartIcon from "@mui/icons-material/TableChart";
-import AccountCircleTwoToneIcon from "@mui/icons-material/AccountCircleTwoTone";
+import TableChartSharpIcon from "@mui/icons-material/TableChartSharp";
+import AccountBoxSharpIcon from "@mui/icons-material/AccountBoxSharp";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import IconButton from "@mui/material/IconButton";
 import { Button } from "@mui/material";
 import BasicModal from "../../components/Modal";
 import CalendarForm from "../../components/CalendarForm";
 import TableMode from "../../components/TableMode";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import CalendarTodaySharpIcon from "@mui/icons-material/CalendarTodaySharp";
 
 const Calendar = dynamic(() => import("../../components/Calendar"), {
   ssr: false,
 });
 
 const Apply = ({ formatEvents, absences }) => {
+  console.log(formatEvents);
   const [open, setOpen] = useState(false);
   const [viewMode, setViewMode] = useState("calendar");
-  const { data: session } = useSession();
   const calendarRef = createRef();
+  const { data: session } = useSession();
 
   const handleOpen = () => setOpen(true);
-  
   const handleClose = (childData) => setOpen(childData);
 
   const handleChangeViewMode = (viewMode) => {
@@ -70,15 +70,15 @@ const Apply = ({ formatEvents, absences }) => {
           </IconButton>
           {viewMode === "calendar" ? (
             <IconButton className={style.iconButton} onClick={() => handleChangeViewMode(viewMode)}>
-              <TableChartIcon fontSize="large" className={style.iconColor} />
+              <TableChartSharpIcon fontSize="large" className={style.iconColor} />
             </IconButton>
           ) : (
             <IconButton className={style.iconButton} onClick={() => handleChangeViewMode(viewMode)}>
-              <CalendarMonthIcon fontSize="large" className={style.iconColor} />
+              <CalendarTodaySharpIcon fontSize="large" className={style.iconColor} />
             </IconButton>
           )}
           <IconButton className={style.iconButton}>
-            <AccountCircleTwoToneIcon fontSize="large" />
+            <AccountBoxSharpIcon fontSize="large" />
           </IconButton>
         </div>
       </div>

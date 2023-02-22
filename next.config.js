@@ -10,7 +10,7 @@ const withTM = require('next-transpile-modules')([
 
 module.exports = withTM({
   // any other general next.js settings
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
   eslint: { ignoreDuringBuilds: true },
   images:{

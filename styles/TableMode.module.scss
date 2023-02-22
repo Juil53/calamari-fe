@@ -1,28 +1,50 @@
 @import "variables";
 
-.searchBox {
-  .inputAdornment {
-    background-color: $primary-color-hover;
-    color: $white;
-  }
-}
-
 .myRequest {
+  min-height: 80vh;
+
+  .table {
+    @include mobile {
+      width: 100%;
+      overflow: scroll;
+    }
+
+    @include tablet {
+      width: 100%;
+      overflow: scroll;
+    }
+  }
+
   table {
-    width: 100%;
+    min-width: 100%;
     border-collapse: collapse;
+    border-radius: $borderRadius;
+    box-shadow: $bs;
+
+    @include mobile {
+      min-width: 900px;
+    }
+
+    @include tablet {
+      min-width: 900px;
+    }
   }
 
   th,
   td {
-    padding: 8px 0 8px 5px;
     border-bottom: 1px solid $grey-blur;
+    padding: 10px;
+    padding-left: 20px;
   }
 
   th {
     color: $grey-blur;
     text-align: left;
     text-transform: uppercase;
+  }
+
+  tr {
+    line-height: 50px;
   }
 
   th.period {
@@ -51,15 +73,22 @@
 
       .statusIcon {
         margin-right: 10px;
-        font-size: 7px
+        font-size: 7px;
+      }
+
+      .decline {
+        background-color: #fbcbc8;
+        color: "crimson";
       }
 
       .success {
-        color: $green;
+        background-color: #9cf3ca;
+        color: "green";
       }
 
       .pending {
-        color: $orange;
+        background-color: #ffffcc;
+        color: "orange";
       }
     }
   }
