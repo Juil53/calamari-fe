@@ -22,7 +22,7 @@
 
   &::before {
     content: "";
-    backdrop-filter: blur(1px);
+    // backdrop-filter: blur(1px);
     background: rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(254, 220, 220, 0.3);
     width: 100%;
@@ -50,6 +50,11 @@
       }
       @include mobile {
         display: none;
+      }
+      .brandLogo {
+        width: 100%;
+        object-fit: contain;
+        object-position: center;
       }
     }
     .hamWrapper {

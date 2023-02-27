@@ -4,15 +4,15 @@ import styles from "../styles/Modal.module.scss";
 
 export default function BasicModal({ showModal, onHandleClose, children }) {
   const sendData = () => {
-    onHandleClose(false);
+    if (onHandleClose) {
+      onHandleClose(false);
+    }
   };
 
   return (
     <div>
       <Modal open={showModal} onClose={sendData}>
-        <Box className={styles.box}>
-          {children}
-        </Box>
+        <Box className={styles.box}>{children}</Box>
       </Modal>
     </div>
   );

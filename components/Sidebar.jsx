@@ -1,20 +1,14 @@
 import {
-  faBars,
-  faCalendar,
-  faChartSimple,
-  faCircleCheck,
-  faFileLines,
-  faGear,
-  faPenToSquare,
+  faBars, faChartSimple,
+  faCircleCheck, faGear,
+  faPenToSquare
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import styles from "../styles/Sidebar.module.scss";
-import Profile from "./Profile";
 
 const Sidebar = (props) => {
   const route = useRouter();
@@ -31,22 +25,6 @@ const Sidebar = (props) => {
               <a>
                 <FontAwesomeIcon icon={faPenToSquare} />
                 <span>Apply</span>
-              </a>
-            </Link>
-          </li>
-          <li className={route.pathname.includes("/staff/calendar") ? `${styles.navActive}` : ""}>
-            <Link href="/staff/calendar">
-              <a>
-                <FontAwesomeIcon icon={faCalendar} />
-                <span>Calendar</span>
-              </a>
-            </Link>
-          </li>
-          <li className={route.pathname.includes("/staff/request") ? `${styles.navActive}` : ""}>
-            <Link href="/staff/requests">
-              <a>
-                <FontAwesomeIcon icon={faFileLines} />
-                <span>Request</span>
               </a>
             </Link>
           </li>
@@ -90,11 +68,9 @@ const Sidebar = (props) => {
             <div className={styles.logoWrapper}>
               <div className={styles.logo}>
                 <Link href="/">
-                  <Image
+                  <img
                     src="/imgs/logo.svg"
-                    alt=""
-                    width={150}
-                    height={40}
+                    alt="logo"
                     className={styles.brandLogo}
                   />
                 </Link>
@@ -109,14 +85,11 @@ const Sidebar = (props) => {
                 />
               </div>
             </div>
-            {/* Admin Menu */}
             {adminMenu()}
-
-            {/* Leader Menu */}
           </div>
 
           {/* Profile */}
-          {session ? <Profile user={session.user} open={open} /> : null}
+          {/* {session ? <Profile user={session.user} open={open} /> : null} */}
         </div>
       </nav>
     );

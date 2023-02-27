@@ -1,10 +1,12 @@
 import { signOut } from "next-auth/react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import styles from "../styles/Profile.module.scss";
 
 function Profile({ user, open }) {
+  const router = useRouter()
   const handleSignOut = () => {
-    signOut({ callbackUrl: `${window.location.origin}` });
+    signOut(router.push('/auth/logout'));
   };
 
   if (!user) return null;

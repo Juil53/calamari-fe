@@ -43,15 +43,14 @@
     p {
       margin-right: 5px;
       font-size: $fs-md;
+      color: $primary-color;
+      font-weight: $fw-bold;
+      font-size: $fs-md;
+      
       @include mobile {
         display: none;
       }
 
-      span {
-        color: $primary-color;
-        font-weight: $fw-bold;
-        font-size: $fs-md;
-      }
     }
     button {
       margin: 0 5px;

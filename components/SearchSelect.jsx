@@ -18,8 +18,18 @@ export default function SearchSelect({ fieldName, types, status }) {
         <MenuItem value="">
           <em>None</em>
         </MenuItem>
-        {types && types.map((type) => <MenuItem value={type}>{type}</MenuItem>)}
-        {status && status.map((stat) => <MenuItem value={stat}>{stat}</MenuItem>)}
+        {types &&
+          types.map((type) => (
+            <MenuItem key={`${type}`} value={type}>
+              {type}
+            </MenuItem>
+          ))}
+        {status &&
+          status.map((stat) => (
+            <MenuItem key={`${stat}`} value={stat}>
+              {stat}
+            </MenuItem>
+          ))}
       </Select>
     </FormControl>
   );

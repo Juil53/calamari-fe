@@ -1,21 +1,23 @@
-import AccountBoxSharpIcon from "@mui/icons-material/AccountBoxSharp";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import CalendarTodaySharpIcon from "@mui/icons-material/CalendarTodaySharp";
+import SearchIcon from "@mui/icons-material/Search";
 import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
 import TableChartSharpIcon from "@mui/icons-material/TableChartSharp";
 import { Button } from "@mui/material";
-import { useSession } from "next-auth/react";
-import React, { createRef, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import axios from "axios";
 import moment from "moment";
+import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
+import React, { createRef, useState } from "react";
+import AccountMenu from "../../components/AccountMenu";
 import CalendarForm from "../../components/CalendarForm";
 import BasicModal from "../../components/Modal";
 import LinearIndeterminate from "../../components/Progress";
 import TableMode from "../../components/TableMode";
 import style from "../../styles/Apply.module.scss";
-import Link from "next/link";
+import SearchModal from "../../components/SearchModal";
 
 const Calendar = dynamic(() => import("../../components/Calendar"), {
   ssr: false,
@@ -23,12 +25,27 @@ const Calendar = dynamic(() => import("../../components/Calendar"), {
 
 const Apply = ({ formatEvents, absences }) => {
   const [open, setOpen] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showSearchModal, setShowSearchModal] = useState(false);
   const [viewMode, setViewMode] = useState("calendar");
   const calendarRef = createRef();
   const { data: session } = useSession();
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = (childData) => setOpen(childData);
+  const handleOpen = (arg) => {
+    setOpen(true);
+    switch (arg) {
+      case "create":
+        return setShowCreateModal(true);
+      case "search":
+        return setShowSearchModal(true);
+      default:
+        break;
+    }
+  };
+  const handleClose = (childData) => {
+    setShowCreateModal(childData);
+    setShowSearchModal(childData);
+  };
 
   const handleChangeViewMode = (viewMode) => {
     switch (viewMode) {
@@ -63,14 +80,26 @@ const Apply = ({ formatEvents, absences }) => {
           </div>
         </div>
         <div className={style.iconWrapper}>
-          <p>
-            Hello <span>{session?.user.full_name}</span>
-          </p>
-          <Link href="/staff/events/events-log">
-            <IconButton className={style.iconButton}>
-              <StickyNote2OutlinedIcon fontSize="large" />
-            </IconButton>
-          </Link>
+          {session?.role === "staff" ? (
+            <Link href="/staff/events/events-log">
+              <IconButton className={style.iconButton}>
+                <StickyNote2OutlinedIcon fontSize="large" />
+              </IconButton>
+            </Link>
+          ) : (
+            <>
+              <IconButton className={style.iconButton} onClick={() => handleOpen("search")}>
+                <SearchIcon fontSize="large" />
+              </IconButton>
+              <div>
+                {open && (
+                  <BasicModal showModal={showSearchModal} onHandleClose={handleClose}>
+                    <SearchModal />
+                  </BasicModal>
+                )}
+              </div>
+            </>
+          )}
           {viewMode === "calendar" ? (
             <IconButton className={style.iconButton} onClick={() => handleChangeViewMode(viewMode)}>
               <TableChartSharpIcon fontSize="large" />
@@ -80,21 +109,24 @@ const Apply = ({ formatEvents, absences }) => {
               <CalendarTodaySharpIcon fontSize="large" />
             </IconButton>
           )}
-          <IconButton className={style.iconButton}>
-            <AccountBoxSharpIcon fontSize="large" />
-          </IconButton>
+          <AccountMenu />
         </div>
       </div>
 
       <div className={style.container}>
         <div className={style.addEvent}>
-          <Button variant="contained" size="small" endIcon={<AddBoxIcon />} onClick={handleOpen}>
+          <Button
+            variant="contained"
+            size="small"
+            endIcon={<AddBoxIcon />}
+            onClick={() => handleOpen("create")}
+          >
             Create Request
           </Button>
         </div>
         <div className={style.calendarWrapper}>{renderView(viewMode)}</div>
         {open && (
-          <BasicModal showModal={open} onHandleClose={handleClose}>
+          <BasicModal showModal={showCreateModal} onHandleClose={handleClose}>
             <CalendarForm absences={absences} />
           </BasicModal>
         )}

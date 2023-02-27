@@ -1,0 +1,14 @@
+.searchWrapper {
+  text-align: center;
+}
+
+.searchModal {
+  display: flex;
+  flex-direction: column;
+}
+
+.searchActions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 8px;
+}
