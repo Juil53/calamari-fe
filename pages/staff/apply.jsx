@@ -3,11 +3,11 @@ import CalendarTodaySharpIcon from "@mui/icons-material/CalendarTodaySharp";
 import SearchIcon from "@mui/icons-material/Search";
 import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
 import TableChartSharpIcon from "@mui/icons-material/TableChartSharp";
+import { useSession } from "next-auth/react";
 import { Button } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import axios from "axios";
 import moment from "moment";
-import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import React, { createRef, useState } from "react";
@@ -121,7 +121,7 @@ const Apply = ({ formatEvents, absences }) => {
             endIcon={<AddBoxIcon />}
             onClick={() => handleOpen("create")}
           >
-            Create Request
+            Create
           </Button>
         </div>
         <div className={style.calendarWrapper}>{renderView(viewMode)}</div>

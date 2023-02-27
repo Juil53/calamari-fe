@@ -19,7 +19,6 @@
     min-width: 100%;
     border-collapse: collapse;
     border-radius: $borderRadius;
-    box-shadow: $bs;
 
     @include mobile {
       min-width: 900px;
@@ -95,5 +94,9 @@
         color: "orange";
       }
     }
+  }
+
+  td.actions {
+    text-align: center;
   }
 }

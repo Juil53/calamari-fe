@@ -2,11 +2,13 @@ import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { memo } from "react";
 import { handleStatus } from "../utils/utils";
+import DeleteIcon from "@mui/icons-material/Delete";
 import Link from "next/link";
 import SearchBox from "./SearchBox";
 import styles from "../styles/TableMode.module.scss";
 
 const TableMode = ({ events }) => {
+  console.log(events)
   return (
     <div className={styles.myRequest}>
       <div className={styles.searchBox}>
@@ -30,6 +32,7 @@ const TableMode = ({ events }) => {
               </th>
               <th>COMMENT</th>
               <th>Status</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -47,6 +50,9 @@ const TableMode = ({ events }) => {
                     <div className={styles.statusContainer}>
                       <span>{handleStatus(event.status)}</span>
                     </div>
+                  </td>
+                  <td className={styles.actions}>
+                    <DeleteIcon color="error"/>
                   </td>
                 </tr>
               </Link>

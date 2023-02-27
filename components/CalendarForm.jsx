@@ -38,7 +38,7 @@ const CalendarForm = ({ absences, sessionInfo }) => {
       case "remote":
         setData({
           ...data,
-          submitter: sessionInfo.user.email,
+          submitter: sessionInfo?.user.email,
           color: "#fff",
           background_color: "#ff4081",
           [name]: value,
@@ -47,7 +47,7 @@ const CalendarForm = ({ absences, sessionInfo }) => {
       case "sick":
         setData({
           ...data,
-          submitter: sessionInfo.user.email,
+          submitter: sessionInfo?.user.email,
           color: "#fff",
           background_color: "#7986cb",
           [name]: value,
@@ -56,7 +56,7 @@ const CalendarForm = ({ absences, sessionInfo }) => {
       case "holiday":
         setData({
           ...data,
-          submitter: sessionInfo.user.email,
+          submitter: sessionInfo?.user.email,
           color: "#fff",
           background_color: "#4db6ac",
           [name]: value,
@@ -65,7 +65,7 @@ const CalendarForm = ({ absences, sessionInfo }) => {
       default:
         setData({
           ...data,
-          submitter: sessionInfo.user.email || "no email",
+          submitter: sessionInfo?.user.email || "no email",
           [name]: value,
         });
         break;
@@ -75,7 +75,7 @@ const CalendarForm = ({ absences, sessionInfo }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/event`, data);
+      await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/events/create`, data);
       alert("Post Success");
       router.reload();
     } catch (error) {

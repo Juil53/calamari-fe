@@ -4,9 +4,7 @@
   min-width: fit-content;
   border: 1px solid $grey-light;
   border-radius: $borderRadius;
-  box-shadow: $bs;
   padding: 0 10px;
-  margin-bottom: 50px;
 
   h3 {
     margin-left: 5px;
@@ -17,6 +15,7 @@
   .searchBox {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 
     @include mobile {
       flex-direction: column;
