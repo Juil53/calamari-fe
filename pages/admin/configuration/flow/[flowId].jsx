@@ -119,7 +119,7 @@ export const getStaticPaths = async () => {
   const response = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/flows`);
   const flows = await response.data;
   return {
-    paths: flows.map((flow) => ({ params: { flowId: flow.id.toString() } })),
+    paths: flows.map((flow) => ({ params: { flowId: flow?.id.toString() } })),
     fallback: true,
   };
 };
