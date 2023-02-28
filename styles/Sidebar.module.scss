@@ -4,18 +4,17 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 300px;
+  width: 250px;
   height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
-  padding: 6px 14px;
-  border-left: 50px solid $primary-color;
+  padding: 10px;
   border-right: 1px solid rgba(225, 170, 170, 0.3);
   background-image: url(/imgs/background_1.jpg);
   background-position: center;
   background-size: cover;
-  box-shadow: $bs1;
+  box-shadow: $bs2;
   z-index: 10;
   transition: $transition;
   text-transform: uppercase;
@@ -126,7 +125,11 @@
   }
 
   &.active {
-    width: 130px;
+    width: 60px;
+    
+    ul li a {
+      justify-content: center;
+    }
 
     .logo {
       display: none;
@@ -137,7 +140,7 @@
         border-radius: $borderRadius;
         padding: 2px;
         position: absolute;
-        right: 25%;
+        right: 10%;
         top: 20px;
         height: 20px;
         text-align: center;
@@ -163,7 +166,6 @@
       color: $primary-color;
       font-weight: $fw-bold;
     }
-
     svg {
       color: $primary-color !important;
     }

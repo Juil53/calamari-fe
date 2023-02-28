@@ -24,7 +24,7 @@ const Sidebar = (props) => {
             <Link href="/staff/apply">
               <a>
                 <FontAwesomeIcon icon={faPenToSquare} />
-                <span>Apply</span>
+                <span>Dashboard</span>
               </a>
             </Link>
           </li>
@@ -32,7 +32,7 @@ const Sidebar = (props) => {
             <Link href="/admin/approval">
               <a>
                 <FontAwesomeIcon icon={faCircleCheck} />
-                <span>Approval</span>
+                <span>Approvals</span>
               </a>
             </Link>
           </li>
@@ -40,7 +40,7 @@ const Sidebar = (props) => {
             <Link href="/staff/people">
               <a>
                 <FontAwesomeIcon icon={faChartSimple} />
-                <span>People</span>
+                <span>Staffs</span>
               </a>
             </Link>
           </li>
