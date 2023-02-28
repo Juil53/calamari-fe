@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import styles from "../../styles/Login.module.scss";
-import errors from "./errorMessage";
+import errors from "../../utils/errorMessage";
 
 export default function Login() {
   const router = useRouter();
