@@ -1,0 +1,28 @@
+@import "variables";
+
+.searchWrapper {
+  min-width: fit-content;
+  border: 1px solid $grey-light;
+  border-radius: $borderRadius;
+  padding: 0 10px;
+
+  h3 {
+    margin-left: 5px;
+    text-transform: uppercase;
+    font-size: $fs-lg;
+  }
+
+  .searchBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    @include mobile {
+      flex-direction: column;
+    }
+
+    @include tablet {
+      flex-direction: column;
+    }
+  }
+}

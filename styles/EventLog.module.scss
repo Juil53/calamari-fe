@@ -1,0 +1,53 @@
+@import "variables";
+
+.eventLog {
+  .headerLog {
+    background-color: $grey-blur;
+    box-shadow: $bs;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .icon {
+      position: absolute;
+      left: 20px;
+    }
+    .title {
+      display: inline-block;
+    }
+  }
+
+  .tableLog {
+    width: 100%;
+
+    table {
+      width: 100%;
+      text-align: left;
+      box-shadow: $bs;
+      background-color: $grey-light;
+      padding: 10px 20px;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid $grey-blur;
+      padding: 10px 0;
+    }
+
+    thead > tr > th:nth-child(3) {
+      text-align: right;
+    }
+
+    tbody > tr {
+      height: 50px;
+    }
+
+    tbody > tr:last-child > td {
+      border-bottom: 0;
+    }
+
+    tbody > tr > td:nth-child(3) {
+      text-align: right;
+    }
+  }
+}

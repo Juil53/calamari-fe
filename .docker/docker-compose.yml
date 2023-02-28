@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  client:
+    build:
+      context: ../
+      dockerfile: ./.docker/nodejs/Dockerfile
+    container_name: al_client
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ../:/usr/src/app
+      - ./logs/nodejs:/root/.npm/_logs
+      - /usr/src/app/node_modules
+    ports:
+      - 3000:3000

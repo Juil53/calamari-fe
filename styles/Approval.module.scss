@@ -1,0 +1,83 @@
+@import "variables";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $white;
+  border-radius: $borderRadius;
+  box-shadow: $bs1;
+  padding: 5px;
+
+  .leftSide {
+    display: flex;
+    width: 75%;
+    button.approveBtn {
+      width: 170px;
+      margin-right: 1rem;
+      border-radius: $borderRadius;
+      transition: $transition2;
+      span {
+        margin-right: 5px;
+      }
+      &:hover {
+        background-color: $primary-color-light;
+        color: $primary-color;
+        font-weight: $fw-bold;
+      }
+    }
+  }
+
+  .rightSide {
+    width: 25%;
+    text-align: right;
+  }
+}
+
+.tabContent {
+  background-color: $white;
+  box-shadow: $bs1;
+  margin: 1rem 0 0 0;
+  table {
+    width: 100%;
+    border-spacing: 0; /* Removes the cell spacing via CSS */
+    border-collapse: collapse; /* Optional - if you don't want to have double border where cells touch */
+    thead {
+      width: 100%;
+      border-bottom: 1px solid $grey-blur;
+    }
+
+    thead > tr > th {
+      text-align: center;
+      padding: 1rem 0;
+      color: $grey-blur;
+      font-size: $fs-sm;
+      font-weight: $fw-bold;
+    }
+
+    thead > td:nth-of-type(0) {
+      width: 50px;
+    }
+
+    tbody {
+      text-align: center;
+      tr {
+        height: 50px;
+        font-size: $fs-md;
+        transition: $transition;
+        &:hover {
+          background-color: $primary-color-hover-2;
+          color: $primary-color-hover;
+        }
+      }
+
+      .avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center top;
+      }
+    }
+  }
+}

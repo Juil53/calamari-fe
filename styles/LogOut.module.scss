@@ -1,0 +1,22 @@
+@import "variables";
+
+.modal {
+  padding: 0;
+}
+
+.title {
+  text-align: center;
+}
+
+.content {
+  min-height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  column-gap: 10px;
+  justify-content: flex-end;
+}

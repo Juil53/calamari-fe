@@ -1,5 +1,171 @@
-@import 'variables';
+@import "variables";
 
-nav {
-  border: 1px solid $green;
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 300px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 6px 14px;
+  border-left: 50px solid $primary-color;
+  border-right: 1px solid rgba(225, 170, 170, 0.3);
+  background-image: url(/imgs/background_1.jpg);
+  background-position: center;
+  background-size: cover;
+  box-shadow: $bs1;
+  z-index: 10;
+  transition: $transition;
+  text-transform: uppercase;
+
+  &::before {
+    content: "";
+    // backdrop-filter: blur(1px);
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(254, 220, 220, 0.3);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+
+  @include mobile {
+    width: 90px;
+    border-left: 10px solid $primary-color;
+  }
+
+  .logoWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid $grey-blur;
+    .logo {
+      width: 100%;
+      &:hover {
+        cursor: pointer;
+      }
+      @include mobile {
+        display: none;
+      }
+      .brandLogo {
+        width: 100%;
+        object-fit: contain;
+        object-position: center;
+      }
+    }
+    .hamWrapper {
+      width: 100%;
+      height: 50px;
+      #hamburger {
+        color: $primary-color;
+        border-radius: $borderRadius;
+        padding: 2px;
+        position: absolute;
+        right: 5%;
+        top: 20px;
+        height: 20px;
+        text-align: center;
+        line-height: 30px;
+        cursor: pointer;
+        transform: translateX(-50%);
+        @include mobile {
+          right: 25%;
+        }
+      }
+    }
+  }
+
+  ul li {
+    position: relative;
+    margin-top: 5px;
+    width: 100%;
+    transition: $transition;
+    border: 2px solid transparent;
+    border-radius: $borderRadius;
+    &:hover {
+      border: 2px solid $primary-color;
+    }
+  }
+
+  ul li a {
+    display: flex;
+    align-items: center;
+    color: $black;
+    font-weight: $fw-normal;
+    padding: 10px 0;
+
+    span {
+      display: block;
+      @include mobile {
+        display: none;
+      }
+    }
+
+    svg {
+      color: $grey;
+      height: 20px;
+      min-width: 50px;
+      border-radius: 12px;
+      line-height: 20px;
+    }
+
+    &:hover {
+      border-radius: $borderRadius;
+      background-color: $primary-color-light;
+      color: $primary-color-hover;
+      font-weight: $fw-bold;
+      svg {
+        color: $primary-color-hover;
+        font-weight: $fw-bold;
+      }
+    }
+  }
+
+  &.active {
+    width: 130px;
+
+    .logo {
+      display: none;
+    }
+    .hamWrapper {
+      #hamburger {
+        color: $primary-color;
+        border-radius: $borderRadius;
+        padding: 2px;
+        position: absolute;
+        right: 25%;
+        top: 20px;
+        height: 20px;
+        text-align: center;
+        line-height: 30px;
+        cursor: pointer;
+        transform: translateX(-50%);
+      }
+    }
+
+    ul li a span {
+      display: none;
+    }
+  }
+}
+
+.navActive {
+  border: 2px solid $primary-color !important;
+  border-radius: $borderRadius;
+  background-color: $primary-color-light;
+  color: $primary-color;
+  a {
+    span {
+      color: $primary-color;
+      font-weight: $fw-bold;
+    }
+
+    svg {
+      color: $primary-color !important;
+    }
+  }
 }

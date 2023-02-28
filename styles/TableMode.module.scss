@@ -1,0 +1,102 @@
+@import "variables";
+
+.myRequest {
+  min-height: 80vh;
+
+  .table {
+    @include mobile {
+      width: 100%;
+      overflow: scroll;
+    }
+
+    @include tablet {
+      width: 100%;
+      overflow: scroll;
+    }
+  }
+
+  table {
+    min-width: 100%;
+    border-collapse: collapse;
+    border-radius: $borderRadius;
+
+    @include mobile {
+      min-width: 900px;
+    }
+
+    @include tablet {
+      min-width: 900px;
+    }
+  }
+
+  th,
+  td {
+    border-bottom: 1px solid $grey-blur;
+    padding: 10px;
+    padding-left: 20px;
+  }
+
+  th {
+    color: $grey-blur;
+    text-align: left;
+    text-transform: uppercase;
+  }
+
+  tr {
+    line-height: 50px;
+    &:hover {
+      cursor: pointer;
+      background-color: $primary-color-hover-2;
+    }
+  }
+
+  th.period {
+    .periodContainer {
+      display: flex;
+      align-items: center;
+    }
+
+    .periodIconWrapper {
+      font-size: 14px;
+      display: flex;
+      margin-left: 10px;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .periodIcon:hover {
+      color: $primary-color;
+    }
+  }
+
+  td.status {
+    .statusContainer {
+      display: flex;
+      align-items: center;
+
+      .statusIcon {
+        margin-right: 10px;
+        font-size: 7px;
+      }
+
+      .decline {
+        background-color: #fbcbc8;
+        color: "crimson";
+      }
+
+      .success {
+        background-color: #9cf3ca;
+        color: "green";
+      }
+
+      .pending {
+        background-color: #ffffcc;
+        color: "orange";
+      }
+    }
+  }
+
+  td.actions {
+    text-align: center;
+  }
+}

@@ -1,17 +1,66 @@
+//Color
+$primary-color: #bd1133;
+$primary-color-light: #f1c3cdb6;
+$primary-color-hover: #8d0f28;
+$primary-color-hover-2: #fbf1f1a7;
+
 $white: #fff;
 $black: #333;
 $green: #27a082;
-$green-dark: #217963;
-$green-light: #44eac1;
+$green-hover: #e3f3f0;
 $grey: #717981;
-$grey-blur: #aaa;
+$grey-blur: #c9d1d3;
+$grey-blur-2: #ebf0f1;
+$grey-light: #f9fafb;
+$orange: #fb8500;
+$blue: #1976d2;
 
+$bg-color: #eff5f5;
+$bg-color-2: rgba(0, 0, 0, 0.8);
+
+//FONT-SIZE
 $fs-sm: 0.8rem;
 $fs-md: 1rem;
 $fs-lg: 1.3rem;
+$fs-xl: 2rem;
 
+//FONT-WEIGHT
 $fw-light: 400;
 $fw-normal: 500;
 $fw-bold: 700;
 
+//TRANSITION & BORDER
 $transition: all 120ms ease;
+$transition2: all 300ms ease;
+$transition3: all 1000ms ease;
+$borderRadius: 4px;
+$borderRadius-2: 16px;
+
+//BOX SHADOW
+$bs: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+$bs1: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+$bs2: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+$bs3: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+
+// DEVICE
+$mobile-width: 415px;
+$tablet-width: 768px;
+$desktop-width: 1280px;
+
+@mixin mobile {
+  @media (max-width: $mobile-width) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$mobile-width + 1px}) and (max-width: $tablet-width) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$tablet-width + 1px}) and (max-width:#{$desktop-width}) {
+    @content;
+  }
+}

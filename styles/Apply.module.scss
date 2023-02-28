@@ -1,0 +1,85 @@
+@import "variables";
+
+.topWrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: $fs-lg;
+  color: $black;
+  padding-bottom: 10px;
+  border-bottom: 2px solid $grey-blur;
+  .header {
+    font-weight: $fw-bold;
+    font-size: $fs-xl;
+    color: $primary-color;
+  }
+
+  .dayLeft {
+    display: flex;
+    align-items: center;
+    flex-grow: 0.5;
+    @include mobile {
+      display: none;
+    }
+
+    p {
+      min-width: max-content;
+      margin-right: 10px;
+      font-size: $fs-md;
+    }
+    .progress {
+      width: 80%;
+    }
+  }
+
+  .iconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    .iconButton {
+      text-align: center;
+    }
+    p {
+      margin-right: 5px;
+      font-size: $fs-md;
+      color: $primary-color;
+      font-weight: $fw-bold;
+      font-size: $fs-md;
+      
+      @include mobile {
+        display: none;
+      }
+
+    }
+    button {
+      margin: 0 5px;
+    }
+  }
+}
+
+.container {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .addEvent {
+    align-self: flex-end;
+    margin: 15px 0;
+  }
+
+  .calendarWrapper {
+    width: 100%;
+    padding: 1rem;
+    background-color: $white;
+    border-radius: $borderRadius;
+    box-shadow: $bs;
+  }
+}
+
+.iconColor {
+  color: $blue;
+}

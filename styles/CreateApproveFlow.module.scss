@@ -1,0 +1,100 @@
+@import "variables";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 5px;
+  border-bottom: 1px solid $grey-blur;
+
+  .leftSide {
+    flex-grow: 2;
+    button,
+    h4,
+    h2 {
+      display: inline-block;
+    }
+    button.returnBtn {
+      width: 50px;
+      font-size: $fs-md;
+      margin-right: 0.5rem;
+      background-color: transparent;
+      color: $grey;
+      transition: $transition;
+      span {
+        margin-right: 5px;
+        font-size: $fs-sm;
+      }
+      &:hover {
+        color: $primary-color-hover;
+      }
+    }
+    button.approveBtn {
+      width: 100px;
+      font-size: $fs-sm;
+      margin-right: 1rem;
+      transition: $transition;
+      span {
+        margin-right: 5px;
+        font-size: $fs-sm;
+      }
+      &:hover {
+        background-color: $primary-color-hover;
+      }
+    }
+    h4.title {
+      height: 30px;
+      vertical-align: middle;
+      line-height: 35px;
+    }
+  }
+}
+
+.content {
+  display: flex;
+  .leftSideContent {
+    width: 75%;
+    margin-top: 0.5rem;
+    margin-right: 1rem;
+    .steps {
+      height: 100%;
+      margin-bottom: 1rem;
+      // border-bottom: 3px solid $grey-blur;
+
+      button {
+        margin: 0.5rem 0;
+      }
+    }
+
+    form {
+      margin-top: 1rem;
+      h3 {
+        color: $grey;
+        font-size: $fs-md;
+      }
+      .stepWrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    .stepsContent {
+      margin: 2rem 0;
+    }
+  }
+  .rightSideContent {
+    width: 25%;
+    height: 90vh;
+    margin-top: 0.5rem;
+    padding: 1rem;
+    background-color: $white;
+    box-shadow: $bs1;
+    border-radius: $borderRadius;
+    .title {
+      color: $primary-color;
+    }
+    .content {
+      color: $grey;
+    }
+  }
+}

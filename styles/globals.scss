@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
+@import "variables";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #ddd;
+  color: #333;
+  font-family: 'Poppins', sans-serif;
+}
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+label {
+  display: block;
+  text-align: left;
+  font-size: 0.9rem;
+  font-weight: $fw-bold;
+  // color: $primary-color-hover;
+  margin: 0.2rem 0;
+}
+
+input {
+  width: 100%;
+  height: 3rem;
+  padding: 0.2rem 0.5rem;
+  transition: all 100ms ease;
+  cursor: pointer;
+  outline: none;
+  border: 1px solid transparent;
+  font-size: $fs-md;
+}
+
+input:focus {
+  border-bottom: 1px solid $primary-color;
+}
+
+input[type='checkbox']{
+  height: auto;
+}
+
+textarea {
+  width: 100%;
+  height: 3rem;
+  padding: 0.2rem 0.5rem;
+  margin: 0.5rem 0;
+  border: 3px solid transparent;
+  border-radius: $borderRadius;
+  transition: all 100ms ease;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+textarea:focus {
+  padding: 0.2rem 0.5rem;
+  border-bottom: 4px solid rgba(57, 63, 84, 0.8);
+  outline: none;
+  background-color: #c9d1d3;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+button {
+  padding: 8px 10px;
+  border: none;
+  font-weight: 600;
+  width: max-content;
+  cursor: pointer;
+}
+
+select {
+  width: 100%;
+  height: 3rem;
+  padding: 0.2rem 0.5rem;
+  margin: 0.5rem 0;
+  border: 3px solid transparent;
+  border-radius: $borderRadius;
+  transition: all 120ms ease;
+  cursor: pointer;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+select:focus {
+  outline: none;
+  background-color: #c9d1d3;
+  border-bottom: 4px solid rgba(57, 63, 84, 0.8);
+  border-radius: 4px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+/* FUll CALENDAR CSS OVERRIDE */
+.fc .fc-button-primary {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #717981;
+  transition: all 200ms ease;
+  padding: 5px;
+}
+.fc .fc-button-primary:hover {
+  background-color: #bd1133;
+  border: 1px solid #8d0f28;
+}
+.fc .fc-button-primary.fc-button-active {
+  background-color: #bd1133 !important;
+  border-radius: none;
+  border: 1px solid $primary-color-hover;
+}
+.fc .fc-button-primary.fc-button-active:focus {
+  box-shadow: none;
+  border: none;
+}
+.fc .fc-button-primary:disabled {
+  background-color: transparent;
+  color: $primary-color;
+  border: none;
+}
+.fc-toolbar-chunk {
+  display: flex;
+}
+
+.rdrSelected {
+  background: #bd11336d !important;
+}
+
+/* MOBILE */
+@media screen and (max-width: 415px) {
+  .fc .fc-toolbar-title {
+    font-size: 1rem;
+  }
+  .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+  }
+  .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr .fc-toolbar-chunk:nth-child(2) {
+    text-align: center;
+    margin: 5px 0;
+  }
+  .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr .fc-toolbar-chunk:nth-child(3) {
+    display: flex;
+    justify-content: center;
+    font-size: smaller;
+  }
+}
+/* TABLET */
+@media screen and (min-width: 416px) and (max-width: 992px) {
+  .fc .fc-toolbar-title {
+    font-size: 1.2rem;
+  }
+}
+
+/* LAPTOP */
+@media screen and (max-width: 1280px) {
+  .fc .fc-toolbar-title {
+    font-size: 1.2rem;
+  }
+}

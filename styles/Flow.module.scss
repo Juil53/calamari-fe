@@ -1,0 +1,164 @@
+@import "variables";
+
+.wrapper {
+  position: relative;
+  width: 100%;
+
+  .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: $bg-color;
+    border-radius: $borderRadius;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+  }
+}
+
+.header {
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid $grey-blur;
+}
+
+button.createBtn {
+  width: 150px;
+  margin-right: 1rem;
+  border: 1px solid transparent;
+  transition: $transition;
+  span {
+    margin-right: 5px;
+  }
+  &:hover {
+    background-color: $primary-color-light;
+    border: 1px solid $primary-color-hover;
+  }
+}
+
+button.revalidateBtn {
+  background-color: $primary-color-light;
+  border: 1px solid $primary-color-hover;
+}
+
+button.returnBtn {
+  width: 50px;
+  font-size: $fs-md;
+  margin-right: 0.5rem;
+  background-color: transparent;
+  color: $grey;
+  transition: $transition;
+  span {
+    margin-right: 5px;
+    font-size: $fs-sm;
+  }
+  &:hover {
+    color: $primary-color-hover;
+  }
+}
+
+.content {
+  display: flex;
+  height: 100%;
+  margin-top: 1.5rem;
+  justify-content: space-between;
+  column-gap: 5%;
+
+  .leftSide {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    align-items: flex-start;
+
+    .flow {
+      position: relative;
+      min-height: 150px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border: 1px solid transparent;
+      background-color: $white;
+      box-shadow: $bs1;
+      border-radius: $borderRadius;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      column-gap: 10px;
+      transition: $transition2;
+      overflow: hidden;
+
+      .flowDetail {
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+        span {
+          font-size: $fs-sm;
+          color: $grey;
+        }
+      }
+      .flowChart {
+        width: 70%;
+      }
+
+      &:hover {
+        transform: translateY(-5px);
+        border: 1px solid $primary-color-hover;
+        .editIcon {
+          top: 10px;
+          color: $green;
+        }
+        .deleteIcon {
+          top: 10px;
+          left: 90px;
+          color: $primary-color-hover;
+        }
+      }
+    }
+  }
+
+  .rightSide {
+    width: 25%;
+    min-height: 90vh;
+    text-align: center;
+    padding-top: 1.5rem;
+    background-color: $white;
+    box-shadow: $bs1;
+    border-radius: $borderRadius;
+    overflow: hidden;
+    p {
+      text-align: left;
+      padding: 0.75rem 1rem;
+    }
+  }
+
+  .editIcon {
+    position: absolute;
+    top: -50px;
+    color: $black;
+    border-radius: $borderRadius;
+    padding: 5px 5px;
+    transition: $transition;
+    cursor: pointer;
+    span {
+      margin-right: 5px;
+    }
+    &:hover {
+      background-color: $green-hover;
+    }
+  }
+
+  .deleteIcon {
+    position: absolute;
+    top: -50px;
+    color: $black;
+    border-radius: $borderRadius;
+    padding: 5px 8px;
+    transition: $transition;
+    cursor: pointer;
+    span {
+      margin-right: 5px;
+    }
+    &:hover {
+      background-color: $primary-color-light;
+    }
+  }
+}
