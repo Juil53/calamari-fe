@@ -11,16 +11,16 @@ import CloseIcon from "@mui/icons-material/Close";
 import style from "../styles/Modal.module.scss";
 
 const CalendarModal = ({ show, setShow, event }) => {
+  console.log(event)
   const route = useRouter();
   const handleClose = () => setShow(false);
   const [currentEvent, setCurrentEvent] = useState({
     id: "",
     start: "",
     end: "",
-    title: "",
+    reason: "",
     name: "",
     status: "",
-    comment: "",
   });
 
   useEffect(() => {
@@ -29,8 +29,7 @@ const CalendarModal = ({ show, setShow, event }) => {
         id: event.id,
         start: event.start,
         end: event.end,
-        title: event.title,
-        comment: event.data.comment,
+        reason: event.reason,
         status: event.data.status,
         name: event.data.submitter,
       });
@@ -78,18 +77,10 @@ const CalendarModal = ({ show, setShow, event }) => {
           <button className={style.closeIcon}>
             <CloseIcon onClick={handleClose}/>
           </button>
-          <h2>Reason: {currentEvent.title.toUpperCase()}</h2>
+          <h2>Reason: {currentEvent.reason.toUpperCase()}</h2>
           <form onSubmit={handleSubmit}>
             <CalendarFrom dataCalendarFrom={dataCalendarFrom} oldData={currentEvent.start} />
             <CalendarTo dataCalendarTo={dataCalendarTo} oldData={currentEvent.end} />
-            <label htmlFor="comment">Comment</label>
-            <textarea
-              id="comment"
-              rows="2"
-              value={currentEvent.comment}
-              onChange={handleChange}
-              name="comment"
-            />
             <h5>Status: {handleStatus(currentEvent.status)}</h5>
             <h5>Submitter: {currentEvent.name}</h5>
             <div className={style.modalFooter}>

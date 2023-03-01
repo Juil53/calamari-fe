@@ -9,12 +9,16 @@ import * as Constant from "../constant/constants";
 import styles from "../styles/CalendarForm.module.scss";
 import CalendarFrom from "./CalendarFrom";
 import CalendarTo from "./CalendarTo";
+import { useSession } from "next-auth/react";
 
-const CalendarForm = ({ absences, sessionInfo }) => {
+const CalendarForm = ({ absences }) => {
   const router = useRouter();
+  const { data: session } = useSession();
   const [data, setData] = useState({
     status: Constant.PENDING,
   });
+
+  const submitter = session?.user.email;
 
   const dataCalendarFrom = (start) => {
     setData({
@@ -32,13 +36,13 @@ const CalendarForm = ({ absences, sessionInfo }) => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    const title = document.querySelector("#absence_type").value;
+    const type = document.querySelector("#absence_type").value;
 
-    switch (title) {
+    switch (type) {
       case "remote":
         setData({
           ...data,
-          submitter: sessionInfo?.user.email,
+          submitter,
           color: "#fff",
           background_color: "#ff4081",
           [name]: value,
@@ -47,25 +51,16 @@ const CalendarForm = ({ absences, sessionInfo }) => {
       case "sick":
         setData({
           ...data,
-          submitter: sessionInfo?.user.email,
+          submitter,
           color: "#fff",
           background_color: "#7986cb",
-          [name]: value,
-        });
-        break;
-      case "holiday":
-        setData({
-          ...data,
-          submitter: sessionInfo?.user.email,
-          color: "#fff",
-          background_color: "#4db6ac",
           [name]: value,
         });
         break;
       default:
         setData({
           ...data,
-          submitter: sessionInfo?.user.email || "no email",
+          submitter: submitter || "no user",
           [name]: value,
         });
         break;
@@ -75,9 +70,10 @@ const CalendarForm = ({ absences, sessionInfo }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      console.log(data);
       await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/events/create`, data);
       alert("Post Success");
-      router.reload();
+      // router.reload();
     } catch (error) {
       alert("Error", error);
     }
@@ -90,18 +86,16 @@ const CalendarForm = ({ absences, sessionInfo }) => {
         <CalendarFrom dataCalendarFrom={dataCalendarFrom} />
         <CalendarTo dataCalendarTo={dataCalendarTo} />
         <label htmlFor="absence_type">Absence Type</label>
-        <select name="title" id="absence_type" onChange={handleChange}>
+        <select name="type" id="absence_type" onChange={handleChange}>
           <option value="">Select absences</option>
-          {absences.map((absence) => (
-            <React.Fragment key={absence.id}>
+          {absences.map((absence, index) => (
+            <React.Fragment key={`absence_${index}`}>
               <option value={absence.value}>{absence.name.toUpperCase()}</option>
             </React.Fragment>
           ))}
         </select>
-        <label htmlFor="title">Title</label>
+        <label htmlFor="title">Reason</label>
         <input name="title" id="title" onChange={handleChange} />
-        <label htmlFor="comment">Reason</label>
-        <textarea name="comment" id="comment" onChange={handleChange} />
         <label htmlFor="approver">Select Approver</label>
         <select name="approver" id="approver" onChange={handleChange}>
           <option value="">Select absences</option>
