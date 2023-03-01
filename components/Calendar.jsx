@@ -24,6 +24,7 @@ const Calendar = ({ ref, events }) => {
   const handleEvent = (info) => {
     setShow(true);
     setEvent({
+      title: info.event.title,
       start: moment(info.event.start).format("yyyy-MM-DD"),
       end: moment(info.event.end).format("yyyy-MM-DD"),
       data: info.event.extendedProps,

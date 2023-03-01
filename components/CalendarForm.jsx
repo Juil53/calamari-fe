@@ -44,7 +44,7 @@ const CalendarForm = ({ absences }) => {
           ...data,
           submitter,
           color: "#fff",
-          background_color: "#ff4081",
+          background_color: "#FF9AA2",
           [name]: value,
         });
         break;
@@ -53,7 +53,7 @@ const CalendarForm = ({ absences }) => {
           ...data,
           submitter,
           color: "#fff",
-          background_color: "#7986cb",
+          background_color: "#B5EAD7",
           [name]: value,
         });
         break;
@@ -70,7 +70,7 @@ const CalendarForm = ({ absences }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      console.log(data);
+      console.log(data)
       await axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/events/create`, data);
       alert("Post Success");
       // router.reload();
