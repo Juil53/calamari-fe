@@ -32,15 +32,15 @@ const Sidebar = (props) => {
             <Link href="/admin/approval">
               <a>
                 <FontAwesomeIcon icon={faCircleCheck} />
-                <span>Approvals</span>
+                <span>Approval</span>
               </a>
             </Link>
           </li>
-          <li className={route.pathname.includes("/staff/people") ? `${styles.navActive}` : ""}>
-            <Link href="/staff/people">
+          <li className={route.pathname.includes("/admin/staff") ? `${styles.navActive}` : ""}>
+            <Link href="/admin/staff">
               <a>
                 <FontAwesomeIcon icon={faChartSimple} />
-                <span>Staffs</span>
+                <span>Staff</span>
               </a>
             </Link>
           </li>
