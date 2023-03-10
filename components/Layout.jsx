@@ -1,13 +1,13 @@
 import Sidebar from "./Sidebar";
 import styles from "../styles/Layout.module.scss";
-import { useState } from "react";
+import { useState, memo } from "react";
 import { useSession } from "next-auth/react";
 
 const Layout = ({ children }) => {
   const [show, setShow] = useState(false);
   const { data: session } = useSession();
 
-  if (session?.role === "admin" || session?.role === 'leader') {
+  if (session?.role === "admin" || session?.role === "leader") {
     return (
       <div className="layout">
         <Sidebar changeStatus={(show) => setShow(show)} show={show} />
@@ -16,9 +16,7 @@ const Layout = ({ children }) => {
     );
   }
 
-  return (
-    <div className={styles.staffContent}>{children}</div>
-  )
+  return <div className={styles.staffContent}>{children}</div>;
 };
 
-export default Layout;
+export default memo(Layout);

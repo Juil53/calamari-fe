@@ -10,22 +10,20 @@ import moment from "moment";
 
 const Calendar = ({ ref, events }) => {
   const [show, setShow] = useState(false);
-  const [event, setEvent] = useState({
-    id: null,
+  const [event, setEvent] = useState({    
     title: null,
     start: null,
     end: null,
     data: {
       status: Constant.PENDING,
-      comment: null,
       name: null,
+      reason: null
     },
   });
 
   const handleEvent = (info) => {
     setShow(true);
     setEvent({
-      id: info.event.id,
       title: info.event.title,
       start: moment(info.event.start).format("yyyy-MM-DD"),
       end: moment(info.event.end).format("yyyy-MM-DD"),

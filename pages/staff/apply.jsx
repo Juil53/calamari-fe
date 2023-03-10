@@ -18,6 +18,7 @@ import LinearIndeterminate from "../../components/Progress";
 import TableMode from "../../components/TableMode";
 import style from "../../styles/Apply.module.scss";
 import SearchModal from "../../components/SearchModal";
+import Tooltip from "@mui/material/Tooltip";
 
 const Calendar = dynamic(() => import("../../components/Calendar"), {
   ssr: false,
@@ -73,41 +74,55 @@ const Apply = ({ formatEvents, absences }) => {
     <>
       <div className={style.topWrapper}>
         <h4 className={style.header}>APPLY</h4>
-        <div className={style.dayLeft}>
-          <p>Day Left</p>
-          <div className={style.progress}>
-            <LinearIndeterminate />
+        <Tooltip title="Day left">
+          <div className={style.dayLeft}>
+            <p>Day Left</p>
+            <div className={style.progress}>
+              <LinearIndeterminate />
+            </div>
           </div>
-        </div>
+        </Tooltip>
+
         <div className={style.iconWrapper}>
           {session?.role === "staff" ? (
             <Link href="/staff/events/events-log">
-              <IconButton className={style.iconButton}>
-                <StickyNote2OutlinedIcon fontSize="large" />
-              </IconButton>
+              <Tooltip title="Event logs">
+                <IconButton className={style.iconButton}>
+                  <StickyNote2OutlinedIcon fontSize="large" />
+                </IconButton>
+              </Tooltip>
             </Link>
           ) : (
             <>
-              <IconButton className={style.iconButton} onClick={() => handleOpen("search")}>
-                <SearchIcon fontSize="large" />
-              </IconButton>
-              <div>
-                {open && (
-                  <BasicModal showModal={showSearchModal} onHandleClose={handleClose}>
-                    <SearchModal />
-                  </BasicModal>
-                )}
-              </div>
+              <Tooltip title="Search...">
+                <IconButton className={style.iconButton} onClick={() => handleOpen("search")}>
+                  <SearchIcon fontSize="large" />
+                </IconButton>
+              </Tooltip>
+
+              {/* Modal */}
+              {open && (
+                <BasicModal showModal={showSearchModal} onHandleClose={handleClose}>
+                  <SearchModal />
+                </BasicModal>
+              )}
             </>
           )}
           {viewMode === "calendar" ? (
-            <IconButton className={style.iconButton} onClick={() => handleChangeViewMode(viewMode)}>
-              <TableChartSharpIcon fontSize="large" />
-            </IconButton>
+            <Tooltip title="Table view">
+              <IconButton
+                className={style.iconButton}
+                onClick={() => handleChangeViewMode(viewMode)}
+              >
+                <TableChartSharpIcon fontSize="large" />
+              </IconButton>
+            </Tooltip>
           ) : (
+            <Tooltip title="Calendar view">
             <IconButton className={style.iconButton} onClick={() => handleChangeViewMode(viewMode)}>
               <CalendarTodaySharpIcon fontSize="large" />
             </IconButton>
+            </Tooltip>
           )}
           <AccountMenu />
         </div>

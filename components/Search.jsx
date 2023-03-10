@@ -18,7 +18,7 @@ const Search = () => {
           type="search"
           required
           className={styles.searchInput}
-          placeholder="Type something!"
+          placeholder="Type Something..."
         />
         <FontAwesomeIcon icon={faMagnifyingGlass} className={styles.icon} />
       </div>

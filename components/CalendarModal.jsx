@@ -9,33 +9,33 @@ import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
 import style from "../styles/Modal.module.scss";
+import { Divider } from "@mui/material";
 
 const CalendarModal = ({ show, setShow, event }) => {
+  console.log(event);
   const route = useRouter();
   const handleClose = () => setShow(false);
   const [currentEvent, setCurrentEvent] = useState({
-    id: "",
-    start: "",
-    end: "",
-    title: "",
-    name: "",
-    status: "",
-    comment: "",
+    // id: event.data._id,
+    // start: event.start,
+    // end: event.end,
+    // title: event.title,
+    // name: event.data.name,
+    // status: event.data.status,
   });
 
-  useEffect(() => {
-    if (event.id) {
-      setCurrentEvent({
-        id: event.id,
-        start: event.start,
-        end: event.end,
-        title: event.title,
-        comment: event.data.comment,
-        status: event.data.status,
-        name: event.data.submitter,
-      });
-    }
-  }, [event]);
+  // useEffect(() => {
+  //   if (event.data.id) {
+  //     setCurrentEvent({
+  //       id: event.data._id,
+  //       start: event.start,
+  //       end: event.end,
+  //       title: event.data.title,
+  //       status: event.data.status,
+  //       name: event.data.submitter,
+  //     });
+  //   }
+  // }, [event]);
 
   const dataCalendarFrom = (start) => setCurrentEvent({ ...currentEvent, start });
   const dataCalendarTo = (end) => setCurrentEvent({ ...currentEvent, end });
@@ -61,47 +61,46 @@ const CalendarModal = ({ show, setShow, event }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-        //post updated Event
-        try {
-            await axios.put(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/event/${event.id}`, currentEvent);
-            alert("Updated");
-        } catch (error) {
-            console.log(error);
-            alert("Failed");
-        }
-    };
+    try {
+      await axios.put(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/event/${event.id}`, currentEvent);
+      alert("Updated");
+    } catch (error) {
+      console.log(error);
+      alert("Failed");
+    }
+  };
 
   return (
     <>
       <Modal open={show} onClose={handleClose}>
         <div className={style.box}>
           <button className={style.closeIcon}>
-            <CloseIcon onClick={handleClose}/>
+            <CloseIcon onClick={handleClose} />
           </button>
-          <h2>Reason: {currentEvent.title.toUpperCase()}</h2>
+          <h3 className={style.modaleHeader}>{event.title?.toUpperCase()}</h3>
+          <Divider />
           <form onSubmit={handleSubmit}>
-            <CalendarFrom dataCalendarFrom={dataCalendarFrom} oldData={currentEvent.start} />
-            <CalendarTo dataCalendarTo={dataCalendarTo} oldData={currentEvent.end} />
-            <label htmlFor="comment">Comment</label>
-            <textarea
-              id="comment"
-              rows="2"
-              value={currentEvent.comment}
-              onChange={handleChange}
-              name="comment"
-            />
-            <h5>Status: {handleStatus(currentEvent.status)}</h5>
-            <h5>Submitter: {currentEvent.name}</h5>
+            <CalendarFrom dataCalendarFrom={dataCalendarFrom} oldData={event.start} />
+            <CalendarTo dataCalendarTo={dataCalendarTo} oldData={event.end} />
+            <p className={style.modalTitle}>
+              Status:
+              <span className={style.modalText}>{handleStatus(event.data.status)}</span>
+            </p>
+            <p className={style.modalTitle}>
+              Submitter:
+              <span className={style.modalText}>{event.data.submitter}</span>
+            </p>
             <div className={style.modalFooter}>
               <Button
-                variant="outlined"
+                variant="contained"
                 color="error"
-                onClick={() => handleDelete(currentEvent.id)}
+                size="small"
+                onClick={() => handleDelete(event.data._id)}
               >
-                Delete
+                Withdraw
               </Button>
-              <Button variant="outlined" type="submit">
-                Submit
+              <Button variant="contained" type="submit" size="small" color="success">
+                Save
               </Button>
             </div>
           </form>

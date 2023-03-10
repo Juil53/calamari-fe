@@ -24,7 +24,7 @@ const Sidebar = (props) => {
             <Link href="/staff/apply">
               <a>
                 <FontAwesomeIcon icon={faPenToSquare} />
-                <span>Apply</span>
+                <span>Dashboard</span>
               </a>
             </Link>
           </li>
@@ -36,11 +36,11 @@ const Sidebar = (props) => {
               </a>
             </Link>
           </li>
-          <li className={route.pathname.includes("/staff/people") ? `${styles.navActive}` : ""}>
-            <Link href="/staff/people">
+          <li className={route.pathname.includes("/admin/staff") ? `${styles.navActive}` : ""}>
+            <Link href="/admin/staff">
               <a>
                 <FontAwesomeIcon icon={faChartSimple} />
-                <span>People</span>
+                <span>Staff</span>
               </a>
             </Link>
           </li>

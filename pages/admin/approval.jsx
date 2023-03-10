@@ -5,7 +5,6 @@ import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import { IconButton } from "@mui/material";
-import Checkbox from "@mui/material/Checkbox";
 import { Stack } from "@mui/system";
 import axios from "axios";
 import moment from "moment";
@@ -18,33 +17,33 @@ import { handleStatus } from "../../utils/utils";
 const Approval = ({ formatEvents }) => {
   const [index, setIndex] = useState(0);
   const [datas, setDatas] = useState(formatEvents);
-  const [updatedEvent,setUpdatedEvent] = useState({})
+  const [updatedEvent, setUpdatedEvent] = useState({});
   const tabs = ["FOR APPROVAL", "HISTORY"];
 
   const handleEventApprove = async (id) => {
     // Approve Event
-    const selectedIndex = formatEvents.findIndex((item) => item.id === id);
-    const eventSelected = formatEvents[selectedIndex];
+    const selectedIndex = datas.findIndex((data) => data._id === id);
+    const eventSelected = datas[selectedIndex];
     const eventUpdated = { ...eventSelected, status: 1 };
-    const updatedData = datas.map((data) => (data.id === id ? eventUpdated : data));
+    const updatedData = datas.map((data) => (data._id === id ? eventUpdated : data));
     setDatas(updatedData);
-    setUpdatedEvent(eventUpdated)
+    setUpdatedEvent(eventUpdated);
   };
 
   const handleEventDecline = (id) => {
     // Decline Event
-    const selectedIndex = formatEvents.findIndex((item) => item.id === id);
-    const eventSelected = formatEvents[selectedIndex];
+    const selectedIndex = datas.findIndex((data) => data._id === id);
+    const eventSelected = datas[selectedIndex];
     const eventUpdated = { ...eventSelected, status: 2 };
-    const updatedData = datas.map((data) => (data.id === id ? eventUpdated : data));
+    const updatedData = datas.map((data) => (data._id === id ? eventUpdated : data));
     setDatas(updatedData);
-    setUpdatedEvent(eventUpdated)
+    setUpdatedEvent(eventUpdated);
   };
 
-  const handleSubmit = async (e,id) => {
+  const handleSubmit = async (e, id) => {
     e.preventDefault();
     try {
-      await axios.put(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/event/${id}`, updatedEvent);
+      await axios.put(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/events/${id}`, updatedEvent);
       alert("Saved!");
     } catch (error) {
       console.log(error);
@@ -55,12 +54,6 @@ const Approval = ({ formatEvents }) => {
     <>
       <div className={styles.header}>
         <div className={styles.leftSide}>
-          <button className={styles.approveBtn}>
-            <span>
-              <FontAwesomeIcon icon={faCheck} />
-            </span>
-            SAVE
-          </button>
           <Search />
         </div>
         <div className={styles.rightSide}>
@@ -85,10 +78,7 @@ const Approval = ({ formatEvents }) => {
             </thead>
             <tbody>
               {datas.map((data) => (
-                <tr key={data.id}>
-                  {/* <td className={styles.reporter}>
-                    <Checkbox />
-                  </td> */}
+                <tr key={data._id}>
                   <td>
                     <img className={styles.avatar} src="/imgs/default_avatar.jpg" alt="avatar" />
                   </td>
@@ -105,7 +95,7 @@ const Approval = ({ formatEvents }) => {
                         aria-label="delete"
                         size="small"
                         color="success"
-                        onClick={() => handleEventApprove(data.id)}
+                        onClick={() => handleEventApprove(data._id)}
                       >
                         {data.status === 1 ? <ThumbUpIcon /> : <ThumbUpAltOutlinedIcon />}
                       </IconButton>
@@ -113,14 +103,14 @@ const Approval = ({ formatEvents }) => {
                         aria-label="delete"
                         size="small"
                         color="error"
-                        onClick={() => handleEventDecline(data.id)}
+                        onClick={() => handleEventDecline(data._id)}
                       >
                         {data.status === 2 ? <ThumbDownIcon /> : <ThumbDownAltOutlinedIcon />}
                       </IconButton>
                     </Stack>
                   </td>
                   <td>
-                    <button onClick={(e) => handleSubmit(e, data.id)}>Save</button>
+                    <button onClick={(e) => handleSubmit(e, data._id)}>Save</button>
                   </td>
                 </tr>
               ))}

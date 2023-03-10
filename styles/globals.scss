@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
 @import "variables";
 
+@font-face {
+  font-family: "Permanent";
+  src: url('../public/fonts/PermanentMarker-Regular.ttf');
+}
+
 * {
   margin: 0;
   padding: 0;
