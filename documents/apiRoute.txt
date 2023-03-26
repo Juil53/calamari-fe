@@ -1,9 +1,0 @@
-API Route:
-
-proxy-server --> http-proxy
-
-handle tất cả req đều thông qua proxy
-xóa bodyParse từ client lên proxy
-từ proxy sẽ chạy lên server
-
-Ưu điểm: không phải viết file API cho tất cả các route

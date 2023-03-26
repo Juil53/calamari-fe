@@ -74,14 +74,6 @@ const Apply = ({ formatEvents, absences }) => {
     <>
       <div className={style.topWrapper}>
         <h4 className={style.header}>APPLY</h4>
-        <Tooltip title="Day left">
-          <div className={style.dayLeft}>
-            <p>Day Left</p>
-            <div className={style.progress}>
-              <LinearIndeterminate />
-            </div>
-          </div>
-        </Tooltip>
 
         <div className={style.iconWrapper}>
           {session?.role === "staff" ? (
