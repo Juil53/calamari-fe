@@ -8,7 +8,6 @@ import SearchBox from "./SearchBox";
 import styles from "../styles/TableMode.module.scss";
 
 const TableMode = ({ events }) => {
-  console.log(events)
   return (
     <div className={styles.myRequest}>
       <div className={styles.searchBox}>
@@ -32,7 +31,7 @@ const TableMode = ({ events }) => {
               </th>
               <th>COMMENT</th>
               <th>Status</th>
-              <th>Actions</th>
+              <th style={{textAlign:'center'}}>Actions</th>
             </tr>
           </thead>
           <tbody>

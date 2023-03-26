@@ -38,6 +38,8 @@
   background-color: $white;
   box-shadow: $bs1;
   margin: 1rem 0 0 0;
+  padding: 10px;
+  border-radius: $borderRadius;
   table {
     width: 100%;
     border-spacing: 0; /* Removes the cell spacing via CSS */

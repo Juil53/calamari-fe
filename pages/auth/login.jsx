@@ -49,8 +49,8 @@ export default function Login() {
   return (
     <>
       <nav className={styles.head}>
-        <div className={styles.logo}>
-          <Image src="/imgs/logo.svg" alt="logo" width={200} height={50} />
+        <div className={styles.headerText}>
+          LEAVE MANAGEMENT
         </div>
         <div className={styles.signup}>
           <Link href="/auth/register">

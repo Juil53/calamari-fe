@@ -1,13 +1,15 @@
 import {
-  faBars, faChartSimple,
-  faCircleCheck, faGear,
-  faPenToSquare
+  faBars,
+  faChartSimple,
+  faCircleCheck,
+  faGear,
+  faPenToSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, memo } from "react";
 import styles from "../styles/Sidebar.module.scss";
 
 const Sidebar = (props) => {
@@ -68,11 +70,7 @@ const Sidebar = (props) => {
             <div className={styles.logoWrapper}>
               <div className={styles.logo}>
                 <Link href="/">
-                  <img
-                    src="/imgs/logo.svg"
-                    alt="logo"
-                    className={styles.brandLogo}
-                  />
+                  <img src="/imgs/logo.svg" alt="logo" className={styles.brandLogo} />
                 </Link>
               </div>
               <div className={styles.hamWrapper}>
@@ -96,4 +94,4 @@ const Sidebar = (props) => {
   }
 };
 
-export default Sidebar;
+export default memo(Sidebar);

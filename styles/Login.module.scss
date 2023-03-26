@@ -10,11 +10,10 @@
   padding: 0 1rem;
   margin: 1rem 0;
 
-  .logo {
-    width: 15%;
-    img {
-      width: 100%;
-    }
+  .headerText {
+    font-size: $fs-xl;
+    font-weight: $fw-bold;
+    color: $primary-color;
   }
 
   .signup {
@@ -39,48 +38,40 @@
   }
 }
 
-.bgImage {
-  width: 100%;
-  height: 100vh;
-  background-image: url(/imgs/background_1.jpg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  filter: blur(1px);
-}
-
 .bgText {
   position: absolute;
-  width: 30%;
   top: 50%;
   left: 50%;
+  width: 90%;
   transform: translate(-50%, -50%);
   text-align: center;
-  color: $white;
-  border: 1px solid $primary-color-hover;
-  border-radius: $borderRadius;
-  background-color: rgba(0, 0, 0, 0.3); /* Black w/opacity/see-through */
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  .title {
-    color: $primary-color;
-  }
-  @include desktop {
-    width: 50%;
-  }
+  color: $primary-color;
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.26);
 
   @include tablet {
-    width: 80%;
+    width: 70%;
+    padding: 20px;
   }
 
-  @include mobile {
-    width: 70%;
+  @include desktop {
+    width: 30%;
+    padding: 10px;
+  }
+
+  .title {
+    color: $primary-color;
   }
 
   .content {
     margin: 3rem auto;
+    width: 100%;
     text-align: center;
     @include mobile {
-      padding: 1rem;
+      padding: 10px;
     }
 
     h2 {
@@ -90,8 +81,18 @@
     }
 
     .wrapper {
-      max-width: 350px;
+      max-width: 450px;
       margin: 0 auto;
+
+      @include tablet {
+        width: 80%;
+      }
+
+      input {
+        width: 100%;
+        border-radius: 16px;
+        margin: 10px 0;
+      }
 
       .error {
         margin-top: 10px;
@@ -116,10 +117,10 @@
       }
 
       .signIn {
-        min-width: 40%;
+        width: 100%;
         margin-top: 1rem;
         padding: 0.75rem 1.5rem;
-        border-radius: $borderRadius;
+        border-radius: 16px;
         background-color: $primary-color;
         color: $white;
         text-align: center;

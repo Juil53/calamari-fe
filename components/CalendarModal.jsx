@@ -12,30 +12,9 @@ import style from "../styles/Modal.module.scss";
 import { Divider } from "@mui/material";
 
 const CalendarModal = ({ show, setShow, event }) => {
-  console.log(event);
   const route = useRouter();
   const handleClose = () => setShow(false);
-  const [currentEvent, setCurrentEvent] = useState({
-    // id: event.data._id,
-    // start: event.start,
-    // end: event.end,
-    // title: event.title,
-    // name: event.data.name,
-    // status: event.data.status,
-  });
-
-  // useEffect(() => {
-  //   if (event.data.id) {
-  //     setCurrentEvent({
-  //       id: event.data._id,
-  //       start: event.start,
-  //       end: event.end,
-  //       title: event.data.title,
-  //       status: event.data.status,
-  //       name: event.data.submitter,
-  //     });
-  //   }
-  // }, [event]);
+  const [currentEvent, setCurrentEvent] = useState({});
 
   const dataCalendarFrom = (start) => setCurrentEvent({ ...currentEvent, start });
   const dataCalendarTo = (end) => setCurrentEvent({ ...currentEvent, end });
