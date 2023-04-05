@@ -1,10 +1,10 @@
+import { useSession } from "next-auth/react";
+import { Button } from "@mui/material";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import CalendarTodaySharpIcon from "@mui/icons-material/CalendarTodaySharp";
 import SearchIcon from "@mui/icons-material/Search";
 import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
 import TableChartSharpIcon from "@mui/icons-material/TableChartSharp";
-import { useSession } from "next-auth/react";
-import { Button } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import axios from "axios";
 import moment from "moment";
@@ -18,18 +18,60 @@ import TableMode from "../../components/TableMode";
 import style from "../../styles/Dashboard.module.scss";
 import SearchModal from "../../components/SearchModal";
 import Tooltip from "@mui/material/Tooltip";
+import useSWR from "swr";
 
-const Calendar = dynamic(() => import("../../components/Calendar"), {
-  ssr: false,
-});
+const Calendar = dynamic(() => import("../../components/Calendar"), { ssr: false });
 
-const Dashboard = ({ formatEvents, absences }) => {
+export const getStaticProps = async () => {
+  const res1 = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/events`);
+  const res2 = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/types`);
+  const res3 = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/flows`);
+
+  const events = res1.data;
+  const types = res2.data;
+  const flows = res3.data;
+
+  const formatEvents = events.map((event) => ({
+    ...event,
+    start: moment(event.start).format("yyyy-MM-DD"),
+    end: moment(event.end).format("yyyy-MM-DD"),
+  }));
+
+  return {
+    props: {
+      formatEvents,
+      types,
+      flows,
+    },
+  };
+};
+
+const fetcher = (url) => axios.get(url).then((res) => res.data);
+
+const Dashboard = (props) => {
   const [open, setOpen] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showSearchModal, setShowSearchModal] = useState(false);
   const [viewMode, setViewMode] = useState("calendar");
   const { data: session } = useSession();
   const calendarRef = createRef();
+
+  const swrOptions = {
+    fallbackData: props,
+    revalidateOnFocus: true,
+    revalidateIfStale: true,
+  };
+
+  const {
+    data: eventsData,
+    error: eventsError,
+    isLoading,
+  } = useSWR(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/events`, fetcher, swrOptions);
+
+  const {
+    data: typesData,
+    error: typesError,
+  } = useSWR(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/types`, fetcher, swrOptions);
 
   const handleOpen = (arg) => {
     setOpen(true);
@@ -42,6 +84,7 @@ const Dashboard = ({ formatEvents, absences }) => {
         break;
     }
   };
+
   const handleClose = (childData) => {
     setShowCreateModal(childData);
     setShowSearchModal(childData);
@@ -61,13 +104,16 @@ const Dashboard = ({ formatEvents, absences }) => {
   const renderView = (viewMode) => {
     switch (viewMode) {
       case "calendar":
-        return <Calendar ref={calendarRef} events={formatEvents} />;
+        return <Calendar ref={calendarRef} events={eventsData} />;
       case "table":
-        return <TableMode ref={calendarRef} events={formatEvents} />;
+        return <TableMode ref={calendarRef} events={eventsData} />;
       default:
         break;
     }
   };
+
+  if (eventsError || typesError) return <div>failed to load</div>;
+  if (isLoading) return <div>loading...</div>;
 
   return (
     <>
@@ -110,9 +156,12 @@ const Dashboard = ({ formatEvents, absences }) => {
             </Tooltip>
           ) : (
             <Tooltip title="Calendar view">
-            <IconButton className={style.iconButton} onClick={() => handleChangeViewMode(viewMode)}>
-              <CalendarTodaySharpIcon fontSize="large" />
-            </IconButton>
+              <IconButton
+                className={style.iconButton}
+                onClick={() => handleChangeViewMode(viewMode)}
+              >
+                <CalendarTodaySharpIcon fontSize="large" />
+              </IconButton>
             </Tooltip>
           )}
           <AccountMenu />
@@ -133,34 +182,12 @@ const Dashboard = ({ formatEvents, absences }) => {
         <div className={style.calendarWrapper}>{renderView(viewMode)}</div>
         {open && (
           <BasicModal showModal={showCreateModal} onHandleClose={handleClose}>
-            <CalendarForm absences={absences} />
+            <CalendarForm absences={typesData} />
           </BasicModal>
         )}
       </div>
     </>
   );
-};
-
-export const getStaticProps = async () => {
-  const res1 = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/events`);
-  const res2 = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/types`);
-  const res3 = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/flows`);
-  const events = res1.data;
-  const absences = res2.data;
-  const flows = res3.data;
-  const formatEvents = events.map((event) => ({
-    ...event,
-    start: moment(event.start).format("yyyy-MM-DD"),
-    end: moment(event.end).format("yyyy-MM-DD"),
-  }));
-
-  return {
-    props: {
-      formatEvents,
-      absences,
-      flows,
-    },
-  };
 };
 
 export default Dashboard;

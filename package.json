@@ -44,6 +44,7 @@
     "sass": "^1.54.9",
     "sharp": "^0.31.2",
     "styled-components": "^5.3.6",
+    "swr": "^2.1.2",
     "yup": "^0.32.11"
   },
   "devDependencies": {
