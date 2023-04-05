@@ -8,7 +8,7 @@ export default {
   OAuthAccountNotLinked:
     "To confirm your identity, sign in with the same account you used originally.",
   EmailSignin: "Check your email address.",
-  CredentialsSignin: "Your email or password is not correct!",
+  CredentialsSignin: "Wrong Email or Password!",
   AccessDenied:"You do not have permission to access this page.",
   default: "Unable to sign in.",
 };

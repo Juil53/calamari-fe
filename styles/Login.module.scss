@@ -5,36 +5,15 @@
   width: 100%;
   top: 10px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 0 1rem;
   margin: 1rem 0;
 
   .headerText {
-    font-size: $fs-xl;
+    font-size: $fs-2xl;
     font-weight: $fw-bold;
     color: $primary-color;
-  }
-
-  .signup {
-    .signup_blur {
-      margin-right: 1rem;
-      color: $primary-color;
-      font-style: italic;
-      font-size: 0.8rem;
-      font-weight: $fw-light;
-    }
-
-    a {
-      font-weight: $fw-bold;
-      color: $primary-color;
-    }
-    .signup_btn {
-      transition: $transition;
-      &:hover {
-        color: $primary-color-hover;
-      }
-    }
   }
 }
 
@@ -46,9 +25,8 @@
   transform: translate(-50%, -50%);
   text-align: center;
   color: $primary-color;
-  /* From https://css.glass */
   background: rgba(255, 255, 255, 0.3);
-  border-radius: 16px;
+  border-radius: 4px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.26);
 
@@ -58,8 +36,13 @@
   }
 
   @include desktop {
+    width: 50%;
+    padding: 20px;
+  }
+
+  @include extra-wide-desktop {
     width: 30%;
-    padding: 10px;
+    padding: 20px;
   }
 
   .title {
@@ -67,7 +50,6 @@
   }
 
   .content {
-    margin: 3rem auto;
     width: 100%;
     text-align: center;
     @include mobile {
@@ -90,7 +72,7 @@
 
       input {
         width: 100%;
-        border-radius: 16px;
+        border-radius: 4px;
         margin: 10px 0;
       }
 
@@ -116,11 +98,17 @@
         cursor: pointer;
       }
 
-      .signIn {
+      button:disabled,
+      button[disabled] {
+        background-color: $primary-color-hover !important;
+        cursor: default;
+      }
+
+      .signIn{
         width: 100%;
         margin-top: 1rem;
         padding: 0.75rem 1.5rem;
-        border-radius: 16px;
+        border-radius: 4px;
         background-color: $primary-color;
         color: $white;
         text-align: center;
@@ -129,6 +117,18 @@
         transition: $transition2;
         &:hover {
           background-color: $primary-color-hover;
+        }
+      }
+    }
+
+    .registerSection {
+      margin-top: 10px;
+      color: #333;
+      .registerText {
+        font-size: $fs-sm;
+        .registerHighlight {
+          display: block;
+          font-weight: $fw-bold;
         }
       }
     }

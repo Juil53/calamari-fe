@@ -22,8 +22,8 @@ const Sidebar = (props) => {
     if (session?.role == "admin") {
       return (
         <ul className={styles.nav_lists}>
-          <li className={route.pathname == "/staff/apply" ? `${styles.navActive}` : ""}>
-            <Link href="/staff/apply">
+          <li className={route.pathname == "/user/dashboard" ? `${styles.navActive}` : ""}>
+            <Link href="/user/dashboard">
               <a>
                 <FontAwesomeIcon icon={faPenToSquare} />
                 <span>Dashboard</span>
@@ -85,9 +85,6 @@ const Sidebar = (props) => {
             </div>
             {adminMenu()}
           </div>
-
-          {/* Profile */}
-          {/* {session ? <Profile user={session.user} open={open} /> : null} */}
         </div>
       </nav>
     );

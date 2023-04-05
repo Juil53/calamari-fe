@@ -14,9 +14,8 @@ import React, { createRef, useState } from "react";
 import AccountMenu from "../../components/AccountMenu";
 import CalendarForm from "../../components/CalendarForm";
 import BasicModal from "../../components/Modal";
-import LinearIndeterminate from "../../components/Progress";
 import TableMode from "../../components/TableMode";
-import style from "../../styles/Apply.module.scss";
+import style from "../../styles/Dashboard.module.scss";
 import SearchModal from "../../components/SearchModal";
 import Tooltip from "@mui/material/Tooltip";
 
@@ -24,13 +23,13 @@ const Calendar = dynamic(() => import("../../components/Calendar"), {
   ssr: false,
 });
 
-const Apply = ({ formatEvents, absences }) => {
+const Dashboard = ({ formatEvents, absences }) => {
   const [open, setOpen] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showSearchModal, setShowSearchModal] = useState(false);
   const [viewMode, setViewMode] = useState("calendar");
-  const calendarRef = createRef();
   const { data: session } = useSession();
+  const calendarRef = createRef();
 
   const handleOpen = (arg) => {
     setOpen(true);
@@ -77,7 +76,7 @@ const Apply = ({ formatEvents, absences }) => {
 
         <div className={style.iconWrapper}>
           {session?.role === "staff" ? (
-            <Link href="/staff/events/events-log">
+            <Link href="/user/events/events-log">
               <Tooltip title="Event logs">
                 <IconButton className={style.iconButton}>
                   <StickyNote2OutlinedIcon fontSize="large" />
@@ -164,4 +163,4 @@ export const getStaticProps = async () => {
   };
 };
 
-export default Apply;
+export default Dashboard;

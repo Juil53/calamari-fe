@@ -9,7 +9,7 @@ const EventLogs = () => {
     <div className={styles.eventLog}>
       <div className={styles.headerLog}>
         <div className={styles.icon}>
-          <Link href="/staff/apply">
+          <Link href="/user/dashboard">
             <IconButton size="small">
               <ArrowBackIcon />
             </IconButton>

@@ -1,6 +1,4 @@
 import { signIn } from "next-auth/react";
-import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import styles from "../../styles/Login.module.scss";
@@ -36,30 +34,20 @@ export default function Login() {
         redirect: false,
       });
       if (res.ok) {
-        router.push("/staff/apply");
+        router.push("/user/dashboard");
       } else {
         setError(res.error);
         setIsDisabled(false);
       }
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   };
 
   return (
     <>
       <nav className={styles.head}>
-        <div className={styles.headerText}>
-          LEAVE MANAGEMENT
-        </div>
-        <div className={styles.signup}>
-          <Link href="/auth/register">
-            <a className={styles.signup_btn}>
-              <span className={styles.signup_blur}>Don't have an account yet?</span>
-              Sign up
-            </a>
-          </Link>
-        </div>
+        <div className={styles.headerText}>LEAVE MANAGEMENT</div>
       </nav>
 
       <div className={styles.bgText}>
@@ -96,6 +84,12 @@ export default function Login() {
               </button>
               <div className={styles.error}>{error && <SignInError error={error} />}</div>
             </form>
+            <div className={styles.registerSection}>
+              <p className={styles.registerText}>
+                <span className={styles.registerHighlight}>Don't have an account yet?</span>
+                Contact Admin to register!
+              </p>
+            </div>
           </div>
         </section>
       </div>

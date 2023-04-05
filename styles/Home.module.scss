@@ -1,7 +1,7 @@
 @import "variables";
 
 .container {
-  height: 100vh;
+  min-height: 100vh;
   background: rgb(238, 174, 202);
   background: linear-gradient(53deg, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 0.227328431372549) 100%),
     url(/imgs/background_1.jpg) no-repeat;

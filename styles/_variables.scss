@@ -23,6 +23,7 @@ $fs-sm: 0.8rem;
 $fs-md: 1rem;
 $fs-lg: 1.3rem;
 $fs-xl: 2rem;
+$fs-2xl: 4rem;
 
 //FONT-WEIGHT
 $fw-light: 400;
@@ -46,6 +47,7 @@ $bs3: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1
 $mobile-width: 415px;
 $tablet-width: 768px;
 $desktop-width: 1280px;
+$extra-wide-width: 1440px;
 
 @mixin mobile {
   @media (max-width: $mobile-width) {
@@ -60,7 +62,13 @@ $desktop-width: 1280px;
 }
 
 @mixin desktop {
-  @media (min-width: ($tablet-width + 1px)) {
+  @media (min-width: ($tablet-width + 1px)) and (max-width: $desktop-width) {
+    @content;
+  }
+}
+
+@mixin extra-wide-desktop {
+  @media (min-width: ($desktop-width + 1px)) {
     @content;
   }
 }

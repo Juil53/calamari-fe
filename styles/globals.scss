@@ -34,7 +34,6 @@ label {
   text-align: left;
   font-size: 0.9rem;
   font-weight: $fw-bold;
-  // color: $primary-color-hover;
   margin: 0.2rem 0;
 }
 
@@ -50,7 +49,7 @@ input {
 }
 
 input:focus {
-  border-bottom: 1px solid $primary-color;
+  background-color: $grey-blur-2
 }
 
 input[type='checkbox']{
