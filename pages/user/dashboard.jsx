@@ -19,29 +19,22 @@ import style from "../../styles/Dashboard.module.scss";
 import SearchModal from "../../components/SearchModal";
 import Tooltip from "@mui/material/Tooltip";
 import useSWR from "swr";
+import Loading from "../../components/Loading";
 
 const Calendar = dynamic(() => import("../../components/Calendar"), { ssr: false });
 
 export const getStaticProps = async () => {
-  const res1 = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/events`);
-  const res2 = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/types`);
-  const res3 = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/flows`);
+  const eventPromise = axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/events`);
+  const typePromise = axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/types`);
+  const flowPromise = axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/flows`);
 
-  const events = res1.data;
-  const types = res2.data;
-  const flows = res3.data;
-
-  const formatEvents = events.map((event) => ({
-    ...event,
-    start: moment(event.start).format("yyyy-MM-DD"),
-    end: moment(event.end).format("yyyy-MM-DD"),
-  }));
+  const [result1, result2, result3] = await Promise.all([eventPromise, typePromise, flowPromise]);
 
   return {
     props: {
-      formatEvents,
-      types,
-      flows,
+      events: result1.data,
+      types: result2.data,
+      flows: result3.data,
     },
   };
 };
@@ -62,16 +55,8 @@ const Dashboard = (props) => {
     revalidateIfStale: true,
   };
 
-  const {
-    data: eventsData,
-    error: eventsError,
-    isLoading,
-  } = useSWR(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/events`, fetcher, swrOptions);
-
-  const {
-    data: typesData,
-    error: typesError,
-  } = useSWR(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/types`, fetcher, swrOptions);
+  const { data: eventsData, error: eventsError, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/events`, fetcher, swrOptions);
+  const { data: typesData, error: typesError } = useSWR(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/types`, fetcher, swrOptions );
 
   const handleOpen = (arg) => {
     setOpen(true);
@@ -101,7 +86,7 @@ const Dashboard = (props) => {
     }
   };
 
-  const renderView = (viewMode) => {
+  const renderViewMode = (viewMode) => {
     switch (viewMode) {
       case "calendar":
         return <Calendar ref={calendarRef} events={eventsData} />;
@@ -113,7 +98,12 @@ const Dashboard = (props) => {
   };
 
   if (eventsError || typesError) return <div>failed to load</div>;
-  if (isLoading) return <div>loading...</div>;
+  if (isLoading)
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
 
   return (
     <>
@@ -179,7 +169,7 @@ const Dashboard = (props) => {
             Create
           </Button>
         </div>
-        <div className={style.calendarWrapper}>{renderView(viewMode)}</div>
+        <div className={style.calendarWrapper}>{renderViewMode(viewMode)}</div>
         {open && (
           <BasicModal showModal={showCreateModal} onHandleClose={handleClose}>
             <CalendarForm absences={typesData} />
